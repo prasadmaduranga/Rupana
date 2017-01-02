@@ -1,0 +1,38 @@
+﻿@model FYP_MVC.Models.CSVFile
+
+@{
+    ViewBag.Title = "showCSV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Choose your Columns</h2>
+<span class="label label-primary">@Model.filename</span>
+
+<div class="row">
+    <div class="col-lg-8">
+        <table class="table table-striped table-hover ">
+            <thead>
+                <tr class="info">
+                    @for (int i = 0; i < Model.Data.Length; i++)
+                    {
+                        <td>
+                           @Html.CheckBoxFor(m => m.Data[i].selected) @Model.Data[i].Heading
+                        </td>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+
+                @for (int i = 0; i < Model.rowCount; i++)
+                {
+                    <tr>
+                        @for (int j = 0; j < Model.Data.Length; j++)
+                        {
+                            <td>@Model.Data[j].Data[i]</td>
+                        }
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div></div>

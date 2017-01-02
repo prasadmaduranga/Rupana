@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "UploadCSV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("UploadCSV", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-lg-4">
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>Upload your CSV</legend>
+
+                    <div style="position:relative;">
+                        <a class='btn btn-primary' href='javascript:;'>
+                            Choose File...
+                            <input type="file" accept=".csv" name="file" id="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);
+                               -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;
+                               color:transparent;' size="40" onchange='$("#upload-file-info").html($(this).val());'>
+                        </a>
+                        &nbsp;
+                        <span class='label label-info' id="upload-file-info"></span>
+                    </div>
+
+                    <br />
+                    <div class="form-group">
+                        <button type="reset" class="btn btn-default" onclick='$("#upload-file-info").html($(this).val());'>Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <br/>
+                    <br/>
+                    @ViewBag.Message
+                </fieldset>
+            </form>
+            </div>
+        </div>
+}
+

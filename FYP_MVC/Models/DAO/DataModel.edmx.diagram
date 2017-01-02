@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b2a87de58ef246568b1151a9837edf1e" Name="Diagram1">
+        <EntityTypeShape EntityType="FYPModel.chart" Width="1.5" PointX="10.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.chartDimension" Width="1.5" PointX="12.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.chartDimensionCardinality" Width="1.5" PointX="15" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.column" Width="1.5" PointX="9.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.dimensionContext" Width="1.5" PointX="15" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.dimensionCount" Width="1.5" PointX="12.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.intention" Width="1.5" PointX="12.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.originalDataFile" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.table" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.tableDimension" Width="1.5" PointX="9.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.user" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.visualizedDataFile" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.feedBack" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.userFeedBack" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYPModel.chartRuleBase_View" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="FYPModel.FK__chartDime__cahrt__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__dimension__cahrt__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__feedBack__chartI__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__intention__cahrt__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__chartDime__dimen__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__dimension__dimen__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__column__tableID__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__originalD__userI__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__visualize__paren__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__feedBack__tableI__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__table__fileID__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="FYPModel.FK__tableDime__table__4222D4EF" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
