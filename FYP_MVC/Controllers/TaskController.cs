@@ -6,11 +6,12 @@ using System.Web.Mvc;
 using FYP_MVC.Models;
 using System.IO;
 using System.Data;
-
+using FYP_MVC.Core.ContextRecognizer;
 namespace FYP_MVC.Controllers
 {
     public class TaskController : Controller
     {
+       
         // GET: Task
         [HttpGet]
         public ActionResult UploadCSV()
@@ -24,6 +25,7 @@ namespace FYP_MVC.Controllers
             if (file != null && file.ContentLength > 0)
                 try
                 {
+                    CSVFile csv = new CSVFile();
                     //Saving File in server
                     String GUID = Guid.NewGuid().ToString();
                     var myUniqueFileName = string.Format(@"{0}.csv", GUID);
@@ -31,7 +33,6 @@ namespace FYP_MVC.Controllers
                     file.SaveAs(path);
 
                     //Initializing CSV 
-                    CSVFile csv = new CSVFile();
                     csv.csvFile = file;
                     csv.filename = file.FileName;
                     csv.GUID = GUID;
@@ -68,12 +69,14 @@ namespace FYP_MVC.Controllers
                             }
                             rows++;
                         }
-                        if (rows > 10) { csv.rowCount = 10; }
-                        else { csv.rowCount = rows; }
+                        csv.rowCount = rows;
+                        // numRows - used as loop variable in creating table
+                        if (rows > 10) { ViewBag.numRows = 10; }
+                        else { ViewBag.numRows = rows; }
                     }
 
                     TempData["csv"] = csv;
-                    return RedirectToAction("showCSV", "Task");
+                    return RedirectToAction("showContextInfo", "Task");
 
                 }
                 catch (Exception ex)
@@ -85,6 +88,15 @@ namespace FYP_MVC.Controllers
                 ViewBag.Message = "You have not specified a file.";
             }
             return View();
+        }
+
+
+        public ActionResult showContextInfo()
+        {
+            CSVFile csv = (CSVFile)TempData["csv"];
+            ContextExtractor con = new ContextExtractor(csv);
+            csv = con.processCSV();
+            return View(csv);
         }
 
         [HttpGet]

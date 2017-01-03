@@ -1,0 +1,14 @@
+﻿@model FYP_MVC.Models.CSVFile
+@{
+    ViewBag.Title = "showContextInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Show Context Info</h2>
+
+@foreach (var item in Model.Data)
+{
+    <p>Column : @item.Heading</p>
+    <p>Context : @item.Context</p>
+   
+}

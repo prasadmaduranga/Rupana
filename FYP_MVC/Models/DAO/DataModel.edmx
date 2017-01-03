@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FYPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FYPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="chart">
           <Key>
             <PropertyRef Name="ID" />
@@ -91,6 +91,14 @@ warning 6002: The table/view 'FYP.dbo.feedBack' does not have a primary key defi
           <Property Name="dim7_context" Type="nvarchar" MaxLength="30" />
           <Property Name="recommendation" Type="nvarchar" MaxLength="30" />
           <Property Name="rating" Type="int" />
+        </EntityType>
+        <EntityType Name="headerContext">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContextType" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Word" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="intention">
           <Key>
@@ -335,20 +343,53 @@ warning 6002: The table/view 'FYP.dbo.chartRuleBase_View' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="calculateCosineScore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="dim1_numOfDim" Type="int" Mode="In" />
+        <Function Name="calculateCosineScore_DimCount_2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
           <Parameter Name="intention" Type="nvarchar" Mode="In" />
-          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
-          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
-          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
-          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
-          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
-          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
-          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
-          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
-          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="calculateCosineScore2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="calculateCosineScore_DimCount_2_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount_3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount_3_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount_4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount_4_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount_5" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount_5_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount_6" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount_6_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount_7" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount_7_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScore_DimCount3Version4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateCosineScoreVersion3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="numOfDim" Type="int" Mode="In" />
           <Parameter Name="intention" Type="nvarchar" Mode="In" />
           <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
@@ -360,6 +401,384 @@ warning 6002: The table/view 'FYP.dbo.chartRuleBase_View' does not have a primar
           <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
           <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
           <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_2_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_3_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_4_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_5" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim5_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_5_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim5_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_6" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim5_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim6_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim6_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim6_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim6_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim6_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim6_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_6_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim5_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim6_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim6_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim6_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim6_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim6_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim6_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_7" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim5_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim6_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim6_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim6_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim7_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim7_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim7_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim6_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim6_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim6_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim7_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim7_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim7_context" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="calculateScoreOfPermutum_DimCount_7_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="result" Type="float" Mode="InOut" />
+          <Parameter Name="dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim5_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim6_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim6_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim6_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="dim7_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="dim7_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="dim7_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_intention" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim1_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim1_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim2_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim2_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim3_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim3_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim4_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim4_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim5_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim5_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim6_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim6_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim6_context" Type="nvarchar" Mode="In" />
+          <Parameter Name="Curr_dim7_IsContinuous" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim7_Cardinality" Type="int" Mode="In" />
+          <Parameter Name="Curr_dim7_context" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="calculateScoreOfPermutumVersion2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="result" Type="float" Mode="InOut" />
@@ -386,8 +805,25 @@ warning 6002: The table/view 'FYP.dbo.chartRuleBase_View' does not have a primar
         </Function>
         <Function Name="getRecommendationFromRules" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tableID" Type="int" Mode="In" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="readResults" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getRecommendationFromRules_WithoutIntention_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="getRecommendationFromRules_WithoutIntention ">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getRecommendations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getRecommendations_More" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+          <Parameter Name="intention" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getRecommendations_More_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getRecommendations_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="FYPModelStoreContainer">
           <EntitySet Name="chart" EntityType="Self.chart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="chartDimension" EntityType="Self.chartDimension" Schema="dbo" store:Type="Tables" />
@@ -395,6 +831,7 @@ warning 6002: The table/view 'FYP.dbo.chartRuleBase_View' does not have a primar
           <EntitySet Name="column" EntityType="Self.column" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dimensionContext" EntityType="Self.dimensionContext" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dimensionCount" EntityType="Self.dimensionCount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="headerContext" EntityType="Self.headerContext" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="intention" EntityType="Self.intention" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="originalDataFile" EntityType="Self.originalDataFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="table" EntityType="Self.table" Schema="dbo" store:Type="Tables" />
@@ -519,8 +956,7 @@ warning 6002: The table/view 'FYP.dbo.chartRuleBase_View' does not have a primar
             <End Role="visualizedDataFile" EntitySet="visualizedDataFile" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FYPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -986,9 +1422,465 @@ warning 6002: The table/view 'FYP.dbo.chartRuleBase_View' does not have a primar
             <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="getRecommendationFromRules">
-            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          <Parameter Name="tableID" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="readResults" ReturnType="Collection(FYPModel.readResults_Result)" />
+          <EntitySet Name="headerContexts" EntityType="FYPModel.headerContext" />
+          <FunctionImport Name="calculateCosineScore_DimCount_2">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_2_WithoutIntention">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_3">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_3_WithoutIntention">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_4">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_4_WithoutIntention">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_5">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_5_WithoutIntention">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_6">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_6_WithoutIntention">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_7">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount_7_WithoutIntention">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScore_DimCount3Version4">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateCosineScoreVersion3">
+            <Parameter Name="numOfDim" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_2">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_2_WithoutIntention">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_3">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_3_WithoutIntention">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_4">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+            <Parameter Name="dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_4_WithoutIntention">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+            <Parameter Name="dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_5">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+            <Parameter Name="dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_context" Mode="In" Type="String" />
+            <Parameter Name="dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_5_WithoutIntention">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+            <Parameter Name="dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_context" Mode="In" Type="String" />
+            <Parameter Name="dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_6">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+            <Parameter Name="dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_context" Mode="In" Type="String" />
+            <Parameter Name="dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_context" Mode="In" Type="String" />
+            <Parameter Name="dim6_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim6_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim6_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim6_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim6_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim6_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_6_WithoutIntention">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+            <Parameter Name="dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_context" Mode="In" Type="String" />
+            <Parameter Name="dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_context" Mode="In" Type="String" />
+            <Parameter Name="dim6_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim6_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim6_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim6_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim6_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim6_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_7">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+            <Parameter Name="dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_context" Mode="In" Type="String" />
+            <Parameter Name="dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_context" Mode="In" Type="String" />
+            <Parameter Name="dim6_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim6_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim6_context" Mode="In" Type="String" />
+            <Parameter Name="dim7_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim7_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim7_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim6_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim6_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim6_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim7_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim7_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim7_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="calculateScoreOfPermutum_DimCount_7_WithoutIntention">
+            <Parameter Name="result" Mode="InOut" Type="Double" />
+            <Parameter Name="dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim1_context" Mode="In" Type="String" />
+            <Parameter Name="dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim2_context" Mode="In" Type="String" />
+            <Parameter Name="dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim3_context" Mode="In" Type="String" />
+            <Parameter Name="dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim4_context" Mode="In" Type="String" />
+            <Parameter Name="dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim5_context" Mode="In" Type="String" />
+            <Parameter Name="dim6_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim6_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim6_context" Mode="In" Type="String" />
+            <Parameter Name="dim7_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="dim7_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="dim7_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_intention" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim1_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim1_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim2_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim2_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim3_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim3_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim4_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim4_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim5_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim5_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim6_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim6_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim6_context" Mode="In" Type="String" />
+            <Parameter Name="Curr_dim7_IsContinuous" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim7_Cardinality" Mode="In" Type="Int32" />
+            <Parameter Name="Curr_dim7_context" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getRecommendationFromRules_WithoutIntention_">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getRecommendations">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getRecommendations_More">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+            <Parameter Name="intention" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getRecommendations_More_WithoutIntention">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getRecommendations_WithoutIntention">
+            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="readResults_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1006,6 +1898,14 @@ warning 6002: The table/view 'FYP.dbo.chartRuleBase_View' does not have a primar
           <Property Type="String" Name="recommendation" Nullable="true" MaxLength="30" />
           <Property Type="Double" Name="score" Nullable="true" />
         </ComplexType>
+        <EntityType Name="headerContext">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContextType" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Word" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1207,30 +2107,48 @@ warning 6002: The table/view 'FYP.dbo.chartRuleBase_View' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="calculateCosineScore" FunctionName="FYPModel.Store.calculateCosineScore" />
-          <FunctionImportMapping FunctionImportName="calculateCosineScore2" FunctionName="FYPModel.Store.calculateCosineScore2" />
           <FunctionImportMapping FunctionImportName="calculateScoreOfPermutumVersion2" FunctionName="FYPModel.Store.calculateScoreOfPermutumVersion2" />
           <FunctionImportMapping FunctionImportName="getRecommendationFromRules" FunctionName="FYPModel.Store.getRecommendationFromRules" />
-          <FunctionImportMapping FunctionImportName="readResults" FunctionName="FYPModel.Store.readResults">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FYPModel.readResults_Result">
+          <EntitySetMapping Name="headerContexts">
+            <EntityTypeMapping TypeName="FYPModel.headerContext">
+              <MappingFragment StoreEntitySet="headerContext">
+                <ScalarProperty Name="Word" ColumnName="Word" />
+                <ScalarProperty Name="ContextType" ColumnName="ContextType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="intention" ColumnName="intention" />
-                <ScalarProperty Name="dim1_IsContinuous" ColumnName="dim1_IsContinuous" />
-                <ScalarProperty Name="dim1_Cardinality" ColumnName="dim1_Cardinality" />
-                <ScalarProperty Name="dim1_context" ColumnName="dim1_context" />
-                <ScalarProperty Name="dim2_IsContinuous" ColumnName="dim2_IsContinuous" />
-                <ScalarProperty Name="dim2_Cardinality" ColumnName="dim2_Cardinality" />
-                <ScalarProperty Name="dim2_context" ColumnName="dim2_context" />
-                <ScalarProperty Name="dim3_IsContinuous" ColumnName="dim3_IsContinuous" />
-                <ScalarProperty Name="dim3_Cardinality" ColumnName="dim3_Cardinality" />
-                <ScalarProperty Name="dim3_context" ColumnName="dim3_context" />
-                <ScalarProperty Name="recommendation" ColumnName="recommendation" />
-                <ScalarProperty Name="score" ColumnName="score" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_2" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_2" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_2_WithoutIntention" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_2_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_3" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_3" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_3_WithoutIntention" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_3_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_4" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_4" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_4_WithoutIntention" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_4_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_5" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_5" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_5_WithoutIntention" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_5_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_6" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_6" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_6_WithoutIntention" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_6_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_7" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_7" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount_7_WithoutIntention" FunctionName="FYPModel.Store.calculateCosineScore_DimCount_7_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScore_DimCount3Version4" FunctionName="FYPModel.Store.calculateCosineScore_DimCount3Version4" />
+          <FunctionImportMapping FunctionImportName="calculateCosineScoreVersion3" FunctionName="FYPModel.Store.calculateCosineScoreVersion3" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_2" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_2" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_2_WithoutIntention" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_2_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_3" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_3" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_3_WithoutIntention" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_3_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_4" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_4" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_4_WithoutIntention" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_4_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_5" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_5" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_5_WithoutIntention" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_5_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_6" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_6" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_6_WithoutIntention" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_6_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_7" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_7" />
+          <FunctionImportMapping FunctionImportName="calculateScoreOfPermutum_DimCount_7_WithoutIntention" FunctionName="FYPModel.Store.calculateScoreOfPermutum_DimCount_7_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="getRecommendationFromRules_WithoutIntention_" FunctionName="FYPModel.Store.getRecommendationFromRules_WithoutIntention_" />
+          <FunctionImportMapping FunctionImportName="getRecommendations" FunctionName="FYPModel.Store.getRecommendations" />
+          <FunctionImportMapping FunctionImportName="getRecommendations_More" FunctionName="FYPModel.Store.getRecommendations_More" />
+          <FunctionImportMapping FunctionImportName="getRecommendations_More_WithoutIntention" FunctionName="FYPModel.Store.getRecommendations_More_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="getRecommendations_WithoutIntention" FunctionName="FYPModel.Store.getRecommendations_WithoutIntention" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

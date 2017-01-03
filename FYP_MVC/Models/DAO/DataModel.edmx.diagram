@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b2a87de58ef246568b1151a9837edf1e" Name="Diagram1">
+      <Diagram DiagramId="b2a87de58ef246568b1151a9837edf1e" Name="Diagram1" ZoomLevel="76">
         <EntityTypeShape EntityType="FYPModel.chart" Width="1.5" PointX="10.5" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="FYPModel.chartDimension" Width="1.5" PointX="12.75" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FYPModel.chartDimensionCardinality" Width="1.5" PointX="15" PointY="13.25" IsExpanded="true" />
@@ -32,6 +32,7 @@
         <AssociationConnector Association="FYPModel.FK__feedBack__tableI__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="FYPModel.FK__table__fileID__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="FYPModel.FK__tableDime__table__4222D4EF" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FYPModel.headerContext" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

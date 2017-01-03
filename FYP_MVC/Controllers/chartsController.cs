@@ -12,7 +12,7 @@ namespace FYP_MVC.Controllers
 {
     public class chartsController : Controller
     {
-        private DBContext db = new DBContext();
+        private FYPEntities db = new FYPEntities();
 
         // GET: charts
         public ActionResult Index()

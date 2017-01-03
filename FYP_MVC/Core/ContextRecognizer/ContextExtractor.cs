@@ -5,42 +5,81 @@ using System.Web;
 using FYP_MVC.Models;
 using System.Diagnostics;
 using System.IO;
+using FYP_MVC.Models.DAO;
 
 namespace FYP_MVC.Core.ContextRecognizer
 {
     public class ContextExtractor
     {
+        FYPEntities db = new FYPEntities();
         public CSVFile csv;
         public ContextExtractor(CSVFile csv)
         {
             this.csv = csv;
+          
         }
         
         // Counting variables
-        int NumericCount = 0;
-        int PercentageCount = 0;
-        int LocationCount = 0;
-        int DateCount = 0;
+        float NumericCount = 0;
+        float LocationCount = 0;
+        float DateCount = 0;
 
         //tempory numeric list
-        List<double> temp_num = new List<double>();
+        float numericTotal = 0f;
 
+        public CSVFile processCSV()
+        {
+            foreach (var item in csv.Data)
+            {
+                processColumn(item);
+            }
+            return csv;
+        }
         public void processColumn(Column col)
         {
             int rowCount = col.Data.Count;
             checkForLocation(col);
             checkForNumeric(col);
             checkForDate(col);
-            PercentageCount = 0;
-            PercentageCount = temp_num.Where(c => c >= 0d && c <= 100d).Count();
+            checkHeader(col);
+
+            // Entering condition count > num_rows/2
+            bool IsLocationEnters = (LocationCount > rowCount / 2) ? true:false;
+            bool IsDateEnters = (DateCount > rowCount / 2) ? true : false;
+            bool IsNumericEnters = (NumericCount > rowCount / 2) ? true : false;
+
+            //Nothing enters context is Nominal
+            if (!IsDateEnters && !IsLocationEnters && !IsNumericEnters)
+            {
+                col.Context = "Nominal";
+            }
+            else
+            {
+                float max = NumericCount;
+                if (NumericCount < LocationCount) { max = LocationCount; }
+                if (NumericCount < DateCount && LocationCount < DateCount) { max = DateCount; }
+
+                if (max == NumericCount)
+                {
+                    bool isPersentage = false;
+                    col.Context = "Numeric";
+                    if (numericTotal > .9f && numericTotal < 1.1f) { isPersentage = true; }
+                    if (numericTotal > 90f && numericTotal < 110f) { isPersentage = true; }
+                    if (isPersentage) { col.Context = "Persentage"; }
+                }
+                else if (max == LocationCount) { col.Context = "Location"; }
+                else if (max == DateCount) { col.Context = "DateTime"; }
+            }
+            numericTotal = 0f;
         }
 
         public void checkForNumeric(Column col)
         {
+            numericTotal = 0f;
             NumericCount = 0;
             foreach (var item in col.Data)
             {
-                if (IsNumeric(item)) { NumericCount++;}
+                if (IsNumeric(item)) { NumericCount++;numericTotal += float.Parse(item); }
             }
         }
 
@@ -49,10 +88,19 @@ namespace FYP_MVC.Core.ContextRecognizer
         {
             double s = 0d;
             bool result = double.TryParse(value, out s);
-            temp_num.Add(s);
             return result;
         }
-
+        public void checkHeader(Column col)
+        {
+            String context =  db.headerContexts.Where(c => c.Word == col.Heading).First().ContextType;
+            switch (context)
+            {
+                case "percentage": { NumericCount += (float)(csv.rowCount * .2); break; }
+                case "date": { DateCount += (float)(csv.rowCount * .2); break; }
+                case "location": { LocationCount += (float)(csv.rowCount * .2); break; }
+                default:break;
+            }
+        }
         public void checkForLocation(Column col)
         {
             LocationCount = 0;
