@@ -21,11 +21,11 @@ namespace FYP_MVC.Unit_Testing
             col.Data.Add("2015");
             col.Data.Add("2014");
             col.Data.Add("April");
-            col.Data.Add("Sunday");
+            col.Data.Add("2011");
             col.Data.Add("March");
             ContextExtractor con = new ContextExtractor(csv);
-            csv = con.processCSV();
-            Assert.AreEqual("DateTime", csv.Data[0].Context);
+            
+            Assert.AreEqual(5f, con.checkForDate(col));
 
         }
 

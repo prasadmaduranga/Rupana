@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FYP_MVC.Core.ContextRecognizer;
+using FYP_MVC.Models;
+using System.Diagnostics;
+using System.IO;
 
 namespace FYP_MVC.Controllers
 {
@@ -11,15 +14,12 @@ namespace FYP_MVC.Controllers
     {
         public ActionResult Index()
         {
-           // ContextExtractor ce = new ContextExtractor();
-            //ce.checkForDate();
             return View();
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

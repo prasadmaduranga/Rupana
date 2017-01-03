@@ -11,6 +11,8 @@ namespace FYP_MVC.Core.ContextRecognizer
 {
     public class ContextExtractor
     {
+        public ContextExtractor() { }
+
         FYPEntities db = new FYPEntities();
         public CSVFile csv;
         public ContextExtractor(CSVFile csv)
@@ -107,7 +109,7 @@ namespace FYP_MVC.Core.ContextRecognizer
             //implementation of Aba
             //update location count variable at the end
         }
-        public void checkForDate(Column col)
+        public float checkForDate(Column col)
         {
             DateCount = 0;
             ProcessStartInfo pythonInfo = new ProcessStartInfo();
@@ -126,9 +128,10 @@ namespace FYP_MVC.Core.ContextRecognizer
                 }
             }
             // calling python script passing parameter "query"
-            String path = HttpContext.Current.Server.MapPath("~/Content/Python/date.py");
+            string path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/Python/date.py");
+           // string path = System.Web.HttpContext.Current.Server.MapPath("~/Content/Python/date.py");
             pythonInfo.Arguments = string.Format("{0} {1}",path,query);
-            pythonInfo.CreateNoWindow = true;
+            pythonInfo.CreateNoWindow = false;
             pythonInfo.UseShellExecute = false;
             pythonInfo.RedirectStandardOutput = true;
             string result = "";
@@ -149,6 +152,7 @@ namespace FYP_MVC.Core.ContextRecognizer
                     }
                 }
             }
+            return DateCount;
         }
     }
 }
