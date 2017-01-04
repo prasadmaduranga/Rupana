@@ -7,6 +7,8 @@ using FYP_MVC.Core.ContextRecognizer;
 using FYP_MVC.Models;
 using System.Diagnostics;
 using System.IO;
+using FYP_MVC.Core.ContextRecognizer;
+using FYP_MVC.Models.DAO;
 
 namespace FYP_MVC.Controllers
 {
@@ -14,6 +16,48 @@ namespace FYP_MVC.Controllers
     {
         public ActionResult Index()
         {
+            /*
+            ProcessStartInfo pythonInfo = new ProcessStartInfo();
+            pythonInfo.FileName = @"C:\Python27\python.exe";
+           
+           
+            string path = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Python/date.py");
+            pythonInfo.Arguments = string.Format("{0} {1}", path, "2015");
+            pythonInfo.CreateNoWindow = false;
+            pythonInfo.UseShellExecute = false;
+            pythonInfo.RedirectStandardOutput = true;
+            string result = "";
+            using (Process process = Process.Start(pythonInfo))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    for (int i = 0; i < 1; i++)
+                    {
+                        result = reader.ReadLine();
+                        if (!result.Equals("error"))
+                        {
+                            DateTime myDate = DateTime.Parse(result);
+                          
+                        }
+                    }
+                }
+            }
+          
+            CSVFile csv = new CSVFile();
+            Column col = new Column();
+            csv.Data = new Column[1];
+            csv.Data[0] = col;
+            col.Data = new List<string>();
+            col.Data.Add("2015");
+            col.Data.Add("2014");
+            col.Data.Add("April");
+            col.Data.Add("2011");
+            col.Data.Add("March");
+            ContextExtractor con = new ContextExtractor(csv);
+            System.Diagnostics.Debug.WriteLine("sdfasdfasdf");
+            System.Diagnostics.Debug.WriteLine(con.checkForDate(col));*/
+
+            
             return View();
         }
 

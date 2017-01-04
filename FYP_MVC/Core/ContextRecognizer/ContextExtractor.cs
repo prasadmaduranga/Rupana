@@ -94,14 +94,21 @@ namespace FYP_MVC.Core.ContextRecognizer
         }
         public void checkHeader(Column col)
         {
-            String context =  db.headerContexts.Where(c => c.Word == col.Heading).First().ContextType;
-            switch (context)
+            String heading = col.Heading.ToLower();
+            String[] headingarr = heading.Split(new Char[] { ',', '_',' ','.'});
+            foreach (var item in headingarr)
             {
-                case "percentage": { NumericCount += (float)(csv.rowCount * .2); break; }
-                case "date": { DateCount += (float)(csv.rowCount * .2); break; }
-                case "location": { LocationCount += (float)(csv.rowCount * .2); break; }
-                default:break;
+                String context = db.headerContexts.Where(c => c.Word.Equals(item)).Select(d => d.ContextType).FirstOrDefault();
+                if (context != null) { context = context.Replace("\r\n", string.Empty); }
+                switch (context)
+                {
+                    case "percentage": { NumericCount += (float)(csv.rowCount * .2); break; }
+                    case "date": { DateCount += (float)(csv.rowCount * .2); break; }
+                    case "location": { LocationCount += (float)(csv.rowCount * .2); break; }
+                    default: break;
+                }
             }
+            
         }
         public void checkForLocation(Column col)
         {
@@ -128,8 +135,8 @@ namespace FYP_MVC.Core.ContextRecognizer
                 }
             }
             // calling python script passing parameter "query"
-            string path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/Python/date.py");
-           // string path = System.Web.HttpContext.Current.Server.MapPath("~/Content/Python/date.py");
+           // string path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/Python/date.py");
+            string path = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Python/date.py");
             pythonInfo.Arguments = string.Format("{0} {1}",path,query);
             pythonInfo.CreateNoWindow = false;
             pythonInfo.UseShellExecute = false;

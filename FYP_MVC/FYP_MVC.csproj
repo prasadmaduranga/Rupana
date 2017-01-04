@@ -180,6 +180,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Core\ContextRecognizer\ContextExtractor.cs" />
+    <Compile Include="Core\Recommendations\Recommendation.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -232,6 +233,10 @@
     <Compile Include="Models\DAO\originalDataFile.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAO\Recommendations_Result.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAO\Recommendation_Results.cs" />
     <Compile Include="Models\DAO\table.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -368,8 +373,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Admin\" />
     <Folder Include="Controllers\User\" />
-    <Folder Include="Core\MLComponent\" />
-    <Folder Include="Core\RuleBaseComponent\" />
     <Folder Include="Models\CoreObjects\" />
   </ItemGroup>
   <ItemGroup>

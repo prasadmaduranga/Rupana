@@ -65,7 +65,7 @@ namespace FYP_MVC.Models.DAO
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getRecommendationFromRules_WithoutIntention_", tableIDParameter);
         }
     
-        public virtual int getRecommendations(Nullable<int> tableID, string intention)
+        public virtual ObjectResult<Recommendations_Result> getRecommendations(Nullable<int> tableID, string intention)
         {
             var tableIDParameter = tableID.HasValue ?
                 new ObjectParameter("tableID", tableID) :
@@ -75,10 +75,10 @@ namespace FYP_MVC.Models.DAO
                 new ObjectParameter("intention", intention) :
                 new ObjectParameter("intention", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getRecommendations", tableIDParameter, intentionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Recommendations_Result>("getRecommendations", tableIDParameter, intentionParameter);
         }
     
-        public virtual int getRecommendations_More(Nullable<int> tableID, string intention)
+        public virtual ObjectResult<Recommendations_Result> getRecommendations_More(Nullable<int> tableID, string intention)
         {
             var tableIDParameter = tableID.HasValue ?
                 new ObjectParameter("tableID", tableID) :
@@ -88,25 +88,25 @@ namespace FYP_MVC.Models.DAO
                 new ObjectParameter("intention", intention) :
                 new ObjectParameter("intention", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getRecommendations_More", tableIDParameter, intentionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Recommendations_Result>("getRecommendations_More", tableIDParameter, intentionParameter);
         }
     
-        public virtual int getRecommendations_More_WithoutIntention(Nullable<int> tableID)
+        public virtual ObjectResult<Recommendations_Result> getRecommendations_More_WithoutIntention(Nullable<int> tableID)
         {
             var tableIDParameter = tableID.HasValue ?
                 new ObjectParameter("tableID", tableID) :
                 new ObjectParameter("tableID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getRecommendations_More_WithoutIntention", tableIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Recommendations_Result>("getRecommendations_More_WithoutIntention", tableIDParameter);
         }
     
-        public virtual int getRecommendations_WithoutIntention(Nullable<int> tableID)
+        public virtual ObjectResult<Recommendations_Result> getRecommendations_WithoutIntention(Nullable<int> tableID)
         {
             var tableIDParameter = tableID.HasValue ?
                 new ObjectParameter("tableID", tableID) :
                 new ObjectParameter("tableID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getRecommendations_WithoutIntention", tableIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Recommendations_Result>("getRecommendations_WithoutIntention", tableIDParameter);
         }
     }
 }

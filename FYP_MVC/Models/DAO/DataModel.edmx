@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FYPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FYPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="chart">
           <Key>
             <PropertyRef Name="ID" />
@@ -469,8 +469,7 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
             <End Role="visualizedDataFile" EntitySet="visualizedDataFile" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FYPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -886,23 +885,28 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
             <Parameter Name="intention" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="getRecommendationFromRules_WithoutIntention_">
-            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          <Parameter Name="tableID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="getRecommendations">
+          <FunctionImport Name="getRecommendations" ReturnType="Collection(FYPModel.Recommendations_Result)">
             <Parameter Name="tableID" Mode="In" Type="Int32" />
             <Parameter Name="intention" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="getRecommendations_More">
+          <FunctionImport Name="getRecommendations_More" ReturnType="Collection(FYPModel.Recommendations_Result)">
             <Parameter Name="tableID" Mode="In" Type="Int32" />
             <Parameter Name="intention" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="getRecommendations_More_WithoutIntention">
-            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          <FunctionImport Name="getRecommendations_More_WithoutIntention" ReturnType="Collection(FYPModel.Recommendations_Result)">
+          <Parameter Name="tableID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="getRecommendations_WithoutIntention">
-            <Parameter Name="tableID" Mode="In" Type="Int32" />
+          <FunctionImport Name="getRecommendations_WithoutIntention" ReturnType="Collection(FYPModel.Recommendations_Result)">
+          <Parameter Name="tableID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="Recommendations_Result">
+          <Property Type="String" Name="chartName" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="tableDimIndex" Nullable="true" />
+          <Property Type="Int32" Name="chartDimIndex" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1101,10 +1105,42 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="getRecommendationFromRules" FunctionName="FYPModel.Store.getRecommendationFromRules" />
           <FunctionImportMapping FunctionImportName="getRecommendationFromRules_WithoutIntention_" FunctionName="FYPModel.Store.getRecommendationFromRules_WithoutIntention_" />
-          <FunctionImportMapping FunctionImportName="getRecommendations" FunctionName="FYPModel.Store.getRecommendations" />
-          <FunctionImportMapping FunctionImportName="getRecommendations_More" FunctionName="FYPModel.Store.getRecommendations_More" />
-          <FunctionImportMapping FunctionImportName="getRecommendations_More_WithoutIntention" FunctionName="FYPModel.Store.getRecommendations_More_WithoutIntention" />
-          <FunctionImportMapping FunctionImportName="getRecommendations_WithoutIntention" FunctionName="FYPModel.Store.getRecommendations_WithoutIntention" />
+          <FunctionImportMapping FunctionImportName="getRecommendations" FunctionName="FYPModel.Store.getRecommendations" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYPModel.Recommendations_Result">
+                <ScalarProperty Name="chartName" ColumnName="chartName" />
+                <ScalarProperty Name="tableDimIndex" ColumnName="tableDimIndex" />
+                <ScalarProperty Name="chartDimIndex" ColumnName="chartDimIndex" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getRecommendations_More" FunctionName="FYPModel.Store.getRecommendations_More" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYPModel.Recommendations_Result">
+                <ScalarProperty Name="chartName" ColumnName="chartName" />
+                <ScalarProperty Name="tableDimIndex" ColumnName="tableDimIndex" />
+                <ScalarProperty Name="chartDimIndex" ColumnName="chartDimIndex" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getRecommendations_More_WithoutIntention" FunctionName="FYPModel.Store.getRecommendations_More_WithoutIntention" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYPModel.Recommendations_Result">
+                <ScalarProperty Name="chartName" ColumnName="chartName" />
+                <ScalarProperty Name="tableDimIndex" ColumnName="tableDimIndex" />
+                <ScalarProperty Name="chartDimIndex" ColumnName="chartDimIndex" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getRecommendations_WithoutIntention" FunctionName="FYPModel.Store.getRecommendations_WithoutIntention" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYPModel.Recommendations_Result">
+                <ScalarProperty Name="chartName" ColumnName="chartName" />
+                <ScalarProperty Name="tableDimIndex" ColumnName="tableDimIndex" />
+                <ScalarProperty Name="chartDimIndex" ColumnName="chartDimIndex" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

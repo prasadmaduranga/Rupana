@@ -11,7 +11,8 @@ namespace FYP_MVC.Controllers
 {
     public class TaskController : Controller
     {
-       
+
+        public CSVFile commonCSV { get; set; }
         // GET: Task
         [HttpGet]
         public ActionResult UploadCSV()
@@ -76,7 +77,7 @@ namespace FYP_MVC.Controllers
                     }
 
                     TempData["csv"] = csv;
-                    return RedirectToAction("showContextInfo", "Task");
+                    return RedirectToAction("showCSV", "Task");
 
                 }
                 catch (Exception ex)
@@ -90,24 +91,21 @@ namespace FYP_MVC.Controllers
             return View();
         }
 
-
-        public ActionResult showContextInfo()
+        [HttpPost]
+        public ActionResult showContextInfo(CSVFile csv)
         {
-            CSVFile csv = (CSVFile)TempData["csv"];
-            ContextExtractor con = new ContextExtractor(csv);
-            csv = con.processCSV();
-            return View(csv);
+            ContextExtractor con = new ContextExtractor(commonCSV);
+            CSVFile csvs = con.processCSV();
+            return View(csvs);
         }
 
         [HttpGet]
         public ActionResult showCSV()
         {
             CSVFile csv = (CSVFile)TempData["csv"];
+            commonCSV = new CSVFile();
+            commonCSV = csv;
             return View(csv);
         }
-
-        
-
-
     }
 }

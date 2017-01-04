@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Choose your Columns</h2>
+<h2>Choose required columns</h2>
 <span class="label label-primary">@Model.filename</span>
-
+@{Html.BeginForm("showContextInfo", "Task", FormMethod.Post);
 <div class="row">
     <div class="col-lg-8">
         <table class="table table-striped table-hover ">
@@ -36,18 +36,5 @@
             </tbody>
         </table>
     </div></div>
-<a href="#" id ="subbmit"class="btn btn-primary">Primary</a>
-<script>
-
-    $(document).ready(function () {
-
-        $('#subbmit').on('click', function (evt) {
-
-
-            console.log("here");
-
- var url = '@Url.Action("showContextInfo", "Task")';
-        });
-    });
-
-</script>
+    <button type="submit">submit</button>
+}
