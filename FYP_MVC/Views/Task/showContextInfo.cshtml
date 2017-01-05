@@ -6,8 +6,73 @@
 
 <h2>Show Context Info</h2>
 
+<div class="row">
+    <div class="col-lg-8">
+        <table class="table table-striped table-hover ">
+            <thead>
+                <tr class="info">
+                    <th>Column</th>
+                    <th>Predicted Context</th>
+                    <th>Actual Context</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                @for (int i = 0; i < Model.Data.Length; i++)
+                {
+
+                    if (Model.Data[i].selected)
+                    {
+                <tr>
+                    <td>@Model.Data[i].Heading</td>
+                    <td>
+                        @{
+                            string classname="";
+                            switch (Model.Data[i].Context)
+                            {
+                                case "Nominal": { classname = "label label-primary"; break; }
+                                case "Location": { classname = "label label-success"; break; }
+                                case "Numeric": { classname = "label label-warning"; break; }
+                                case "Persentage": { classname = "label label-danger"; break; }
+                                case "DateTime": { classname = "label label-info"; break; }
+                            }
+
+                        }
+                    <span class="@classname">@Model.Data[i].Context</span>
+                    </td>
+
+                    @{List<string> dropdownlist = new List<string>();
+                        switch (Model.Data[i].Context)
+                        {
+                            case "Nominal": { dropdownlist.Add("Nominal"); break; }
+                            case "Location": { dropdownlist.Add("Nominal"); break; }
+                            case "Numeric": { dropdownlist.Add("Nominal"); break; }
+                            case "Persentage": { dropdownlist.Add("Nominal"); dropdownlist.Add("Numeric"); break; }
+                            case "DateTime": { dropdownlist.Add("Nominal"); break; }
+                        }
+                        }
+
+                    <td>
+                        @Html.DropDownListFor(c => c.Data[i].Context,
+                     new SelectList(dropdownlist),Model.Data[i].Context)
+                </td>
+            </tr>
+                    }
+
+
+                            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
 @foreach (var item in Model.Data)
-{
+                            {
+
+
+
     <p>Column : @item.Heading</p>
     <p>Context : @item.Context</p>
    

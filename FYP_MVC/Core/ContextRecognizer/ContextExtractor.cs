@@ -33,7 +33,10 @@ namespace FYP_MVC.Core.ContextRecognizer
         {
             foreach (var item in csv.Data)
             {
-                processColumn(item);
+                if (item.selected)
+                {
+                    processColumn(item);
+                }
             }
             return csv;
         }
@@ -58,8 +61,8 @@ namespace FYP_MVC.Core.ContextRecognizer
             else
             {
                 float max = NumericCount;
-                if (NumericCount < LocationCount) { max = LocationCount; }
-                if (NumericCount < DateCount && LocationCount < DateCount) { max = DateCount; }
+                if (NumericCount <= LocationCount) { max = LocationCount; }
+                if (NumericCount <= DateCount && LocationCount <= DateCount) { max = DateCount; }
 
                 if (max == NumericCount)
                 {
@@ -73,6 +76,14 @@ namespace FYP_MVC.Core.ContextRecognizer
                 else if (max == DateCount) { col.Context = "DateTime"; }
             }
             numericTotal = 0f;
+
+            //final processing
+            if (col.Context.Equals("Location") || col.Context.Equals("Nominal")) { col.IsContinous = false; }
+            else if (col.Context.Equals("Numeric") || col.Context.Equals("Persentage") || col.Context.Equals("DateTime")) { col.IsContinous = true; }
+
+            //counting discrete values
+            col.NumDiscreteValues = col.Data.Distinct().Count();
+            if (col.Context.Equals("Persentage") || col.Context.Equals("Numeric")) { col.NumDiscreteValues = 1000; }
         }
 
         public void checkForNumeric(Column col)

@@ -15,5 +15,6 @@ namespace FYP_MVC.Models
         public String Context { get; set; }
         public bool IsContinous { get; set; }
         public int ColumnId { get; set; }
+        public int NumDiscreteValues { get; set; }
     }
 }

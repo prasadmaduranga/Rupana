@@ -7,12 +7,12 @@ using FYP_MVC.Models;
 using System.IO;
 using System.Data;
 using FYP_MVC.Core.ContextRecognizer;
+using FYP_MVC.Core.Injector;
 namespace FYP_MVC.Controllers
 {
     public class TaskController : Controller
     {
 
-        public CSVFile commonCSV { get; set; }
         // GET: Task
         [HttpGet]
         public ActionResult UploadCSV()
@@ -94,8 +94,15 @@ namespace FYP_MVC.Controllers
         [HttpPost]
         public ActionResult showContextInfo(CSVFile csv)
         {
-            ContextExtractor con = new ContextExtractor(commonCSV);
+            CSVFile csv2 = CSVInjector.csv;
+            for (int i = 0; i < csv.Data.Length; i++)
+            {
+                csv2.Data.ToList()[i].selected = csv.Data.ToList()[i].selected;
+            }
+            ContextExtractor con = new ContextExtractor(csv2);
             CSVFile csvs = con.processCSV();
+            CSVInjector.csv = csvs;
+         
             return View(csvs);
         }
 
@@ -103,8 +110,14 @@ namespace FYP_MVC.Controllers
         public ActionResult showCSV()
         {
             CSVFile csv = (CSVFile)TempData["csv"];
-            commonCSV = new CSVFile();
-            commonCSV = csv;
+            CSVInjector.csv = csv;
+            bool[] selections = new bool[csv.Data.Length];
+            for (int i = 0; i < selections.Length; i++)
+            {
+                selections[i] = new bool();
+                selections[i] = true;
+            }
+            ViewBag.selections = selections;
             return View(csv);
         }
     }
