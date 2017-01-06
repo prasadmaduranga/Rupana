@@ -8,6 +8,7 @@ namespace FYP_MVC.Models
 {
     public class CSVFile
     {
+        public int ID { get; set; }
         public HttpPostedFileBase csvFile { get; set; }
         public String filename { get; set; }
         public String GUID { get; set; }

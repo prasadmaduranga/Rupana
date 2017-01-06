@@ -8,11 +8,13 @@ using System.IO;
 using System.Data;
 using FYP_MVC.Core.ContextRecognizer;
 using FYP_MVC.Core.Injector;
+using FYP_MVC.Models.DAO;
+
 namespace FYP_MVC.Controllers
 {
     public class TaskController : Controller
     {
-
+        private FYPEntities db = new FYPEntities();
         // GET: Task
         [HttpGet]
         public ActionResult UploadCSV()
@@ -76,6 +78,17 @@ namespace FYP_MVC.Controllers
                         else { ViewBag.numRows = rows; }
                     }
 
+                    
+                    // saving to database : OriginalDataFile
+                    originalDataFile ori_data = new originalDataFile();
+                    ori_data.date = DateTime.Now;
+                    ori_data.fileLocation = csv.GUID;
+                    user temp = (user)Session["user"];
+                    ori_data.userID = temp.ID;
+                    db.originalDataFiles.Add(ori_data);
+                    db.SaveChanges();
+
+                    csv.ID = ori_data.ID;
                     TempData["csv"] = csv;
                     return RedirectToAction("showCSV", "Task");
 
@@ -106,6 +119,86 @@ namespace FYP_MVC.Controllers
             return View(csvs);
         }
 
+        [HttpPost]
+        public ActionResult Recommendations(CSVFile csv)
+        {
+            CSVFile csv2 = CSVInjector.csv;
+            for (int i = 0; i < csv.Data.Length; i++)
+            {
+                csv2.Data.ToList()[i].Context = csv.Data.ToList()[i].Context;
+            }
+            writeFinalCSV(csv2);
+           
+
+            return View(csv2);
+        }
+        //Write CSV to file system with only selected columns
+        public void writeFinalCSV(CSVFile csvfile)
+        {
+            Column[] selected = (from t in csvfile.Data where t.selected == true select t).ToArray();
+            var csv = new System.Text.StringBuilder();
+            int numCols = selected.Length;
+            int numRows = selected[0].Data.Count;
+            string text = "";
+
+            for (int i = 0; i < numCols; i++)
+            {
+                if (i != 0)
+                {
+                    text += ("," + selected[i].Heading);
+                }
+                else { text += selected[i].Heading; }              
+            }
+            csv.AppendLine(text);
+
+            for (int i = 0; i < numRows; i++)
+            {
+                text = "";
+                for (int j = 0; j < numCols; j++)
+                {
+                    if (j != 0)
+                    {
+                        text += ("," + selected[j].Data[i]);
+                    }
+                    else { text += selected[j].Data[i];}
+                }
+                csv.AppendLine(text);
+            }
+
+            String GUID = Guid.NewGuid().ToString();
+            var myUniqueFileName = string.Format(@"{0}.csv", GUID);
+            string path = Path.Combine(Server.MapPath("~/CSVFinalized"), Path.GetFileName(myUniqueFileName));
+            System.IO.File.AppendAllText(path, csv.ToString());
+
+            //Writing database values
+            visualizedDataFile vizFile = new visualizedDataFile();
+            vizFile.date = DateTime.Now;
+            vizFile.fileLocation = myUniqueFileName;
+            vizFile.parentFileID = csvfile.ID;
+            db.visualizedDataFiles.Add(vizFile);
+            db.SaveChanges();
+            int ID = vizFile.ID;
+            table tbl = new table();
+            tbl.fileID = ID;
+            tbl.name = csvfile.filename;
+            tbl.numOfRows = numRows;
+            db.tables.Add(tbl);
+            db.SaveChanges();
+            int tblId = tbl.ID;
+            for (int i = 0; i < numCols; i++)
+            {
+                tableDimension tbldim = new tableDimension();
+                tbldim.dimensionIndex = i+1;
+                tbldim.context = selected[i].Context;
+                tbldim.tableID = tblId;
+                tbldim.cardinality = selected[i].NumDiscreteValues;
+                tbldim.isContinuous = selected[i].IsContinous ? 1 : 0;
+                db.tableDimensions.Add(tbldim);
+                db.SaveChanges();
+            }
+
+        }
+
         [HttpGet]
         public ActionResult showCSV()
         {
@@ -120,5 +213,6 @@ namespace FYP_MVC.Controllers
             ViewBag.selections = selections;
             return View(csv);
         }
+
     }
 }

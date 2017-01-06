@@ -5,7 +5,7 @@
 }
 
 <h2>Show Context Info</h2>
-
+@{Html.BeginForm("Recommendations", "Task", FormMethod.Post);
 <div class="row">
     <div class="col-lg-8">
         <table class="table table-striped table-hover ">
@@ -27,7 +27,7 @@
                     <td>@Model.Data[i].Heading</td>
                     <td>
                         @{
-                            string classname="";
+                            string classname = "";
                             switch (Model.Data[i].Context)
                             {
                                 case "Nominal": { classname = "label label-primary"; break; }
@@ -41,39 +41,51 @@
                     <span class="@classname">@Model.Data[i].Context</span>
                     </td>
 
-                    @{List<string> dropdownlist = new List<string>();
-                        switch (Model.Data[i].Context)
-                        {
-                            case "Nominal": { dropdownlist.Add("Nominal"); break; }
-                            case "Location": { dropdownlist.Add("Nominal"); break; }
-                            case "Numeric": { dropdownlist.Add("Nominal"); break; }
-                            case "Persentage": { dropdownlist.Add("Nominal"); dropdownlist.Add("Numeric"); break; }
-                            case "DateTime": { dropdownlist.Add("Nominal"); break; }
-                        }
-                        }
+                  
 
                     <td>
-                        @Html.DropDownListFor(c => c.Data[i].Context,
-                     new SelectList(dropdownlist),Model.Data[i].Context)
+                        @{  
+                            List<SelectListItem> lis = new List<SelectListItem>();
+                            SelectListItem item_nominal = new SelectListItem();
+                            item_nominal.Text = "Nominal";
+                            item_nominal.Value = "Nominal";
+
+                            SelectListItem item_Location = new SelectListItem();
+                            item_Location.Text = "Location";
+                            item_Location.Value = "Location";
+
+                            SelectListItem item_Numeric = new SelectListItem();
+                            item_Numeric.Text = "Numeric";
+                            item_Numeric.Value = "Numeric";
+
+                            SelectListItem item_Persentage = new SelectListItem();
+                            item_Persentage.Text = "Persentage";
+                            item_Persentage.Value = "Persentage";
+
+                            SelectListItem item_DateTime = new SelectListItem();
+                            item_DateTime.Text = "DateTime";
+                            item_DateTime.Value = "DateTime";
+
+                            switch (Model.Data[i].Context)
+                            {
+                                case "Nominal": { item_nominal.Selected = true; lis.Add(item_nominal); break; }
+                                case "Location": { item_Location.Selected = true; lis.Add(item_nominal); lis.Add(item_Location); break; }
+                                case "Numeric": { item_Numeric.Selected = true; lis.Add(item_nominal); lis.Add(item_Numeric); break; }
+                                case "Persentage": { item_Persentage.Selected = true; lis.Add(item_nominal); lis.Add(item_Numeric); lis.Add(item_nominal); break; }
+                                case "DateTime": { item_DateTime.Selected = true; lis.Add(item_nominal); lis.Add(item_DateTime); break; }
+                            }
+
+                            @Html.DropDownListFor(c => c.Data[i].Context, lis, Model.Data[i].Context);
+                         }
                 </td>
+                
             </tr>
-                    }
-
-
+                                }
                             }
             </tbody>
         </table>
     </div>
 </div>
+<button type="submit">submit</button>
 
-
-
-@foreach (var item in Model.Data)
-                            {
-
-
-
-    <p>Column : @item.Heading</p>
-    <p>Context : @item.Context</p>
-   
 }

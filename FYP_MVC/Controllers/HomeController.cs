@@ -14,6 +14,7 @@ namespace FYP_MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private FYPEntities db = new FYPEntities();
         public ActionResult Index()
         {
             /*
@@ -57,7 +58,9 @@ namespace FYP_MVC.Controllers
             System.Diagnostics.Debug.WriteLine("sdfasdfasdf");
             System.Diagnostics.Debug.WriteLine(con.checkForDate(col));*/
 
-            
+
+            user tempUser = db.users.Where(c => c.firstName.Equals("Lahiru")).First();
+            Session["user"] = tempUser;
             return View();
         }
 

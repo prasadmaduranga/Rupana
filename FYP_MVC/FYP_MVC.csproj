@@ -315,6 +315,20 @@
     <Content Include="Models\DAO\DataModel.edmx.diagram">
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Content>
+    <Content Include="CSV\0edcedfd-bc0c-4e80-a5db-86e8e02a5d83.csv" />
+    <Content Include="CSV\18bf9f56-a804-45b8-a0e0-cfe9bf93c5dc.csv" />
+    <Content Include="CSV\1f1031d9-18ba-49b6-ba87-97033a25ff56.csv" />
+    <Content Include="CSV\332d0840-f657-4902-bc37-0b853c889e58.csv" />
+    <Content Include="CSV\3f1ab38f-cf3a-4750-9315-2d9e90b7eb12.csv" />
+    <Content Include="CSV\797aa313-d3b8-41a7-8748-e36cff6314ed.csv" />
+    <Content Include="CSV\7cd1b25c-4f24-475b-9457-161068992117.csv" />
+    <Content Include="CSV\7fbdbb13-2c0e-409f-ad7c-254c506aef6b.csv" />
+    <Content Include="CSV\89012c08-59d8-49e8-94ad-4721cf59719e.csv" />
+    <Content Include="CSV\aeb55274-a9ce-461b-882b-17f7318b4fa8.csv" />
+    <Content Include="CSV\c3306de7-9442-42fc-acf7-f7c8cd7f8944.csv" />
+    <Content Include="CSV\d3f15ac6-92f9-4e84-906d-8c15fd443e51.csv" />
+    <Content Include="CSV\e64ee395-78d1-45a3-8df5-314cc14752fa.csv" />
+    <Content Include="CSV\eaab09ab-948b-40ee-99f9-946f1e13e702.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -369,11 +383,13 @@
     <Content Include="Views\Task\UploadCSV.cshtml" />
     <Content Include="Views\Task\showCSV.cshtml" />
     <Content Include="Views\Task\showContextInfo.cshtml" />
+    <Content Include="Views\Task\Recommendations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Admin\" />
     <Folder Include="Controllers\User\" />
+    <Folder Include="CSVFinalized\" />
     <Folder Include="Models\CoreObjects\" />
   </ItemGroup>
   <ItemGroup>
