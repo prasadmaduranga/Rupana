@@ -142,10 +142,11 @@ warning 6002: The table/view 'FYP.dbo.feedBack' does not have a primary key defi
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="userName" Type="nvarchar" MaxLength="60" />
           <Property Name="passwword" Type="nvarchar" MaxLength="128" />
           <Property Name="firstName" Type="nvarchar" MaxLength="30" />
           <Property Name="lastName" Type="nvarchar" MaxLength="30" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="userType" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -594,11 +595,12 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="passwword" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="originalDataFiles" Relationship="Self.FK__originalD__userI__2F10007B" FromRole="user" ToRole="originalDataFile" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="userType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="visualizedDataFile">
           <Key>
@@ -1024,8 +1026,9 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="FYPModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="userType" ColumnName="userType" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="passwword" ColumnName="passwword" />
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
                 <ScalarProperty Name="lastName" ColumnName="lastName" />
