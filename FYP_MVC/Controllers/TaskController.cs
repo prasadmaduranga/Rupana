@@ -22,6 +22,11 @@ namespace FYP_MVC.Controllers
             return View();
         }
 
+        public ActionResult Home()
+        {
+
+            return View();
+        }
         [HttpPost]
         public ActionResult UploadCSV(HttpPostedFileBase file)
         {

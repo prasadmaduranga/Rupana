@@ -108,5 +108,9 @@ namespace FYP_MVC.Models.DAO
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Recommendations_Result>("getRecommendations_WithoutIntention", tableIDParameter);
         }
+
+        public System.Data.Entity.DbSet<FYP_MVC.Models.Auth.LoginViewModel> LoginViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<FYP_MVC.Models.Auth.RegisterViewModel> RegisterViewModels { get; set; }
     }
 }
