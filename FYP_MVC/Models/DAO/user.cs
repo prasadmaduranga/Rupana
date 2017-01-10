@@ -21,10 +21,11 @@ namespace FYP_MVC.Models.DAO
         }
     
         public int ID { get; set; }
-        public string userName { get; set; }
         public string passwword { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
+        public string email { get; set; }
+        public string userType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<originalDataFile> originalDataFiles { get; set; }
