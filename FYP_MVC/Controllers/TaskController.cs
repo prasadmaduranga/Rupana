@@ -19,7 +19,9 @@ namespace FYP_MVC.Controllers
         [HttpGet]
         public ActionResult UploadCSV()
         {
-            return View();
+            CSVFile csv = new CSVFile();
+            csv.hasHeader = true;
+            return View(csv);
         }
 
         public ActionResult Home()
@@ -27,13 +29,14 @@ namespace FYP_MVC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult UploadCSV(HttpPostedFileBase file)
+        public ActionResult UploadCSV(bool hasHeader, HttpPostedFileBase file)
         {
             if (file != null && file.ContentLength > 0)
                 try
                 {
                     CSVFile csv = new CSVFile();
                     //Saving File in server
+                    csv.hasHeader = hasHeader;
                     String GUID = Guid.NewGuid().ToString();
                     var myUniqueFileName = string.Format(@"{0}.csv", GUID);
                     string path = Path.Combine(Server.MapPath("~/CSV"), Path.GetFileName(myUniqueFileName));
@@ -54,24 +57,45 @@ namespace FYP_MVC.Controllers
                         string[] columns = a.Split(',');
                         columnCount = columns.Length;
                         csv.Data = new Column[columnCount];
-
-                        //creating new columns 
                         for (int i = 0; i < columnCount; i++)
                         {
                             Column col = new Column();
                             col.Data = new List<string>();
                             col.selected = true;
-                            col.Heading = columns[i];
                             csv.Data[i] = col;
                         }
-
-                        //now read rest of the file 
                         int rows = 0;
+                        if (hasHeader)
+                        {
+                            //creating new columns 
+                            for (int i = 0; i < columnCount; i++)
+                            {
+                                csv.Data[i].Heading = columns[i];   
+                            }
+                        }
+                        else
+                        {
+                            rows = 1;
+                            if (!columns.Where(c => c.Equals(String.Empty)).Any())
+                            {
+
+                                for (int i = 0; i < columnCount; i++)
+                                {
+                                    csv.Data[i].Data.Add(columns[i]);
+                                    csv.Data[i].Heading = "Column " + (i + 1);
+                                }
+                            }
+                            else { //fatal error
+                            }
+                        }
+                        //now read rest of the file 
+                        
                         while ((a = sr.ReadLine()) != null)
                         {
                             string[] cols = a.Split(',');
                             if (!cols.Where(c => c.Equals(String.Empty)).Any())
                             {
+                                
                                 for (int i = 0; i < columnCount; i++)
                                 {
                                     csv.Data[i].Data.Add(cols[i]);
