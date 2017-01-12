@@ -180,6 +180,7 @@
     <Compile Include="Controllers\chartsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RecController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Core\ContextRecognizer\ContextExtractor.cs" />
     <Compile Include="Core\Injector\CSVInjector.cs" />
@@ -394,6 +395,8 @@
     <Content Include="Views\Authentication\Index.cshtml" />
     <Content Include="Views\Task\Home.cshtml" />
     <Content Include="Views\Admin\Home.cshtml" />
+    <Content Include="Views\Rec\ShowRecommendation_test.cshtml" />
+    <Content Include="Views\Rec\ShowRecommendation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -401,6 +404,7 @@
     <Folder Include="Controllers\User\" />
     <Folder Include="CSVFinalized\" />
     <Folder Include="Models\CoreObjects\" />
+    <Folder Include="Views\Recommendation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

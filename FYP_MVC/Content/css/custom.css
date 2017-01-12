@@ -42,7 +42,7 @@ body {
     border:1px solid #f3f3f3;
 }
 h2 {
-    color: #f00;
+    color: #1108fa;
 }
 h4 {
     padding-top:10px;
@@ -207,7 +207,7 @@ max-width:170px;
 
 .navbar-cls-top .navbar-brand {
 	color: #fff;
-background: #1108fa;
+background: #00CE6F;
 width: 260px;
 text-align: center;
 height: 60px;
@@ -305,7 +305,7 @@ font-weight: 700;
 	
 }
 .navbar-cls-top {
-	background:#4D4D4D;
+	background:#000;
 	border-bottom:none;
 	
 }

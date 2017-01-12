@@ -1,0 +1,39 @@
+﻿@model IEnumerable<FYP_MVC.Models.DAO.Recommendations_Result>
+
+@{
+    ViewBag.Title = "ShowRecommendation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowRecommendation</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Chart</th>
+        <th>Table Dim Index</th>
+        <th>Chart Dim Index</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+          @item.chartName
+        </td>
+        <td>
+            @item.tableDimIndex
+        </td>
+        <td>
+            @item.chartDimIndex
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

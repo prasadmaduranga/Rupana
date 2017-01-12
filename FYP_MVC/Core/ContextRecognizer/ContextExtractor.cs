@@ -12,13 +12,13 @@ namespace FYP_MVC.Core.ContextRecognizer
     public class ContextExtractor
     {
         public ContextExtractor() { }
+        static int checkingRowMargin = 20;
 
         FYPEntities db = new FYPEntities();
         public CSVFile csv;
         public ContextExtractor(CSVFile csv)
         {
             this.csv = csv;
-          
         }
         
         // Counting variables
@@ -49,6 +49,7 @@ namespace FYP_MVC.Core.ContextRecognizer
             checkHeader(col);
 
             // Entering condition count > num_rows/2
+            if (rowCount > checkingRowMargin) { rowCount = checkingRowMargin; }
             bool IsLocationEnters = (LocationCount > rowCount / 2) ? true:false;
             bool IsDateEnters = (DateCount > rowCount / 2) ? true : false;
             bool IsNumericEnters = (NumericCount > rowCount / 2) ? true : false;
@@ -66,34 +67,41 @@ namespace FYP_MVC.Core.ContextRecognizer
 
                 if (max == NumericCount)
                 {
-                    bool isPersentage = false;
+                    bool isPercentage = false;
                     col.Context = "Numeric";
-                    if (numericTotal > .9f && numericTotal < 1.1f) { isPersentage = true; }
-                    if (numericTotal > 90f && numericTotal < 110f) { isPersentage = true; }
-                    if (isPersentage) { col.Context = "Persentage"; }
+                    if (numericTotal > .9f && numericTotal < 1.1f) { isPercentage = true; }
+                    if (numericTotal > 90f && numericTotal < 110f) { isPercentage = true; }
+                    if (isPercentage) { col.Context = "Percentage"; }
                 }
                 else if (max == LocationCount) { col.Context = "Location"; }
-                else if (max == DateCount) { col.Context = "DateTime"; }
+                else if (max == DateCount) { col.Context = "Time series"; }
             }
             numericTotal = 0f;
 
             //final processing
             if (col.Context.Equals("Location") || col.Context.Equals("Nominal")) { col.IsContinous = false; }
-            else if (col.Context.Equals("Numeric") || col.Context.Equals("Persentage") || col.Context.Equals("DateTime")) { col.IsContinous = true; }
+            else if (col.Context.Equals("Numeric") || col.Context.Equals("Percentage") || col.Context.Equals("Time series")) { col.IsContinous = true; }
 
             //counting discrete values
             col.NumDiscreteValues = col.Data.Distinct().Count();
-            if (col.Context.Equals("Persentage") || col.Context.Equals("Numeric")) { col.NumDiscreteValues = 1000; }
+            if (col.Context.Equals("Percentage") || col.Context.Equals("Numeric")) { col.NumDiscreteValues = 1000; }
         }
 
         public void checkForNumeric(Column col)
         {
+            int rowCount = col.Data.Count;
+            if (rowCount > checkingRowMargin) { rowCount = checkingRowMargin; }
             numericTotal = 0f;
             NumericCount = 0;
-            foreach (var item in col.Data)
+            for (int i = 0; i < rowCount; i++)
             {
-                if (IsNumeric(item)) { NumericCount++;numericTotal += float.Parse(item); }
+                string item = col.Data[i];
+                if (IsNumeric(item))
+                {
+                    NumericCount++; numericTotal += float.Parse(item);
+                }
             }
+           
         }
 
         // try convert to numeric
@@ -111,11 +119,13 @@ namespace FYP_MVC.Core.ContextRecognizer
             {
                 String context = db.headerContexts.Where(c => c.Word.Equals(item)).Select(d => d.ContextType).FirstOrDefault();
                 if (context != null) { context = context.Replace("\r\n", string.Empty); }
+                int rowCount = col.Data.Count;
+                if (rowCount > checkingRowMargin) { rowCount = checkingRowMargin; }
                 switch (context)
                 {
-                    case "percentage": { NumericCount += (float)(csv.rowCount * .2); break; }
-                    case "date": { DateCount += (float)(csv.rowCount * .2); break; }
-                    case "location": { LocationCount += (float)(csv.rowCount * .2); break; }
+                    case "Percentage": { NumericCount += (float)(rowCount * .2); break; }
+                    case "date": { DateCount += (float)(rowCount * .2); break; }
+                    case "location": { LocationCount += (float)(rowCount * .2); break; }
                     default: break;
                 }
             }
@@ -135,20 +145,40 @@ namespace FYP_MVC.Core.ContextRecognizer
             int temp = col.Data.Count;
             col.DateValues = new DateTime[temp];
             String[] arr = col.Data.ToArray();
-            String query = "";
-            query = arr[0];
-            // creating query string
-            if (temp > 1)
+            int numRows = col.Data.Count;
+            if (numRows > checkingRowMargin) { numRows = checkingRowMargin; }
+            int iterations = numRows/5;
+            int remainder = numRows % 5;
+            string query = "";
+            for (int i = 0; i < iterations; i++)
             {
-                for (int i = 1; i < temp; i++)
-                {
-                    query += "," + arr[i];
-                }
+                query = generateQuery(arr, i * 5, (i + 1) * 5);
+                callPython(pythonInfo,query,i*5,(i+1)*5,col);
             }
+            if (remainder > 0)
+            {
+                query = generateQuery(arr, iterations * 5, col.Data.Count);
+                callPython(pythonInfo, query, iterations * 5, col.Data.Count, col);
+            }         
+            return DateCount;
+        }
+
+        public string generateQuery(string[] arr, int start, int end)
+        {
+            String query = arr[start];
+            for (int i = start+1; i < end; i++)
+            {
+                query += "," + arr[i];
+            }
+            return query;
+        }
+        public void callPython(ProcessStartInfo pythonInfo,string query,int start,int finish, Column col)
+        {
+
             // calling python script passing parameter "query"
-           // string path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/Python/date.py");
+            // string path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/Python/date.py");
             string path = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Python/date.py");
-            pythonInfo.Arguments = string.Format("{0} {1}",path,query);
+            pythonInfo.Arguments = string.Format("{0} {1}", path, query);
             pythonInfo.CreateNoWindow = false;
             pythonInfo.UseShellExecute = false;
             pythonInfo.RedirectStandardOutput = true;
@@ -157,20 +187,22 @@ namespace FYP_MVC.Core.ContextRecognizer
             {
                 using (StreamReader reader = process.StandardOutput)
                 {
-                    for (int i = 0; i < temp; i++)
+                    for (int i = start; i < finish; i++)
                     {
                         result = reader.ReadLine();
-                        if (!result.Equals("error"))
+                        if (result != null)
                         {
-                            DateTime myDate = DateTime.Parse(result);
-                            col.DateValues[i] = new DateTime();
-                            col.DateValues[i] = myDate;
-                            DateCount++;
+                            if (!result.Equals("error"))
+                            {
+                                DateTime myDate = DateTime.Parse(result);
+                                col.DateValues[i] = new DateTime();
+                                col.DateValues[i] = myDate;
+                                DateCount++;
+                            }
                         }
                     }
                 }
             }
-            return DateCount;
         }
     }
 }

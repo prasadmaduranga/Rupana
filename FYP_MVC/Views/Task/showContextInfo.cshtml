@@ -33,8 +33,8 @@
                                 case "Nominal": { classname = "label label-primary"; break; }
                                 case "Location": { classname = "label label-success"; break; }
                                 case "Numeric": { classname = "label label-warning"; break; }
-                                case "Persentage": { classname = "label label-danger"; break; }
-                                case "DateTime": { classname = "label label-info"; break; }
+                                case "Percentage": { classname = "label label-danger"; break; }
+                                case "Time series": { classname = "label label-info"; break; }
                             }
 
                         }
@@ -58,21 +58,21 @@
                             item_Numeric.Text = "Numeric";
                             item_Numeric.Value = "Numeric";
 
-                            SelectListItem item_Persentage = new SelectListItem();
-                            item_Persentage.Text = "Persentage";
-                            item_Persentage.Value = "Persentage";
+                            SelectListItem item_Percentage = new SelectListItem();
+                            item_Percentage.Text = "Percentage";
+                            item_Percentage.Value = "Percentage";
 
                             SelectListItem item_DateTime = new SelectListItem();
-                            item_DateTime.Text = "DateTime";
-                            item_DateTime.Value = "DateTime";
+                            item_DateTime.Text = "Time series";
+                            item_DateTime.Value = "Time series";
 
                             switch (Model.Data[i].Context)
                             {
                                 case "Nominal": { item_nominal.Selected = true; lis.Add(item_nominal); break; }
                                 case "Location": { item_Location.Selected = true; lis.Add(item_nominal); lis.Add(item_Location); break; }
                                 case "Numeric": { item_Numeric.Selected = true; lis.Add(item_nominal); lis.Add(item_Numeric); break; }
-                                case "Persentage": { item_Persentage.Selected = true; lis.Add(item_nominal); lis.Add(item_Numeric); lis.Add(item_nominal); break; }
-                                case "DateTime": { item_DateTime.Selected = true; lis.Add(item_nominal); lis.Add(item_DateTime); break; }
+                                case "Percentage": { item_Percentage.Selected = true; lis.Add(item_nominal); lis.Add(item_Numeric); lis.Add(item_Percentage); break; }
+                                case "Time series": { item_DateTime.Selected = true; lis.Add(item_nominal); lis.Add(item_DateTime); break; }
                             }
 
                             @Html.DropDownListFor(c => c.Data[i].Context, lis, Model.Data[i].Context);
@@ -80,6 +80,11 @@
                 </td>
                 
             </tr>
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(c=>c.Data[i].Context, new { style = "display:none;" })
+                               
                                 }
                             }
             </tbody>
