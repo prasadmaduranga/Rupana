@@ -15,6 +15,11 @@ namespace FYP_MVC.Controllers
     public class HomeController : Controller
     {
         private FYPEntities db = new FYPEntities();
+
+        public ActionResult welcomePage()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             /*
