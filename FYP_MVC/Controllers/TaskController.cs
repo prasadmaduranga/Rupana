@@ -219,5 +219,15 @@ namespace FYP_MVC.Controllers
             return View(csv);
         }
 
+    
+        public ActionResult logout()
+        {
+            Session["user"] = null;
+
+            return RedirectToAction("Login", "Authentication");
+
+        }
+
+
     }
 }

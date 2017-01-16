@@ -4,20 +4,172 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    
-        <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <script src="~/Content/js/jquery-1.10.2.js"></script>
+    <script src="~/Content/js/morris/morris.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script>
+        $(window).load(function () {
+            setTimeout(function () {
+                $(".se-pre-con").fadeOut("slow");
+            });
+        });
+
+    </script>
+    @*<script src="~/Content/js/facebook.js"></script>*@
+    <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/custom.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css" />
-        @RenderSection("Styles", false)
-   
+    <link href="@Url.Content("~/Content/css/loader.css")" rel="stylesheet" type="text/css" />
+
+    @RenderSection("Styles", false)
 
 
 
-   
+
 
 </head>
 <body>
- 
+    <div class="se-pre-con"></div>
+
+    <script>
+
+
+
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else if (response.status === 'not_authorized') {
+                // The person is logged into Facebook, but not your app.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                  'into this app.';
+            } else {
+                // The person is not logged into Facebook, so we're not sure if
+                // they are logged into this app or not.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                  'into Facebook.';
+            }
+        }
+
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '582017025328479',
+                cookie: true,  // enable cookies to allow the server to access 
+                // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.8' // use graph api version 2.8
+            });
+
+
+
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+
+        };
+
+
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function testAPI() {
+
+            FB.api('/me', { locale: 'en_US', fields: 'name,first_name,last_name, email' }, function (response) {
+
+                document.getElementById('status').innerHTML =
+                  'Thanks for logging in, ' + response.name + response.email + '!';
+
+                $.ajax({
+                    url: '@Url.Action("LoginWithFB", "Authentication")',
+                    type: 'POST',
+                    dataType: 'json',
+                    cache: false,
+                    data: { 'firstName': response.first_name, 'lastName': response.last_name, 'email': response.email },
+                    success: function (response) {
+                        if (response.result == 'Redirect') {
+                            //redirecting to main page from here for the time being.
+                            window.location = response.url;
+                        }
+
+                    },
+                    error: function () {
+                        alert('Error occured');
+                    }
+                });
+
+
+
+            });
+        }
+
+
+
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+        function logout() {
+            var isFBAuthenticated = '@Session["isFBAuthenticated"]';
+   
+            if (isFBAuthenticated === "True") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("FBLogout", "Authentication")',
+                    success: function (data) {
+                        if (data.result === 'Redirect') {
+                            FB.logout(function (response) {
+                                window.location = data.url;
+                            });
+                        }
+                    },
+                    error: function () {
+                        alert("Error in logging out with FB");
+                    }
+                });
+
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Logout", "Authentication")',
+                    success: function (data) {
+                        if (data.result === 'Redirect') {
+                            window.location = data.url;
+                           @*$.ajax({
+                                  type: "GET",
+                                  url: '@Url.Action("Login", "Authentication")'
+          
+                              });*@ 
+
+                        }
+                    },
+                    error: function () {
+
+                        alert("Error in logging out");
+
+                    }
+                });
+            }
+
+
+
+
+
+        }
+    </script>
 
     <div id="wrapper">
 
@@ -32,10 +184,14 @@
                 <a class="navbar-brand" href="index.html">Ruupana</a>
             </div>
             <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;">Last access : 30 May 2014 &nbsp;<a href="#" class="btn btn-danger square-btn-adjust">@Html.ActionLink("Logout", "LogOut","Authentication")</a></div>
-        </nav>   
+                    padding: 15px 50px 5px 50px;
+                    float: right;
+                    font-size: 16px;">
+                &nbsp;
+                @*<a href="#" class="btn btn-danger square-btn-adjust">@Html.ActionLink("Logout", "LogOut","Authentication")</a>*@
+                <button type="button" id="btnLogout" onclick="logout();">Logout</button>
+            </div>
+        </nav>
 
 
         <nav class="navbar-default navbar-side" role="navigation">
@@ -105,7 +261,7 @@ font-size: 16px;">Last access : 30 May 2014 &nbsp;<a href="#" class="btn btn-dan
                 @RenderBody()
             </div>
         </div>
-        </div>
+    </div>
 
     <script src="~/Content/js/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP SCRIPTS -->
@@ -116,16 +272,6 @@ font-size: 16px;">Last access : 30 May 2014 &nbsp;<a href="#" class="btn btn-dan
     <script src="~/Content/js/custom.js"></script>
 
 
-
-    <script>
-
-        $(document).ready(function () {
-            console.log("loaded");
-
-
-        });
-
-    </script>
 
 
 </body>
