@@ -1,6 +1,30 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="~/Content/js/jquery-1.10.2.js"></script>
+    <script src="~/Content/js/morris/morris.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script>
+        $(window).load(function () {
+            setTimeout(function () {
+                $(".se-pre-con").fadeOut("slow");
+            });
+        });
+
+    </script>
+    @*<script src="~/Content/js/facebook.js"></script>*@
+    <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/loader.css")" rel="stylesheet" type="text/css" />
+
+    @RenderSection("Styles", false)
+@*
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lumino - Dashboard</title>
@@ -10,11 +34,249 @@
     <!--Icons-->
 
     <script src="~/Content/js/lumino.glyphs.js"></script>
+*@
+
+
+
 
 </head>
-
 <body>
+    <div class="se-pre-con"></div>
+
+    <script>
+
+
+
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else if (response.status === 'not_authorized') {
+                // The person is logged into Facebook, but not your app.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                  'into this app.';
+            } else {
+                // The person is not logged into Facebook, so we're not sure if
+                // they are logged into this app or not.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                  'into Facebook.';
+            }
+        }
+
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '582017025328479',
+                cookie: true,  // enable cookies to allow the server to access 
+                // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.8' // use graph api version 2.8
+            });
+
+
+
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+
+        };
+
+
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function testAPI() {
+
+            FB.api('/me', { locale: 'en_US', fields: 'name,first_name,last_name, email' }, function (response) {
+
+                document.getElementById('status').innerHTML =
+                  'Thanks for logging in, ' + response.name + response.email + '!';
+
+                $.ajax({
+                    url: '@Url.Action("LoginWithFB", "Authentication")',
+                    type: 'POST',
+                    dataType: 'json',
+                    cache: false,
+                    data: { 'firstName': response.first_name, 'lastName': response.last_name, 'email': response.email },
+                    success: function (response) {
+                        if (response.result == 'Redirect') {
+                            //redirecting to main page from here for the time being.
+                            window.location = response.url;
+                        }
+
+                    },
+                    error: function () {
+                        alert('Error occured');
+                    }
+                });
+
+
+
+            });
+        }
+
+
+
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+        function logout() {
+            var isFBAuthenticated = '@Session["isFBAuthenticated"]';
+   
+            if (isFBAuthenticated === "True") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("FBLogout", "Authentication")',
+                    success: function (data) {
+                        if (data.result === 'Redirect') {
+                            FB.logout(function (response) {
+                                window.location = data.url;
+                            });
+                        }
+                    },
+                    error: function () {
+                        alert("Error in logging out with FB");
+                    }
+                });
+
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Logout", "Authentication")',
+                    success: function (data) {
+                        if (data.result === 'Redirect') {
+                            window.location = data.url;
+                           @*$.ajax({
+                                  type: "GET",
+                                  url: '@Url.Action("Login", "Authentication")'
+          
+                              });*@ 
+
+                        }
+                    },
+                    error: function () {
+
+                        alert("Error in logging out");
+
+                    }
+                });
+            }
+
+
+
+
+
+        }
+    </script>
+
     <div id="wrapper">
+
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Ruupana</a>
+            </div>
+            <div style="color: white;
+                    padding: 15px 50px 5px 50px;
+                    float: right;
+                    font-size: 16px;">
+                &nbsp;
+                @*<a href="#" class="btn btn-danger square-btn-adjust">@Html.ActionLink("Logout", "LogOut","Authentication")</a>*@
+                <button type="button" id="btnLogout" onclick="logout();">Logout</button>
+            </div>
+        </nav>
+
+
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="text-center">
+                        <img src="~/Content/img/img.png" class="user-image img-responsive" />
+                    </li>
+
+                    <li>
+                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="ui.html"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
+                    </li>
+                    <li>
+                        <a href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>
+                    </li>
+                    <li>
+                        <a href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a>
+                    </li>
+                    <li>
+                        <a href="table.html"><i class="fa fa-table fa-3x"></i> Table Examples</a>
+                    </li>
+                    <li>
+                        <a href=@Url.Action("UploadCSV", "Task") id="newTask"><i class="fa fa-edit fa-3x"></i> New Task </a>
+                    </li>
+
+
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Second Level Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Second Level Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper">
+            <div id="page-inner">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Content/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+@*
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: rgb(13, 13, 176)">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -102,10 +364,12 @@
 
       
     </div>
-
+*@
 
     <script src="~/Content/js/jquery-1.11.1.min.js"></script>
+
     <script src="~/Content/js/bootstrap.min.js"></script>
+
 
     <script>
 
@@ -124,6 +388,7 @@
                 if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
             })
     </script>
+
 </body>
 
 </html>
