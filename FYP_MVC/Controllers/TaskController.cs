@@ -19,22 +19,24 @@ namespace FYP_MVC.Controllers
         [HttpGet]
         public ActionResult UploadCSV()
         {
-            return View();
+            CSVFile csv = new CSVFile();
+            csv.hasHeader = true;
+            return View(csv);
         }
 
         public ActionResult Home()
         {
-
             return View();
         }
         [HttpPost]
-        public ActionResult UploadCSV(HttpPostedFileBase file)
+        public ActionResult UploadCSV(bool hasHeader, HttpPostedFileBase file)
         {
             if (file != null && file.ContentLength > 0)
                 try
                 {
                     CSVFile csv = new CSVFile();
                     //Saving File in server
+                    csv.hasHeader = hasHeader;
                     String GUID = Guid.NewGuid().ToString();
                     var myUniqueFileName = string.Format(@"{0}.csv", GUID);
                     string path = Path.Combine(Server.MapPath("~/CSV"), Path.GetFileName(myUniqueFileName));
@@ -55,27 +57,52 @@ namespace FYP_MVC.Controllers
                         string[] columns = a.Split(',');
                         columnCount = columns.Length;
                         csv.Data = new Column[columnCount];
-
-                        //creating new columns 
                         for (int i = 0; i < columnCount; i++)
                         {
                             Column col = new Column();
                             col.Data = new List<string>();
                             col.selected = true;
-                            col.Heading = columns[i];
                             csv.Data[i] = col;
                         }
-
-                        //now read rest of the file 
                         int rows = 0;
+                        if (hasHeader)
+                        {
+                            //creating new columns 
+                            for (int i = 0; i < columnCount; i++)
+                            {
+                                csv.Data[i].Heading = columns[i];   
+                            }
+                        }
+                        else
+                        {
+                            rows = 1;
+                            if (!columns.Where(c => c.Equals(String.Empty)).Any())
+                            {
+
+                                for (int i = 0; i < columnCount; i++)
+                                {
+                                    csv.Data[i].Data.Add(columns[i]);
+                                    csv.Data[i].Heading = "Column " + (i + 1);
+                                }
+                            }
+                            else { //fatal error
+                            }
+                        }
+                        //now read rest of the file 
+                        
                         while ((a = sr.ReadLine()) != null)
                         {
                             string[] cols = a.Split(',');
-                            for (int i = 0; i < columnCount; i++)
+                            if (!cols.Where(c => c.Equals(String.Empty)).Any())
                             {
-                                csv.Data[i].Data.Add(cols[i]);
+                                
+                                for (int i = 0; i < columnCount; i++)
+                                {
+                                    csv.Data[i].Data.Add(cols[i]);
+                                }
+                                rows++;
                             }
-                            rows++;
+                            else { }
                         }
                         csv.rowCount = rows;
                         // numRows - used as loop variable in creating table
@@ -109,9 +136,29 @@ namespace FYP_MVC.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult showCSV()
+        {
+            ViewBag.errorMessage=TempData["errorMessage"];
+            CSVFile csv = (CSVFile)TempData["csv"];
+            CSVInjector.csv = csv;
+            if (csv.rowCount < 15)
+            {
+                ViewBag.rowCount = csv.rowCount;
+            }
+            else ViewBag.rowCount = 15;
+            return View(csv);
+        }
         [HttpPost]
         public ActionResult showContextInfo(CSVFile csv)
         {
+            int selectedcout = csv.Data.Where(c => c.selected).Count();
+            if (selectedcout < 2 || selectedcout > 7)
+            {
+                TempData["csv"] = CSVInjector.csv;
+                TempData["errorMessage"] = "Please select number of columns in range 2-7";
+                return RedirectToAction("showCSV","Task");
+            }
             CSVFile csv2 = CSVInjector.csv;
             for (int i = 0; i < csv.Data.Length; i++)
             {
@@ -133,9 +180,9 @@ namespace FYP_MVC.Controllers
                 csv2.Data.ToList()[i].Context = csv.Data.ToList()[i].Context;
             }
             writeFinalCSV(csv2);
-           
-
-            return View(csv2);
+            int tblId = (int)Session["CurrentTableId"];
+            return RedirectToAction("ShowRecommendation", "Rec", new { tableID = tblId });
+            
         }
         //Write CSV to file system with only selected columns
         public void writeFinalCSV(CSVFile csvfile)
@@ -202,22 +249,9 @@ namespace FYP_MVC.Controllers
                 db.SaveChanges();
             }
 
+            Session["CurrentTableId"] = tbl.ID;
         }
 
-        [HttpGet]
-        public ActionResult showCSV()
-        {
-            CSVFile csv = (CSVFile)TempData["csv"];
-            CSVInjector.csv = csv;
-            bool[] selections = new bool[csv.Data.Length];
-            for (int i = 0; i < selections.Length; i++)
-            {
-                selections[i] = new bool();
-                selections[i] = true;
-            }
-            ViewBag.selections = selections;
-            return View(csv);
-        }
 
     
         public ActionResult logout()

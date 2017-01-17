@@ -10,9 +10,11 @@ namespace FYP_MVC.Models
     {
         public int ID { get; set; }
         public HttpPostedFileBase csvFile { get; set; }
-        public String filename { get; set; }
-        public String GUID { get; set; }
+        public string filename { get; set; }
+        public string GUID { get; set; }
         public Column[] Data { get; set; }
         public int rowCount { get; set; }
+        public string Intension { get; set; }
+        public bool hasHeader { get; set; }
     }
 }

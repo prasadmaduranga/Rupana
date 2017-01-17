@@ -184,6 +184,7 @@
     <Compile Include="Controllers\chartsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RecController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Core\ContextRecognizer\ContextExtractor.cs" />
     <Compile Include="Core\Injector\CSVInjector.cs" />
@@ -269,11 +270,21 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap-table.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
+
     <Content Include="Content\css\custom.css" />
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\loader.css" />
     <Content Include="Content\css\LoginLayoutCustom.css" />
+
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\datepicker.css" />
+    <Content Include="Content\css\datepicker3.css" />
+    <Content Include="Content\css\styles.css" />
+
     <Content Include="Content\font-awesome\fonts\fontawesome-webfontba72.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\1.png" />
@@ -281,6 +292,7 @@
     <Content Include="Content\img\3.png" />
     <Content Include="Content\img\4.png" />
     <Content Include="Content\img\find_user.png" />
+
     <Content Include="Content\img\img.png" />
     <Content Include="Content\img\Preloader_1.gif" />
     <Content Include="Content\img\Preloader_2.gif" />
@@ -289,16 +301,32 @@
     <Content Include="Content\img\Preloader_5.gif" />
     <Content Include="Content\img\Preloader_6.gif" />
     <Content Include="Content\img\Preloader_7.gif" />
+
+    <Content Include="Content\img\logo1.png" />
+    <Content Include="Content\img\name.png" />
+    <Content Include="Content\img\welcome.PNG" />
+    <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\js\bootstrap-table.js" />
+    <Content Include="Content\js\bootstrap.js" />
+
     <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\chart-data.js" />
+    <Content Include="Content\js\chart.min.js" />
     <Content Include="Content\js\custom.js" />
     <Content Include="Content\js\dataTables\dataTables.bootstrap.css" />
     <Content Include="Content\js\dataTables\dataTables.bootstrap.js" />
     <Content Include="Content\js\dataTables\jquery.dataTables.js" />
+    <Content Include="Content\js\easypiechart-data.js" />
+    <Content Include="Content\js\easypiechart.js" />
+    <Content Include="Content\js\html5shiv.min.js" />
     <Content Include="Content\js\jquery-1.10.2.js" />
+    <Content Include="Content\js\jquery-1.11.1.min.js" />
     <Content Include="Content\js\jquery.metisMenu.js" />
+    <Content Include="Content\js\lumino.glyphs.js" />
     <Content Include="Content\js\morris\morris-0.4.3.min.css" />
     <Content Include="Content\js\morris\morris.js" />
     <Content Include="Content\js\morris\raphael-2.1.0.min.js" />
+    <Content Include="Content\js\respond.min.js" />
     <Content Include="Content\Python\date.py" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -331,20 +359,8 @@
     <Content Include="Models\DAO\DataModel.edmx.diagram">
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Content>
-    <Content Include="CSV\0edcedfd-bc0c-4e80-a5db-86e8e02a5d83.csv" />
-    <Content Include="CSV\18bf9f56-a804-45b8-a0e0-cfe9bf93c5dc.csv" />
-    <Content Include="CSV\1f1031d9-18ba-49b6-ba87-97033a25ff56.csv" />
-    <Content Include="CSV\332d0840-f657-4902-bc37-0b853c889e58.csv" />
-    <Content Include="CSV\3f1ab38f-cf3a-4750-9315-2d9e90b7eb12.csv" />
-    <Content Include="CSV\797aa313-d3b8-41a7-8748-e36cff6314ed.csv" />
-    <Content Include="CSV\7cd1b25c-4f24-475b-9457-161068992117.csv" />
-    <Content Include="CSV\7fbdbb13-2c0e-409f-ad7c-254c506aef6b.csv" />
-    <Content Include="CSV\89012c08-59d8-49e8-94ad-4721cf59719e.csv" />
-    <Content Include="CSV\aeb55274-a9ce-461b-882b-17f7318b4fa8.csv" />
-    <Content Include="CSV\c3306de7-9442-42fc-acf7-f7c8cd7f8944.csv" />
-    <Content Include="CSV\d3f15ac6-92f9-4e84-906d-8c15fd443e51.csv" />
-    <Content Include="CSV\e64ee395-78d1-45a3-8df5-314cc14752fa.csv" />
-    <Content Include="CSV\eaab09ab-948b-40ee-99f9-946f1e13e702.csv" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -406,13 +422,18 @@
     <Content Include="Views\Authentication\Index.cshtml" />
     <Content Include="Views\Task\Home.cshtml" />
     <Content Include="Views\Admin\Home.cshtml" />
+    <Content Include="Views\Rec\ShowRecommendation_test.cshtml" />
+    <Content Include="Views\Rec\ShowRecommendation.cshtml" />
+    <Content Include="Views\Home\welcomePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Admin\" />
     <Folder Include="Controllers\User\" />
     <Folder Include="CSVFinalized\" />
+    <Folder Include="CSV\" />
     <Folder Include="Models\CoreObjects\" />
+    <Folder Include="Views\Recommendation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

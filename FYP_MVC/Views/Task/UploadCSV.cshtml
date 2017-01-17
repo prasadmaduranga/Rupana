@@ -1,12 +1,18 @@
-﻿
+﻿@using FYP_MVC.Models
+@model CSVFile 
 @{
     ViewBag.Title = "UploadCSV";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-@using (Html.BeginForm("UploadCSV", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
+@using (Html.BeginForm("UploadCSV", "Task",
+                  new { hasHeader = true }, FormMethod.Post,
+              new { enctype = "multipart/form-data" })) { 
+
+
+
+
     <div class="row">
         <div class="col-lg-4">
             <form class="form-horizontal">
@@ -22,6 +28,10 @@
                         </a>
                         &nbsp;
                         <span class='label label-info' id="upload-file-info"></span>
+
+                        <br />
+                        CSV has a header Row : @Html.CheckBox("hasHeader", true)
+
                     </div>
 
                     <br />
