@@ -164,6 +164,7 @@ namespace FYP_MVC.Controllers
             {
                 csv2.Data.ToList()[i].selected = csv.Data.ToList()[i].selected;
             }
+            csv2.Intension = csv.Intension;
             ContextExtractor con = new ContextExtractor(csv2);
             CSVFile csvs = con.processCSV();
             CSVInjector.csv = csvs;

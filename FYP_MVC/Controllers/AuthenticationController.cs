@@ -67,6 +67,7 @@ namespace FYP_MVC.Controllers
             if (users.Count == 1)
             {
                 Session["user"] = users.FirstOrDefault();
+                Session["userName"] = users.FirstOrDefault().firstName;
                 if (users.FirstOrDefault().userType == "Admin")
                 {
                     return RedirectToAction("Home", "Admin");
