@@ -61,20 +61,13 @@ namespace FYP_MVC.Core.ContextRecognizer
             }
             else
             {
-                float max = NumericCount;
-                if (NumericCount <= LocationCount) { max = LocationCount; }
-                if (NumericCount <= DateCount && LocationCount <= DateCount) { max = DateCount; }
-
-                if (max == NumericCount)
-                {
-                    bool isPercentage = false;
-                    col.Context = "Numeric";
-                    if (numericTotal > .9f && numericTotal < 1.1f) { isPercentage = true; }
-                    if (numericTotal > 90f && numericTotal < 110f) { isPercentage = true; }
-                    if (isPercentage) { col.Context = "Percentage"; }
-                }
-                else if (max == LocationCount) { col.Context = "Location"; }
-                else if (max == DateCount) { col.Context = "Time series"; }
+                bool isPercentage = false;
+                col.Context = "Numeric";
+                if (numericTotal > .9f && numericTotal < 1.1f) { isPercentage = true; }
+                if (numericTotal > 90f && numericTotal < 110f) { isPercentage = true; }
+                if (isPercentage) { col.Context = "Percentage"; }
+                else if (IsLocationEnters) { col.Context = "Location"; }
+                else if (IsDateEnters) { col.Context = "Time series"; }
             }
             numericTotal = 0f;
 
@@ -199,6 +192,7 @@ namespace FYP_MVC.Core.ContextRecognizer
                                 col.DateValues[i] = myDate;
                                 DateCount++;
                             }
+                            else { }
                         }
                     }
                 }

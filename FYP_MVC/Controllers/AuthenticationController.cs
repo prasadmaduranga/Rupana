@@ -139,6 +139,7 @@ namespace FYP_MVC.Controllers
                     db.SaveChanges();
                     Session["isFBAuthenticated"] = true;
                     Session["user"] = user;
+
                     return Json(new { result = "Redirect", url = Url.Action("Home", "Task") });
 
                 }

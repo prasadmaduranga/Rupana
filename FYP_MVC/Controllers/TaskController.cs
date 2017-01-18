@@ -249,7 +249,6 @@ namespace FYP_MVC.Controllers
                 db.tableDimensions.Add(tbldim);
                 db.SaveChanges();
             }
-
             Session["CurrentTableId"] = tbl.ID;
         }
 
