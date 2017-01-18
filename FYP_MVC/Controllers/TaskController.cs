@@ -254,5 +254,15 @@ namespace FYP_MVC.Controllers
         }
 
 
+    
+        public ActionResult logout()
+        {
+            Session["user"] = null;
+
+            return RedirectToAction("Login", "Authentication");
+
+        }
+
+
     }
 }

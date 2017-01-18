@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -270,10 +274,17 @@
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
+
+    <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\loader.css" />
+    <Content Include="Content\css\LoginLayoutCustom.css" />
+
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\datepicker3.css" />
     <Content Include="Content\css\styles.css" />
+
     <Content Include="Content\font-awesome\fonts\fontawesome-webfontba72.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\1.png" />
@@ -281,12 +292,23 @@
     <Content Include="Content\img\3.png" />
     <Content Include="Content\img\4.png" />
     <Content Include="Content\img\find_user.png" />
+
+    <Content Include="Content\img\img.png" />
+    <Content Include="Content\img\Preloader_1.gif" />
+    <Content Include="Content\img\Preloader_2.gif" />
+    <Content Include="Content\img\Preloader_3.gif" />
+    <Content Include="Content\img\Preloader_4.gif" />
+    <Content Include="Content\img\Preloader_5.gif" />
+    <Content Include="Content\img\Preloader_6.gif" />
+    <Content Include="Content\img\Preloader_7.gif" />
+
     <Content Include="Content\img\logo1.png" />
     <Content Include="Content\img\name.png" />
     <Content Include="Content\img\welcome.PNG" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\bootstrap-table.js" />
     <Content Include="Content\js\bootstrap.js" />
+
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\chart-data.js" />
     <Content Include="Content\js\chart.min.js" />

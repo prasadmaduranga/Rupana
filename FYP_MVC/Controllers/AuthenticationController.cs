@@ -8,6 +8,8 @@ using FYP_MVC.Models.Auth;
 using FYP_MVC.Models.DAO;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json.Linq;
+using System.Web.Script.Serialization;
 
 namespace FYP_MVC.Controllers
 {
@@ -28,6 +30,21 @@ namespace FYP_MVC.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+
+
+            if (Session["user"] != null && !Convert.ToBoolean(Session["isFBAuthenticated"]))
+            {
+                if (((user)Session["user"]).userType == "Admin")
+                {
+                    return RedirectToAction("Home", "Admin");
+                }
+                else
+                {
+                    return RedirectToAction("Home", "Task");
+                }
+
+            }
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -37,6 +54,9 @@ namespace FYP_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+
+            
+            
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -67,7 +87,7 @@ namespace FYP_MVC.Controllers
             if (users.Count == 1)
             {
                 Session["user"] = users.FirstOrDefault();
-                Session["userName"] = users.FirstOrDefault().firstName;
+                Session["isFBAuthenticated"] = false;
                 if (users.FirstOrDefault().userType == "Admin")
                 {
                     return RedirectToAction("Home", "Admin");
@@ -86,6 +106,86 @@ namespace FYP_MVC.Controllers
 
         }
 
+        [HttpPost]
+        [AllowAnonymous]      
+        public ActionResult LoginWithFB(string firstName,string lastName,string email)
+        {
+
+                      
+            user user = new user();
+            user.firstName = firstName;
+            user.lastName = lastName;
+            user.email = email;
+                       
+            List<user> users = db.users.Where(u => u.email == email).ToList();
+            if (users.Count == 0)
+            {
+                user userIn = new user
+                {
+                    firstName = user.firstName,
+                    lastName = user.lastName,
+                    email = user.email,
+                    passwword = null,
+                    userType = "General user"
+
+                };
+
+                // Add the new object to the Orders collection.
+                db.users.Add(userIn);
+
+                // Submit the change to the database.
+                try
+                {
+                    db.SaveChanges();
+                    Session["isFBAuthenticated"] = true;
+                    Session["user"] = user;
+                    return Json(new { result = "Redirect", url = Url.Action("Home", "Task") });
+
+                }
+                catch (Exception e)
+                {
+                    Session["isFBAuthenticated"] = false;
+                    Session["user"] = null;
+                    Console.WriteLine(e);
+                    ModelState.AddModelError("", "Errors while creating your account. Try again..");
+                    return Json(new { result = "Error", url = Url.Action("Login", "Authentication") });
+                }
+
+            }
+            else {
+                Session["user"] = user;
+                Session["isFBAuthenticated"] = true;
+                return Json(new { result = "Redirect", url = Url.Action("Home", "Task") });
+            }
+           
+
+        
+        }
+
+        [HttpPost]
+        public ActionResult FBLogout()
+        {
+
+            Session["user"] = null;
+            Session["isFBAuthenticated"] = false;
+            return Json(new { result = "Redirect", url = Url.Action("Login", "Authentication") });
+
+            //return RedirectToAction("Login", "Authentication");
+
+        }
+
+        [HttpPost]
+        public ActionResult Logout()
+        {
+
+            Session["user"] = null;
+            Session["isFBAuthenticated"] = false;
+            return Json(new { result = "Redirect", url = Url.Action("Login", "Authentication") });
+
+            //return RedirectToAction("Login", "Authentication");
+
+        }
+
 
         [AllowAnonymous]
         public ActionResult Register()
@@ -99,21 +199,7 @@ namespace FYP_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                /*  var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                  var result = await UserManager.CreateAsync(user, model.Password);
-                  if (result.Succeeded)
-                  {
-                      await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                      // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                      // Send an email with this link
-                      // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                      // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                      // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                      return RedirectToAction("Index", "Home");
-                  }
-                  AddErrors(result);*/
+               
                 MD5 md5Hash = MD5.Create();
                 string hassedPassword = GetMd5Hash(md5Hash, model.Password);
                 user user = new user
@@ -188,14 +274,14 @@ namespace FYP_MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOut()
-        {
-            Session["user"] = null;
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult LogOut()
+        //{
+        //    Session["user"] = null;
 
-            return RedirectToAction("Login", "Authentication");
-        }
+        //    return RedirectToAction("Login", "Authentication");
+        //}
 
         static string GetMd5Hash(MD5 md5Hash, string input)
         {
