@@ -10,6 +10,7 @@ using FYP_MVC.Core.ContextRecognizer;
 using FYP_MVC.Core.Injector;
 using FYP_MVC.Models.DAO;
 
+
 namespace FYP_MVC.Controllers
 {
     public class TaskController : Controller
@@ -180,6 +181,8 @@ namespace FYP_MVC.Controllers
             {
                 csv2.Data.ToList()[i].Context = csv.Data.ToList()[i].Context;
             }
+            ProcessConfirmedContext PCC = new ProcessConfirmedContext();
+            PCC.processCSV(csv2);
             writeFinalCSV(csv2);
             int tblId = (int)Session["CurrentTableId"];
             return RedirectToAction("ShowRecommendation", "Rec", new { tableID = tblId });

@@ -66,8 +66,8 @@ namespace FYP_MVC.Core.ContextRecognizer
                 if (numericTotal > .9f && numericTotal < 1.1f) { isPercentage = true; }
                 if (numericTotal > 90f && numericTotal < 110f) { isPercentage = true; }
                 if (isPercentage) { col.Context = "Percentage"; }
-                else if (IsLocationEnters) { col.Context = "Location"; }
-                else if (IsDateEnters) { col.Context = "Time series"; }
+                else if (LocationCount>.6*NumericCount) { col.Context = "Location"; }
+                else if (DateCount>.6*NumericCount) { col.Context = "Time series"; }
             }
             numericTotal = 0f;
 
@@ -188,11 +188,13 @@ namespace FYP_MVC.Core.ContextRecognizer
                             if (!result.Equals("error"))
                             {
                                 DateTime myDate = DateTime.Parse(result);
-                                col.DateValues[i] = new DateTime();
-                                col.DateValues[i] = myDate;
-                                DateCount++;
+                                if (myDate.Year > 1900 && myDate.Year < 2100)
+                                {
+                                    col.DateValues[i] = new DateTime();
+                                    col.DateValues[i] = myDate;
+                                    DateCount++;
+                                }
                             }
-                            else { }
                         }
                     }
                 }
