@@ -6,6 +6,9 @@ using FYP_MVC.Models;
 using System.Diagnostics;
 using System.IO;
 using FYP_MVC.Models.DAO;
+using Newtonsoft.Json;
+using System.Net;
+using System.Data.Entity.Core.Objects;
 
 namespace FYP_MVC.Core.ContextRecognizer
 {
@@ -25,6 +28,9 @@ namespace FYP_MVC.Core.ContextRecognizer
         float NumericCount = 0;
         float LocationCount = 0;
         float DateCount = 0;
+
+        string region = "";
+        string resolution = "";
 
         //tempory numeric list
         float numericTotal = 0f;
@@ -127,6 +133,55 @@ namespace FYP_MVC.Core.ContextRecognizer
         public void checkForLocation(Column col)
         {
             LocationCount = 0;
+            int rowCount = col.Data.Count;
+            string[] jsonResponse = new string[rowCount];
+
+            for (int i = 0; i < rowCount; i++)
+            {
+                string address = col.Data[i];
+                string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyBe7bmv5rusSTJ__tPpPoNkCUt0rxjR7jo";
+                var request = (HttpWebRequest)WebRequest.Create(url);
+
+                var response = (HttpWebResponse)request.GetResponse();
+
+                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                jsonResponse[i] = responseString;
+            }
+
+            int arrayEntryCount = 0;
+            var locationHeirarchy = new Dictionary<int, string>();
+            string countryList = "";
+
+            foreach (var val in jsonResponse)
+            {
+                arrayEntryCount++;
+                dynamic jsonResult = JsonConvert.DeserializeObject(val);
+
+                string resultStatus = jsonResult.status;
+
+                // check if identified as a location
+                if (resultStatus == "OK")
+                {
+
+
+                    AddressComponents[] address = jsonResult.results[0].address_components.ToObject<AddressComponents[]>();
+                    countryList += address[address.Length - 1].long_name;
+                    countryList += ",";
+                    if (address[0].long_name.ToLower() == col.Data[arrayEntryCount - 1].ToLower())
+                    {
+                        LocationCount++;            // if it is location increase location count
+                    }
+
+                }
+            }
+
+            var regionParameter = new ObjectParameter("region", typeof(string));
+            var resolutionParameter = new ObjectParameter("resolution", typeof(string));
+            // get 
+            db.getRegionCodeAndResolution(countryList, regionParameter, resolutionParameter);
+            region = regionParameter.Value.ToString();
+            resolution = resolutionParameter.Value.ToString();
+
             //implementation of Aba
             //update location count variable at the end
         }

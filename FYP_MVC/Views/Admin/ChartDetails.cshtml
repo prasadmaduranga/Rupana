@@ -1,0 +1,98 @@
+﻿@model FYP_MVC.Models.DAO.ChartTemplate
+@{
+    ViewBag.Title = "ChartDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>ChartDetails</h2>
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.intentionList)
+        </dt>
+
+        <dd>
+            @foreach (var item in Model.intentionList)
+            {
+                @item.intention1                <br>
+            }
+        </dd>
+        <br />
+        <dt> Number of Dimensions</dt>
+        <dd>
+            @foreach (var dimCountList in Model.dimensionCount)
+            {
+                @dimCountList
+                <span>,</span>
+            }
+
+
+        </dd>
+
+        <hr />
+        @foreach (var dimension in Model.dimentionList)
+        {
+            <dt>
+                Dimension index: @dimension.dimensionIndex
+            </dt>
+            <dd>
+            <dt>
+                Is contineous
+
+            </dt>
+            <dd>
+                @if (dimension.isContineous)
+                {
+                    <p> true</p>
+                }
+                else
+                {
+                    <p>false</p>
+                }
+            </dd>
+            <br />
+            <dt>
+                Cardinality
+            </dt>
+            <dd>
+                @foreach (var cardinality in dimension.cardinalityType)
+                {
+                    @cardinality.cardinality <br />
+                }
+            </dd>
+
+            </dd>
+            <br />
+            <dt>
+                Context
+            </dt>
+            <dd>
+                @foreach (var context in dimension.contextType)
+                {
+                    @context.context <br />
+                }
+            </dd>
+            <hr />
+        }
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "ChartList")
+</p>
+
+

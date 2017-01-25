@@ -1,0 +1,139 @@
+﻿@model FYP_MVC.Models.DAO.ChartTemplate
+@{
+    ViewBag.Title = "EditChart";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>EditChart</h2>
+
+@using (Html.BeginForm("AddNewChartNameVal", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Add new Chart</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.dimentionCountVal, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.dimentionCountVal, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.comparison, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.comparison, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.composition, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.composition, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.distribution, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.distribution, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.relationship, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.relationship, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <hr />
+    foreach (var dimList in Model.dimentionList)
+    {
+        <h4>Dimension @(dimList.dimensionIndex + 1)</h4>
+        @Html.HiddenFor(m => m.dimentionList[dimList.dimensionIndex].dimensionIndex, new { @Value = dimList.dimensionIndex })
+        <div class="form-group">
+            @Html.LabelFor(m => dimList.isContineous, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].isContineous, new { @checked = "checked" })
+
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => dimList.isSelected, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].isSelected, new { @checked = "checked" })
+
+            </div>
+        </div>
+        <h5>Cardinality</h5>
+        <div class="form-group">
+            @Html.LabelFor(m => dimList.cardinalityHigh, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].cardinalityHigh, new { @checked = "checked" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => dimList.cardinalityMedium, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].cardinalityMedium, new { @checked = "checked" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => dimList.cardinalityLow, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].cardinalityLow, new { @checked = "checked" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => dimList.cardinalityAny, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].cardinalityAny, new { @checked = "checked" })
+            </div>
+        </div>
+
+        <h5>Context</h5>
+        <div class="form-group">
+            @Html.LabelFor(m => dimList.contextNumeric, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].contextNumeric, new { @checked = "checked" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => dimList.contextPercentage, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].contextPercentage, new { @checked = "checked" })
+            </div>
+        </div>
+            <div class="form-group">
+                @Html.LabelFor(m => dimList.contextTimeseries, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].contextTimeseries, new { @checked = "checked" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => dimList.contextLocation, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].contextLocation, new { @checked = "checked" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => dimList.contextNominal, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(m => m.dimentionList[dimList.dimensionIndex].contextNominal, new { @checked = "checked" })
+                </div>
+            </div>
+            <hr />
+    }
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Next" />
+        </div>
+    </div>
+
+}
