@@ -278,19 +278,108 @@ namespace FYP_MVC.Controllers
             var resultChart = db.charts.Where(p => p.ID == id);
             foreach (var item in resultChart)
             {
-                chartTemplate.name = item.name;
+                chartTemplate.name = item.name;                             // update from chart table
             }
 
-            var intentionVal = db.intentions.Where(p => p.chartID == id);
-            foreach (var intenDim in intentionVal)
-            {
-                //if(intenDim.)
+            var intentionVal = db.intentions.Where(p => p.chartID == id);   
+            foreach (var intenDim in intentionVal)                          // update intention table
+            {   
+                if(intenDim.intention1== "Comparison")
+                {
+                    chartTemplate.comparison = true;
+                }
+                else
+                {
+                    chartTemplate.comparison = false;
+                }
+                if (intenDim.intention1 == "Composition")
+                {
+                    chartTemplate.composition = true;
+                }
+                else
+                {
+                    chartTemplate.composition = false;
+                }
+                if (intenDim.intention1 == "Distribution")
+                {
+                    chartTemplate.distribution = true;
+                }
+                else
+                {
+                    chartTemplate.distribution = false;
+                }
+                if (intenDim.intention1 == "Relationship")
+                {
+                    chartTemplate.relationship = true;
+                }
+                else
+                {
+                    chartTemplate.relationship = false;
+                }
+
             }
 
             var chartDim = db.chartDimensions.Where(p => p.chartID == id);
+            chartTemplate.dimentionList = new List<DimensionTemplate>();
             foreach (var itemDim in chartDim)
             {
+                DimensionTemplate dimention = new DimensionTemplate();
+                if (itemDim.isContinuous == 1)
+                {
+                    dimention.isContineous = true;
+                }
+                else
+                {
+                    dimention.isContineous = false;
+                }
+                dimention.dimensionIndex = itemDim.dimensionIndex.Value;
 
+                var contextDim = db.dimensionContexts.Where(d => d.dimensionID == itemDim.ID);
+                foreach(var contextVar in contextDim)
+                {
+                    if(contextVar.context== "Location")
+                    {
+                        dimention.contextLocation = true;
+                    }
+                    else
+                    {
+                        dimention.contextLocation = false;
+                    }
+                    if (contextVar.context == "Nominal")
+                    {
+                        dimention.contextNominal = true;
+                    }
+                    else
+                    {
+                        dimention.contextNominal = false;
+                    }
+                    if (contextVar.context == "Numeric")
+                    {
+                        dimention.contextNumeric = true;
+                    }
+                    else
+                    {
+                        dimention.contextNumeric = false;
+                    }
+                    if (contextVar.context == "Percentage")
+                    {
+                        dimention.contextPercentage = true;
+                    }
+                    else
+                    {
+                        dimention.contextPercentage = false;
+                    }
+                    if (contextVar.context == "Time series")
+                    {
+                        dimention.contextTimeseries = true;
+                    }
+                    else
+                    {
+                        dimention.contextTimeseries = false;
+                    }
+                }
+
+                chartTemplate.dimentionList.Add(dimention);
             }
 
             return View(chartTemplate);
