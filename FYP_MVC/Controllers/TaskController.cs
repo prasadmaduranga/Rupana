@@ -9,6 +9,7 @@ using System.Data;
 using FYP_MVC.Core.ContextRecognizer;
 using FYP_MVC.Core.Injector;
 using FYP_MVC.Models.DAO;
+using FYP_MVC.Models.CoreObjects;
 
 
 namespace FYP_MVC.Controllers
@@ -114,7 +115,7 @@ namespace FYP_MVC.Controllers
                     
                     // saving to database : OriginalDataFile
                     originalDataFile ori_data = new originalDataFile();
-                    ori_data.date = DateTime.Now;
+                    ori_data.date = System.DateTime.Now;
                     ori_data.fileLocation = csv.GUID;
                     user temp = (user)Session["user"];
                     ori_data.userID = temp.ID;
@@ -228,7 +229,7 @@ namespace FYP_MVC.Controllers
 
             //Writing database values
             visualizedDataFile vizFile = new visualizedDataFile();
-            vizFile.date = DateTime.Now;
+            vizFile.date = System.DateTime.Now;
             vizFile.fileLocation = myUniqueFileName;
             vizFile.parentFileID = csvfile.ID;
             db.visualizedDataFiles.Add(vizFile);
@@ -263,6 +264,32 @@ namespace FYP_MVC.Controllers
 
             return RedirectToAction("Login", "Authentication");
 
+        }
+
+        public ActionResult visualizeDataFile(ChartComponent chart)
+        {
+           
+            switch (chart.name)
+            {
+                case ("Area Chart"):
+                    {
+                        return RedirectToAction("AreaChart", "Visualisation", chart);
+                        break;
+                    }
+                case ("Bar Chart"):
+                    {
+                        return RedirectToAction("AreaChart", "Visualisation",chart);
+
+                        break;
+                    }
+                default:
+                    {
+
+                        return RedirectToAction("AreaChart", "Visualisation", chart);
+
+                    }
+
+            }
         }
 
 
