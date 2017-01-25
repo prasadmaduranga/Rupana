@@ -186,6 +186,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RecController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\VisualisationController.cs" />
     <Compile Include="Core\ContextRecognizer\ContextExtractor.cs" />
     <Compile Include="Core\ContextRecognizer\ProcessConfirmedContext.cs" />
     <Compile Include="Core\Injector\CSVInjector.cs" />
@@ -196,6 +197,10 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuthenticationViewModels.cs" />
     <Compile Include="Models\Column.cs" />
+    <Compile Include="Models\CoreObjects\ChartComponent.cs" />
+    <Compile Include="Models\CoreObjects\Column.cs" />
+    <Compile Include="Models\CoreObjects\Data.cs" />
+    <Compile Include="Models\CoreObjects\DataType.cs" />
     <Compile Include="Models\CSVFile.cs" />
     <Compile Include="Models\DAO\chart.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
@@ -299,6 +304,7 @@
     <Content Include="Content\img\name.png" />
     <Content Include="Content\img\welcome.PNG" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\js\bootstrap-dropdown.js" />
     <Content Include="Content\js\bootstrap-table.js" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -313,6 +319,7 @@
     <Content Include="Content\js\html5shiv.min.js" />
     <Content Include="Content\js\jquery-1.10.2.js" />
     <Content Include="Content\js\jquery-1.11.1.min.js" />
+    <Content Include="Content\js\jquery.csv.js" />
     <Content Include="Content\js\jquery.metisMenu.js" />
     <Content Include="Content\js\lumino.glyphs.js" />
     <Content Include="Content\js\morris\morris-0.4.3.min.css" />
@@ -353,6 +360,9 @@
     </Content>
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\DataFiles\area.csv" />
+    <Content Include="Content\DataFiles\calenderChart.csv" />
+    <Content Include="Content\DataFiles\pie.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -417,6 +427,24 @@
     <Content Include="Views\Rec\ShowRecommendation_test.cshtml" />
     <Content Include="Views\Rec\ShowRecommendation.cshtml" />
     <Content Include="Views\Home\welcomePage.cshtml" />
+    <Content Include="Views\Visualisation\AreaChart.cshtml" />
+    <Content Include="Views\Visualisation\BarChart.cshtml" />
+    <Content Include="Views\Visualisation\BubbleChart.cshtml" />
+    <Content Include="Views\Visualisation\StackedBarChart.cshtml" />
+    <Content Include="Views\Visualisation\StackedAreaChart.cshtml" />
+    <Content Include="Views\Visualisation\NormalizedStackedAreaChart.cshtml" />
+    <Content Include="Views\Visualisation\NormalizedStackedBarChart.cshtml" />
+    <Content Include="Views\Visualisation\PieChart.cshtml" />
+    <Content Include="Views\Visualisation\SankeyDiagram.cshtml" />
+    <Content Include="Views\Visualisation\ScatterPlot.cshtml" />
+    <Content Include="Views\Visualisation\TreeMap.cshtml" />
+    <Content Include="Views\Visualisation\WordChart.cshtml" />
+    <Content Include="Views\Visualisation\CalenderChart.cshtml" />
+    <Content Include="Views\Visualisation\GeoMarker.cshtml" />
+    <Content Include="Views\Visualisation\GeoRegion.cshtml" />
+    <Content Include="Views\Visualisation\Histogram.cshtml" />
+    <Content Include="Views\Visualisation\LineChart.cshtml" />
+    <Content Include="Views\Visualisation\TimeLine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -424,7 +452,6 @@
     <Folder Include="Controllers\User\" />
     <Folder Include="CSVFinalized\" />
     <Folder Include="CSV\" />
-    <Folder Include="Models\CoreObjects\" />
     <Folder Include="Views\Recommendation\" />
   </ItemGroup>
   <ItemGroup>

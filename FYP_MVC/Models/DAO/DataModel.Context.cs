@@ -114,5 +114,7 @@ namespace FYP_MVC.Models.DAO
         public System.Data.Entity.DbSet<FYP_MVC.Models.Auth.RegisterViewModel> RegisterViewModels { get; set; }
 
         public System.Data.Entity.DbSet<FYP_MVC.Models.DAO.Recommendations_Result> Recommendations_Result { get; set; }
+
+        public System.Data.Entity.DbSet<FYP_MVC.Models.CoreObjects.ChartComponent> ChartComponents { get; set; }
     }
 }
