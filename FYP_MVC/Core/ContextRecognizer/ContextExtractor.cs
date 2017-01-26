@@ -131,7 +131,8 @@ namespace FYP_MVC.Core.ContextRecognizer
         }
 
         public void checkForLocation(Column col)
-        {/*
+        {
+       
             LocationCount = 0;
             int rowCount = col.Data.Count;
             string[] jsonResponse = new string[rowCount];
@@ -155,8 +156,6 @@ namespace FYP_MVC.Core.ContextRecognizer
             foreach (var val in jsonResponse)
             {
                 arrayEntryCount++;
-
-
                 dynamic jsonResult = JsonConvert.DeserializeObject(val);
 
                 string resultStatus = jsonResult.status;
@@ -164,10 +163,16 @@ namespace FYP_MVC.Core.ContextRecognizer
                 // check if identified as a location
                 if (resultStatus == "OK")
                 {
-                    LocationCount++;            // if it is location increase location count
+
+
                     AddressComponents[] address = jsonResult.results[0].address_components.ToObject<AddressComponents[]>();
                     countryList += address[address.Length - 1].long_name;
                     countryList += ",";
+                    if (address[0].long_name.ToLower() == col.Data[arrayEntryCount - 1].ToLower())
+                    {
+                        LocationCount++;            // if it is location increase location count
+                    }
+
                 }
             }
 
@@ -179,8 +184,9 @@ namespace FYP_MVC.Core.ContextRecognizer
             resolution = resolutionParameter.Value.ToString();
 
             //implementation of Aba
-            //update location count variable at the end*/
-        }
+            //update location count variable at the end
+        
+    }
    
         public float checkForDate(Column col)
         {
