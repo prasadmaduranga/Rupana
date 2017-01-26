@@ -282,9 +282,9 @@ namespace FYP_MVC.Controllers
                     {
                         return RedirectToAction("AreaChart", "Visualisation", chViz);
                     }
-                case ("Bar Chart"):
+                case ("Stacked bar chart"):
                     {
-                        return RedirectToAction("AreaChart", "Visualisation", chViz);
+                        return RedirectToAction("BarChart", "Visualisation", chViz);
                     }
                 default:
                     {
