@@ -6,13 +6,18 @@ using FYP_MVC.Models;
 using System.Diagnostics;
 using System.IO;
 using FYP_MVC.Models.DAO;
-
+using Newtonsoft.Json;
+using System.Net;
+using FYP_MVC.Models;
+using System.Data.Entity.Core.Objects;
 namespace FYP_MVC.Core.ContextRecognizer
 {
     public class ContextExtractor
     {
         public ContextExtractor() { }
         static int checkingRowMargin = 20;
+        string region = "";
+        string resolution = "";
 
         FYPEntities db = new FYPEntities();
         public CSVFile csv;
@@ -124,12 +129,59 @@ namespace FYP_MVC.Core.ContextRecognizer
             }
             
         }
+
         public void checkForLocation(Column col)
-        {
+        {/*
             LocationCount = 0;
+            int rowCount = col.Data.Count;
+            string[] jsonResponse = new string[rowCount];
+
+            for (int i = 0; i < rowCount; i++)
+            {
+                string address = col.Data[i];
+                string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyBe7bmv5rusSTJ__tPpPoNkCUt0rxjR7jo";
+                var request = (HttpWebRequest)WebRequest.Create(url);
+
+                var response = (HttpWebResponse)request.GetResponse();
+
+                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                jsonResponse[i] = responseString;
+            }
+
+            int arrayEntryCount = 0;
+            var locationHeirarchy = new Dictionary<int, string>();
+            string countryList = "";
+
+            foreach (var val in jsonResponse)
+            {
+                arrayEntryCount++;
+
+
+                dynamic jsonResult = JsonConvert.DeserializeObject(val);
+
+                string resultStatus = jsonResult.status;
+
+                // check if identified as a location
+                if (resultStatus == "OK")
+                {
+                    LocationCount++;            // if it is location increase location count
+                    AddressComponents[] address = jsonResult.results[0].address_components.ToObject<AddressComponents[]>();
+                    countryList += address[address.Length - 1].long_name;
+                    countryList += ",";
+                }
+            }
+
+            var regionParameter = new ObjectParameter("region", typeof(string));
+            var resolutionParameter = new ObjectParameter("resolution", typeof(string));
+            // get 
+            db.getRegionCodeAndResolution(countryList, regionParameter, resolutionParameter);
+            region = regionParameter.Value.ToString();
+            resolution = resolutionParameter.Value.ToString();
+
             //implementation of Aba
-            //update location count variable at the end
+            //update location count variable at the end*/
         }
+   
         public float checkForDate(Column col)
         {
             DateCount = 0;

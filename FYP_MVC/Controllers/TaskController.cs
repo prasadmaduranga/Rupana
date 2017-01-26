@@ -10,7 +10,7 @@ using FYP_MVC.Core.ContextRecognizer;
 using FYP_MVC.Core.Injector;
 using FYP_MVC.Models.DAO;
 using FYP_MVC.Models.CoreObjects;
-
+using FYP_MVC.Core.ObjectConversion;
 
 namespace FYP_MVC.Controllers
 {
@@ -72,7 +72,7 @@ namespace FYP_MVC.Controllers
                             //creating new columns 
                             for (int i = 0; i < columnCount; i++)
                             {
-                                csv.Data[i].Heading = columns[i];   
+                                csv.Data[i].Heading = columns[i];
                             }
                         }
                         else
@@ -87,17 +87,18 @@ namespace FYP_MVC.Controllers
                                     csv.Data[i].Heading = "Column " + (i + 1);
                                 }
                             }
-                            else { //fatal error
+                            else
+                            { //fatal error
                             }
                         }
                         //now read rest of the file 
-                        
+
                         while ((a = sr.ReadLine()) != null)
                         {
                             string[] cols = a.Split(',');
                             if (!cols.Where(c => c.Equals(String.Empty)).Any())
                             {
-                                
+
                                 for (int i = 0; i < columnCount; i++)
                                 {
                                     csv.Data[i].Data.Add(cols[i]);
@@ -112,7 +113,7 @@ namespace FYP_MVC.Controllers
                         else { ViewBag.numRows = rows; }
                     }
 
-                    
+
                     // saving to database : OriginalDataFile
                     originalDataFile ori_data = new originalDataFile();
                     ori_data.date = System.DateTime.Now;
@@ -141,7 +142,7 @@ namespace FYP_MVC.Controllers
         [HttpGet]
         public ActionResult showCSV()
         {
-            ViewBag.errorMessage=TempData["errorMessage"];
+            ViewBag.errorMessage = TempData["errorMessage"];
             CSVFile csv = (CSVFile)TempData["csv"];
             CSVInjector.csv = csv;
             if (csv.rowCount < 15)
@@ -159,7 +160,7 @@ namespace FYP_MVC.Controllers
             {
                 TempData["csv"] = CSVInjector.csv;
                 TempData["errorMessage"] = "Please select number of columns in range 2-7";
-                return RedirectToAction("showCSV","Task");
+                return RedirectToAction("showCSV", "Task");
             }
             CSVFile csv2 = CSVInjector.csv;
             for (int i = 0; i < csv.Data.Length; i++)
@@ -170,7 +171,7 @@ namespace FYP_MVC.Controllers
             ContextExtractor con = new ContextExtractor(csv2);
             CSVFile csvs = con.processCSV();
             CSVInjector.csv = csvs;
-         
+
             return View(csvs);
         }
 
@@ -186,8 +187,8 @@ namespace FYP_MVC.Controllers
             PCC.processCSV(csv2);
             writeFinalCSV(csv2);
             int tblId = (int)Session["CurrentTableId"];
-            return RedirectToAction("ShowRecommendation", "Rec", new { tableID = tblId });
-            
+            return RedirectToAction("ShowRecommendation", "Rec", new { tableID = tblId, csv = csv2 });
+
         }
         //Write CSV to file system with only selected columns
         public void writeFinalCSV(CSVFile csvfile)
@@ -204,7 +205,7 @@ namespace FYP_MVC.Controllers
                 {
                     text += ("," + selected[i].Heading);
                 }
-                else { text += selected[i].Heading; }              
+                else { text += selected[i].Heading; }
             }
             csv.AppendLine(text);
 
@@ -217,7 +218,7 @@ namespace FYP_MVC.Controllers
                     {
                         text += ("," + selected[j].Data[i]);
                     }
-                    else { text += selected[j].Data[i];}
+                    else { text += selected[j].Data[i]; }
                 }
                 csv.AppendLine(text);
             }
@@ -245,7 +246,7 @@ namespace FYP_MVC.Controllers
             for (int i = 0; i < numCols; i++)
             {
                 tableDimension tbldim = new tableDimension();
-                tbldim.dimensionIndex = i+1;
+                tbldim.dimensionIndex = i + 1;
                 tbldim.context = selected[i].Context;
                 tbldim.tableID = tblId;
                 tbldim.cardinality = selected[i].NumDiscreteValues;
@@ -257,7 +258,7 @@ namespace FYP_MVC.Controllers
         }
 
 
-    
+
         public ActionResult logout()
         {
             Session["user"] = null;
@@ -266,32 +267,33 @@ namespace FYP_MVC.Controllers
 
         }
 
-        public ActionResult visualizeDataFile(ChartComponent chart)
+        public ActionResult visualizeDataFile(int num)
         {
-           
-            switch (chart.name)
+            ChartVisualizationObject chViz = ChartVisualizationObjectInjector.CVObject;
+            CSVFile csv = CSVInjector.csv;
+            Convert_CSV_to_Chart converter = new Convert_CSV_to_Chart();
+            chViz.chrtCom = new ChartComponent();
+            chViz.chrtCom.name = chViz.chartTypes[num];
+            chViz.chrtCom = converter.Convert(csv, chViz.chrtCom);
+
+            switch (chViz.chrtCom.name)
             {
                 case ("Area Chart"):
                     {
-                        return RedirectToAction("AreaChart", "Visualisation", chart);
-                        break;
+                        return RedirectToAction("AreaChart", "Visualisation", chViz);
                     }
                 case ("Bar Chart"):
                     {
-                        return RedirectToAction("AreaChart", "Visualisation",chart);
-
-                        break;
+                        return RedirectToAction("AreaChart", "Visualisation", chViz);
                     }
                 default:
                     {
-
-                        return RedirectToAction("AreaChart", "Visualisation", chart);
-
+                        return RedirectToAction("AreaChart", "Visualisation", chViz);
                     }
 
             }
+
+
         }
-
-
     }
 }

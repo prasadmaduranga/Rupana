@@ -11,6 +11,7 @@ namespace FYP_MVC.Core.ContextRecognizer
         public List<int> errorRows = new List<int>();
         public CSVFile processCSV(CSVFile csv)
         {
+            csv.Data = csv.Data.Where(c => c.selected).ToArray();
             foreach (var item in csv.Data)
             {
                 switch (item.Context)
@@ -35,6 +36,7 @@ namespace FYP_MVC.Core.ContextRecognizer
         public void removeErrors(CSVFile csv)
         {
             int len = csv.rowCount;
+
             int cols = csv.Data.Count();
             if (errorRows.Count > 0)
             {
