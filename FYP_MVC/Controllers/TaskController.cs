@@ -280,11 +280,14 @@ namespace FYP_MVC.Controllers
             {
                 case ("Area Chart"):
                     {
-                        return RedirectToAction("AreaChart", "Visualisation", chViz);
+                        //return RedirectToAction("AreaChart", "Visualisation", new { chviz = chViz });
+                        return RedirectToAction("AreaChart", "Visualisation", "prasad");
                     }
                 case ("Stacked bar chart"):
                     {
-                        return RedirectToAction("BarChart", "Visualisation", chViz);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("BarChart", "Visualisation");
+                    
                     }
                 default:
                     {

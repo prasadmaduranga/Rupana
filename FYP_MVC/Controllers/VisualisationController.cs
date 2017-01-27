@@ -57,8 +57,10 @@ namespace FYP_MVC.Controllers
             return View(chviz.chrtCom);
         }
 
-        public ActionResult BarChart(ChartVisualizationObject chviz)
+        public ActionResult BarChart()
+       // public ActionResult BarChart(string i)
         {
+           ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
             /*
             string fileLocation = Server.MapPath("~/Content/DataFiles/area.csv");
 
@@ -94,6 +96,8 @@ namespace FYP_MVC.Controllers
             //testChart.dataStr = VisualisationController.readCSVFileString(fileLocation);
             //testChart.numOfColumns = System.IO.File.ReadLines(fileLocation).Select(x => x.Split(',')).ToArray()[0].Length;
             return View(chviz.chrtCom);
+            //return View();
+
         }
 
         public ActionResult BubbleChart()
