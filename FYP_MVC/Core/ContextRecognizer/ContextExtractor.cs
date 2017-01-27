@@ -33,9 +33,7 @@ namespace FYP_MVC.Core.ContextRecognizer
         float LocationCount = 0;
         float DateCount = 0;
 
-        string region = "";
-        string resolution = "";
-
+      
         //tempory numeric list
         float numericTotal = 0f;
 

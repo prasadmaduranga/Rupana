@@ -125,10 +125,11 @@ namespace FYP_MVC.Core.ContextRecognizer
 
             var regionParameter = new ObjectParameter("region", typeof(string));
             var resolutionParameter = new ObjectParameter("resolution", typeof(string));
+            
             // get 
             db.getRegionCodeAndResolution(countryList, regionParameter, resolutionParameter);
-            string region = regionParameter.Value.ToString();
-            string resolution = resolutionParameter.Value.ToString();
+            col.Region = regionParameter.Value.ToString();
+            col.Resolution = resolutionParameter.Value.ToString();
         }
         public void processDateColumn(Column col)
         {
