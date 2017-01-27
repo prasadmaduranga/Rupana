@@ -48,10 +48,6 @@
       <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Azure.AppService.ApiApps.Service, Version=0.9.16.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Azure.AppService.ApiApps.Service.0.9.16\lib\net45\Microsoft.Azure.AppService.ApiApps.Service.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -62,21 +58,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Swashbuckle.Core.5.0.0\lib\net40\Swashbuckle.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -85,14 +69,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -136,10 +112,6 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -206,7 +178,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
@@ -215,15 +186,25 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RecController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\VisualisationController.cs" />
     <Compile Include="Core\ContextRecognizer\ContextExtractor.cs" />
+    <Compile Include="Core\ContextRecognizer\ProcessConfirmedContext.cs" />
+    <Compile Include="Core\Injector\ChartVisualizationObjectInjector.cs" />
     <Compile Include="Core\Injector\CSVInjector.cs" />
+    <Compile Include="Core\ObjectConversion\Convert_CSV_to_Chart.cs" />
     <Compile Include="Core\Recommendations\Recommendation.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddressComponents.cs" />
     <Compile Include="Models\AuthenticationViewModels.cs" />
     <Compile Include="Models\Column.cs" />
+    <Compile Include="Models\CoreObjects\ChartComponent.cs" />
+    <Compile Include="Models\CoreObjects\Column.cs" />
+    <Compile Include="Models\CoreObjects\ChartVisualizationObject.cs" />
+    <Compile Include="Models\CoreObjects\Data.cs" />
+    <Compile Include="Models\CoreObjects\DataType.cs" />
     <Compile Include="Models\CSVFile.cs" />
     <Compile Include="Models\DAO\chart.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
@@ -303,10 +284,7 @@
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\custom.css" />
-    <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\loader.css" />
-    <Content Include="Content\css\LoginLayoutCustom.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\datepicker3.css" />
@@ -330,6 +308,7 @@
     <Content Include="Content\img\name.png" />
     <Content Include="Content\img\welcome.PNG" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\js\bootstrap-dropdown.js" />
     <Content Include="Content\js\bootstrap-table.js" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -344,6 +323,7 @@
     <Content Include="Content\js\html5shiv.min.js" />
     <Content Include="Content\js\jquery-1.10.2.js" />
     <Content Include="Content\js\jquery-1.11.1.min.js" />
+    <Content Include="Content\js\jquery.csv.js" />
     <Content Include="Content\js\jquery.metisMenu.js" />
     <Content Include="Content\js\lumino.glyphs.js" />
     <Content Include="Content\js\morris\morris-0.4.3.min.css" />
@@ -384,8 +364,9 @@
     </Content>
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
-    <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
-    <Content Include="apiapp.json" />
+    <Content Include="Content\DataFiles\area.csv" />
+    <Content Include="Content\DataFiles\calenderChart.csv" />
+    <Content Include="Content\DataFiles\pie.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -450,6 +431,24 @@
     <Content Include="Views\Rec\ShowRecommendation_test.cshtml" />
     <Content Include="Views\Rec\ShowRecommendation.cshtml" />
     <Content Include="Views\Home\welcomePage.cshtml" />
+    <Content Include="Views\Visualisation\AreaChart.cshtml" />
+    <Content Include="Views\Visualisation\BarChart.cshtml" />
+    <Content Include="Views\Visualisation\BubbleChart.cshtml" />
+    <Content Include="Views\Visualisation\StackedBarChart.cshtml" />
+    <Content Include="Views\Visualisation\StackedAreaChart.cshtml" />
+    <Content Include="Views\Visualisation\NormalizedStackedAreaChart.cshtml" />
+    <Content Include="Views\Visualisation\NormalizedStackedBarChart.cshtml" />
+    <Content Include="Views\Visualisation\PieChart.cshtml" />
+    <Content Include="Views\Visualisation\SankeyDiagram.cshtml" />
+    <Content Include="Views\Visualisation\ScatterPlot.cshtml" />
+    <Content Include="Views\Visualisation\TreeMap.cshtml" />
+    <Content Include="Views\Visualisation\WordChart.cshtml" />
+    <Content Include="Views\Visualisation\CalenderChart.cshtml" />
+    <Content Include="Views\Visualisation\GeoMarker.cshtml" />
+    <Content Include="Views\Visualisation\GeoRegion.cshtml" />
+    <Content Include="Views\Visualisation\Histogram.cshtml" />
+    <Content Include="Views\Visualisation\LineChart.cshtml" />
+    <Content Include="Views\Visualisation\TimeLine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -457,7 +456,6 @@
     <Folder Include="Controllers\User\" />
     <Folder Include="CSVFinalized\" />
     <Folder Include="CSV\" />
-    <Folder Include="Models\CoreObjects\" />
     <Folder Include="Views\Recommendation\" />
   </ItemGroup>
   <ItemGroup>

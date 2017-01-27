@@ -350,6 +350,11 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
         <Function Name="getRecommendations_WithoutIntention" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tableID" Type="int" Mode="In" />
         </Function>
+        <Function Name="getRegionCodeAndResolution" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="countryList" Type="varchar(max)" Mode="In" />
+          <Parameter Name="region" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="resolution" Type="nvarchar" Mode="InOut" />
+        </Function>
         <EntityContainer Name="FYPModelStoreContainer">
           <EntitySet Name="chart" EntityType="Self.chart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="chartDimension" EntityType="Self.chartDimension" Schema="dbo" store:Type="Tables" />
@@ -903,6 +908,11 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
           <FunctionImport Name="getRecommendations_WithoutIntention" ReturnType="Collection(FYPModel.Recommendations_Result)">
           <Parameter Name="tableID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="getRegionCodeAndResolution">
+            <Parameter Name="countryList" Mode="In" Type="String" />
+            <Parameter Name="region" Mode="InOut" Type="String" />
+            <Parameter Name="resolution" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Recommendations_Result">
           <Property Type="String" Name="chartName" Nullable="true" MaxLength="30" />
@@ -1144,6 +1154,7 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getRegionCodeAndResolution" FunctionName="FYPModel.Store.getRegionCodeAndResolution" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

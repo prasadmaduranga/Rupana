@@ -1,0 +1,288 @@
+﻿@model FYP_MVC.Models.CoreObjects.ChartComponent
+
+@{
+    ViewBag.Title = "BarChart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Stacked bar Chart testing</h2>
+
+<script>
+ // wait till the DOM is loaded
+
+    // load the visualization library from Google and set a listener
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawVisualization);
+
+    function drawVisualization() { // grab the CSV
+        @*var a2 =  @Html.Raw(Json.Encode(ViewBag.a));
+        alert("First value of first term: " + a2[0][0] + "Second value of first term: " + a2[0][1]);*@
+            //var arrayData = ['a','b'];
+            //var numOfColumns = 5
+            //var colors = ['red', 'blue', 'green'];
+
+            //var splitArray = arrayData.split(",");
+            //alert(splitArray);
+            //var numOfRows = splitArray.length/numOfColumns;
+
+        var arr = [];
+
+        var model = @Html.Raw(Json.Encode(Model));
+
+        var numOfRows=model.columnList[0].data.length;
+        var numOfColumns=model.columnList.length;
+        console.log(model);
+
+        //for(var x = 0; x < numOfColumns; x++){
+        //        arr[x] = [];
+        //        for (var y = 0; y < numOfRows; y++) {
+        //            arr[y][x] =model.columnList[x].data[y].value ;
+        //        }
+        //}
+        arr[0] = [];
+
+        for (var y = 0; y < numOfColumns; y++) {
+            arr[0][y] =model.columnList[y].columnHeader;
+        }
+
+        for(var x = 1; x <= numOfRows ; x++){
+            arr[x] = [];
+            for (var y = 0; y < numOfColumns; y++) {
+                arr[x][y] =model.columnList[y].data[x-1].value ;
+            }
+        }
+
+        alert(arr);
+
+        var data = new google.visualization.arrayToDataTable(arr);
+
+        var wrapper = new google.visualization.ChartWrapper({
+            chartType: 'ColumnChart',
+            dataTable: data,
+            options: {"hAxis": {"title": data.getColumnLabel(0)},
+                "vAxis": {"title": data.getColumnLabel(1)},
+                "isStacked": true    
+            },
+            containerId: 'chart'
+        });
+
+         google.visualization.events.addListener(wrapper, 'ready', function () {
+           var image = wrapper.getChart().getImageURI();
+           window.open(image);
+         });
+
+        wrapper.draw();
+
+        //title
+        $("#title").keyup(function(){
+          var title = $('#title').val();
+          wrapper.setOption('title', title);
+          wrapper.draw();
+        });
+
+        //legend
+        $("#legend").change(function(){
+          var legend = $('#legend :selected').val();
+          wrapper.setOption('legend.position', legend);
+          wrapper.draw();
+        });
+
+        $("#titleFont").change(function(){
+          var font = $('#titleFont :selected').text();
+          wrapper.setOption('titleTextStyle.fontName', font);
+          wrapper.draw();
+        });
+
+        $("#titleFontSize").change(function(){
+          var fontSize = $('#titleFontSize :selected').text();
+          var fontSizeInt = parseInt(fontSize);
+          wrapper.setOption('titleTextStyle.fontSize', fontSizeInt);
+          wrapper.draw();
+        });
+
+        //x-Axis
+        //x-lable
+        $("#xLable").keyup(function(){
+          var xLable = $('#xLable').val();
+          wrapper.setOption('hAxis.title', xLable);
+          wrapper.draw();
+        });
+
+        //grid
+        $("#xGrid").change(function(){
+          var xGrid = $('#xGrid :selected').val();
+          var xCount = parseInt(xGrid);
+          wrapper.setOption('hAxis.gridlines.count', xCount);
+          wrapper.draw();
+        });
+
+        $("#xBold").click(function(){
+          var xBold = true
+          wrapper.setOption('hAxis.titleTextStyle.bold', xBold);
+          wrapper.draw();
+        });
+
+        //y-Axis
+        //y-lable
+        $("#yLable").keyup(function(){
+          var yLable = $('#yLable').val();
+          wrapper.setOption('vAxis.title', yLable);
+          wrapper.draw();
+        });
+
+        //grid
+        $("#yGrid").change(function(){
+          var yGrid = $('#yGrid :selected').val();
+          var yCount = parseInt(yGrid);
+          wrapper.setOption('vAxis.gridlines.count', yCount);
+          wrapper.draw();
+        });
+
+        $("#yBold").click(function(){
+          var yBold = true
+          wrapper.setOption('vAxis.titleTextStyle.bold', yBold);
+          wrapper.draw();
+        });
+
+    }
+
+</script>
+
+<div id="chart" style="width: 100%; height: 500px;"> </div>
+
+      </br>
+<div class="container">
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home"><h4>Chart</h4></a></li>
+        <li><a data-toggle="tab" href="#menu1"><h4>X-Axis</h4></a></li>
+        <li><a data-toggle="tab" href="#menu2"><h4>Y-Axis</h4></a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <h5><strong>Title</strong></h5>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input id="title" class="form-control" placeholder="Title" aria-label="Text input with multiple buttons">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" aria-label="Bold"><span class="glyphicon glyphicon-bold"></span></button>
+                            <button type="button" class="btn btn-default" aria-label="Italic"><span class="glyphicon glyphicon-italic"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h5><strong>Legend</strong></h5>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <select id="legend" class="selectpicker form-control">
+                            <option value="Left">Left</option>
+                            <option value="right">Right</option>
+                            <option value="top">Top</option>
+                            <option value="bottom">Bottom</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <h5><strong>Font</strong></h5>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <select id="titleFont" class="selectpicker form-control">
+                            <option>Arial</option>
+                            <option>Sans Serif</option>
+                            <option>Tahoma</option>
+                            <option>Georgia</option>
+                            <option>Verdana</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <h5><strong>Font Size</strong></h5>
+            <div class="row">
+                <div class="col-xs-1">
+                    <div class="form-group">
+                        <select id="titleFontSize" class="selectpicker form-control">
+                            <option>12</option>
+                            <option>14</option>
+                            <option>16</option>
+                            <option>18</option>
+                            <option>24</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--X-Axis -->
+
+        <div id="menu1" class="tab-pane fade">
+            <h5><strong>Lable</strong></h5>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input id="xLable" class="form-control" placeholder="Title" aria-label="Text input with multiple buttons">
+                        <div class="input-group-btn">
+                            <button id="xBold" type="button" class="btn btn-default" aria-label="Bold"><span class="glyphicon glyphicon-bold"></span></button>
+                            <button id="xItalic" type="button" class="btn btn-default" aria-label="Italic"><span class="glyphicon glyphicon-italic"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <h5><strong>GridLine</strong></h5>
+            <div class="row">
+                <div class="col-xs-1">
+                    <div class="form-group">
+                        <select id="xGrid" class="selectpicker form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>20</option>
+                            <option>25</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!--Y-Axis -->
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <h5><strong>Lable</strong></h5>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input id="yLable" class="form-control" placeholder="Title" aria-label="Text input with multiple buttons">
+                        <div class="input-group-btn">
+                            <button id="yBold" type="button" class="btn btn-default" aria-label="Bold"><span class="glyphicon glyphicon-bold"></span></button>
+                            <button id="yItalic" type="button" class="btn btn-default" aria-label="Italic"><span class="glyphicon glyphicon-italic"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <h5><strong>GridLine</strong></h5>
+            <div class="row">
+                <div class="col-xs-1">
+                    <div class="form-group">
+                        <select id="yGrid" class="selectpicker form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>20</option>
+                            <option>25</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

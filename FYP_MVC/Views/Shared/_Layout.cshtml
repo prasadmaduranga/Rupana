@@ -1,51 +1,131 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <script src="~/Content/js/jquery-1.10.2.js"></script>
-    <script src="~/Content/js/morris/morris.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lumino - Dashboard</title>
+    <script src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/Content/js/jquery-1.11.1.min.js"></script>
+    <script src="~/Content/js/jquery.csv.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="~/Content/js/bootstrap-dropdown.js"></script>
+    <link href="~/Content/css/datepicker3.css" rel="stylesheet" />
+    <link href="~/Content/css/styles.css" rel="stylesheet" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <!--Icons-->
+    <link href="@Url.Content(" ~/Content/css/loader.css")" rel="stylesheet" type="text/css" />
+    <script src="~/Content/js/lumino.glyphs.js"></script>
+</head>
+
+
+
+<body>
+    <div class="se-pre-con"></div>
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: rgb(13, 13, 176)">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+
+                    <img src="~/Content/img/name.png" width="150" height="40" style="margin-top: 5px" />
+
+                    <ul class="user-menu">
+                        <li class="dropdown pull-right">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> @Session["userName"] <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+                                <li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Settings</a></li>
+                                <li><a href="#" onclick="logout();" id="btnLogout"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>Logout  </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+            <form role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+            </form>
+            <ul class="nav menu">
+                <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
+                <li><a href="widgets.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Widgets</a></li>
+                <li><a href="charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Charts</a></li>
+                <li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Tables</a></li>
+
+                <li><a href=@Url.Action("UploadCSV", "Task")><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> New Task</a></li>
+                <li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li>
+                <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Icons</a></li>
+                <li class="parent ">
+                    <a href="#">
+                        <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Dropdown
+                    </a>
+                    <ul class="children collapse" id="sub-item-1">
+                        <li>
+                            <a class="" href="#">
+                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 1
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="#">
+                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 2
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="#">
+                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 3
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="presentation" class="divider"></li>
+                <li><a href="login.html"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Login Page</a></li>
+            </ul>
+        </div><!--/.sidebar-->
+
+        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+            <div class="row">
+                <ol class="breadcrumb">
+                    <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                    <li class="active">Icons</li>
+                </ol>
+            </div><!--/.row-->
+
+
+            @RenderBody()
+
+
+
+        </div>	<!--/.main-->
+
+
+    </div>
+
+
+    
+   
+
     <script>
+
+
         $(window).load(function () {
             setTimeout(function () {
                 $(".se-pre-con").fadeOut("slow");
             });
         });
-
-    </script>
-    @*<script src="~/Content/js/facebook.js"></script>*@
-    <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/css/custom.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/css/loader.css")" rel="stylesheet" type="text/css" />
-
-    @RenderSection("Styles", false)
-@*
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lumino - Dashboard</title>
-    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/css/datepicker3.css" rel="stylesheet" />
-    <link href="~/Content/css/styles.css" rel="stylesheet" />
-    <!--Icons-->
-
-    <script src="~/Content/js/lumino.glyphs.js"></script>
-*@
-
-
-
-
-</head>
-<body>
-    <div class="se-pre-con"></div>
-
-    <script>
-
-
 
         function statusChangeCallback(response) {
             console.log('statusChangeCallback');
@@ -121,9 +201,6 @@
             });
         }
 
-
-
-
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) { return; }
@@ -160,12 +237,12 @@
                         if (data.result === 'Redirect') {
                             window.location = data.url;
                            @*$.ajax({
-                                  type: "GET",
-                                  url: '@Url.Action("Login", "Authentication")'
+                               type: "GET",
+                               url: '@Url.Action("Login", "Authentication")'
           
-                              });*@ 
+                           });*@ 
 
-                        }
+                           }
                     },
                     error: function () {
 
@@ -174,204 +251,8 @@
                     }
                 });
             }
-
-
-
-
-
         }
-    </script>
 
-    <div id="wrapper">
-
-        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Ruupana</a>
-            </div>
-            <div style="color: white;
-                    padding: 15px 50px 5px 50px;
-                    float: right;
-                    font-size: 16px;">
-                &nbsp;
-                @*<a href="#" class="btn btn-danger square-btn-adjust">@Html.ActionLink("Logout", "LogOut","Authentication")</a>*@
-                <button type="button" id="btnLogout" onclick="logout();">Logout</button>
-            </div>
-        </nav>
-
-
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                    <li class="text-center">
-                        <img src="~/Content/img/img.png" class="user-image img-responsive" />
-                    </li>
-
-                    <li>
-                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="ui.html"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
-                    </li>
-                    <li>
-                        <a href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>
-                    </li>
-                    <li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a>
-                    </li>
-                    <li>
-                        <a href="table.html"><i class="fa fa-table fa-3x"></i> Table Examples</a>
-                    </li>
-                    <li>
-                        <a href=@Url.Action("UploadCSV", "Task") id="newTask"><i class="fa fa-edit fa-3x"></i> New Task </a>
-                    </li>
-
-
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
-                    </li>
-                </ul>
-
-            </div>
-        </nav>
-
-        <div id="page-wrapper">
-            <div id="page-inner">
-                @RenderBody()
-            </div>
-        </div>
-    </div>
-
-    <script src="~/Content/js/jquery-1.10.2.js"></script>
-    <!-- BOOTSTRAP SCRIPTS -->
-@*
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: rgb(13, 13, 176)">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-
-                    <img src="~/Content/img/name.png" width="150" height="40" style="margin-top: 5px" />
-
-                    <ul class="user-menu">
-                        <li class="dropdown pull-right">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> User <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
-                                <li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Settings</a></li>
-                                <li><a href="#"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-            </div><!-- /.container-fluid -->
-        </nav>
-
-        <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-            <form role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-            </form>
-            <ul class="nav menu">
-                <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
-                <li><a href="widgets.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Widgets</a></li>
-                <li><a href="charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Charts</a></li>
-                <li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Tables</a></li>
-
-                <li><a href=@Url.Action("UploadCSV", "Task")><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> New Task</a></li>
-                <li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li>
-                <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Icons</a></li>
-                <li class="parent ">
-                    <a href="#">
-                        <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Dropdown
-                    </a>
-                    <ul class="children collapse" id="sub-item-1">
-                        <li>
-                            <a class="" href="#">
-                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 1
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="#">
-                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 2
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="#">
-                                <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> Sub Item 3
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li role="presentation" class="divider"></li>
-                <li><a href="login.html"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Login Page</a></li>
-            </ul>
-        </div><!--/.sidebar-->
-
-        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-            <div class="row">
-                <ol class="breadcrumb">
-                    <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                    <li class="active">Icons</li>
-                </ol>
-            </div><!--/.row-->
-
-
-            @RenderBody()
-
-
-
-        </div>	<!--/.main-->
-
-      
-    </div>
-*@
-
-    <script src="~/Content/js/jquery-1.11.1.min.js"></script>
-
-    <script src="~/Content/js/bootstrap.min.js"></script>
-
-
-    <script>
 
 
             !function ($) {
@@ -388,7 +269,5 @@
                 if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
             })
     </script>
-
 </body>
-
 </html>
