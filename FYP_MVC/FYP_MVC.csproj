@@ -216,6 +216,7 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DAO\charts.cs" />
+    <Compile Include="Models\DAO\ChartTemplate.cs" />
     <Compile Include="Models\DAO\column.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -240,6 +241,7 @@
     <Compile Include="Models\DAO\dimensionCount.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAO\DimensionTemplate.cs" />
     <Compile Include="Models\DAO\feedBack.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -449,6 +451,16 @@
     <Content Include="Views\Visualisation\Histogram.cshtml" />
     <Content Include="Views\Visualisation\LineChart.cshtml" />
     <Content Include="Views\Visualisation\TimeLine.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\AddNewChart.cshtml" />
+    <Content Include="Views\Admin\AddNewChartName.cshtml" />
+    <Content Include="Views\Admin\AddNewUser.cshtml" />
+    <Content Include="Views\Admin\ChartDetails.cshtml" />
+    <Content Include="Views\Admin\ChartList.cshtml" />
+    <Content Include="Views\Admin\EditChart.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Admin\UserDetails.cshtml" />
+    <Content Include="Views\Admin\UserList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
