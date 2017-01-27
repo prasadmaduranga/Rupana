@@ -26,6 +26,7 @@ namespace FYP_MVC.Models.CoreObjects
 
     public class DateTime : DataType
     {
+
     }
 
 

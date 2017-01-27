@@ -8,6 +8,8 @@ using System.IO;
 using FYP_MVC.Models.DAO;
 using Newtonsoft.Json;
 using System.Net;
+
+using FYP_MVC.Models;
 using System.Data.Entity.Core.Objects;
 
 namespace FYP_MVC.Core.ContextRecognizer
@@ -16,6 +18,8 @@ namespace FYP_MVC.Core.ContextRecognizer
     {
         public ContextExtractor() { }
         static int checkingRowMargin = 20;
+        string region = "";
+        string resolution = "";
 
         FYPEntities db = new FYPEntities();
         public CSVFile csv;
@@ -130,8 +134,10 @@ namespace FYP_MVC.Core.ContextRecognizer
             }
             
         }
+
         public void checkForLocation(Column col)
         {
+       
             LocationCount = 0;
             int rowCount = col.Data.Count;
             string[] jsonResponse = new string[rowCount];
@@ -184,7 +190,9 @@ namespace FYP_MVC.Core.ContextRecognizer
 
             //implementation of Aba
             //update location count variable at the end
-        }
+        
+    }
+   
         public float checkForDate(Column col)
         {
             DateCount = 0;

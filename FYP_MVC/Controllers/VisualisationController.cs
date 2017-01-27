@@ -20,10 +20,10 @@ namespace FYP_MVC.Controllers
         //public ActionResult AreaChart(ChartComponent chart,int[] mapping)
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult AreaChart()
+        public ActionResult AreaChart(ChartVisualizationObject chviz)
         {
 
-
+            /*
             ChartComponent sampleChart = new ChartComponent();
             sampleChart.ID = 1;
             sampleChart.name = "Area Chart";
@@ -48,18 +48,20 @@ namespace FYP_MVC.Controllers
             sampleChart.columnList = colList;
 
             int[] mapping = new int[] { 0, 1, 2, 3 };
-
-            ViewBag.mapping = mapping;
+            */
+            ViewBag.mapping = chviz.mappingList;
 
 
             //testChart.dataStr = VisualisationController.readCSVFileString(fileLocation);
             //testChart.numOfColumns = System.IO.File.ReadLines(fileLocation).Select(x => x.Split(',')).ToArray()[0].Length;
-            return View(sampleChart);
+            return View(chviz.chrtCom);
         }
 
-        public ActionResult BarChart(ChartComponent chart)
+        public ActionResult BarChart()
+       // public ActionResult BarChart(string i)
         {
-
+           ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
+            /*
             string fileLocation = Server.MapPath("~/Content/DataFiles/area.csv");
 
 
@@ -87,13 +89,15 @@ namespace FYP_MVC.Controllers
             sampleChart.columnList = colList;
 
             int[] mapping = new int[]{ 0, 1, 2, 3 };
-
-            ViewBag.mapping=mapping;
+            */
+            ViewBag.mapping= chviz.mappingList;
 
 
             //testChart.dataStr = VisualisationController.readCSVFileString(fileLocation);
             //testChart.numOfColumns = System.IO.File.ReadLines(fileLocation).Select(x => x.Split(',')).ToArray()[0].Length;
-            return View(sampleChart);
+            return View(chviz.chrtCom);
+            //return View();
+
         }
 
         public ActionResult BubbleChart()
