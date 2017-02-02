@@ -33,14 +33,18 @@
 
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
+        var resoulution;
+        var region;
         console.log(model);
 
-        //for(var x = 0; x < numOfColumns; x++){
-        //        arr[x] = [];
-        //        for (var y = 0; y < numOfRows; y++) {
-        //            arr[y][x] =model.columnList[x].data[y].value ;
-        //        }
-        //}
+        for (var y = 0; y < numOfColumns; y++) {
+            if(model.columnList[y].dataType.dataType == "Location"){
+                resoulution = model.columnList[y].dataType.resolution;
+                region = model.columnList[y].dataType.region;
+            }
+
+        }
+
         arr[0] = [];
 
         for (var y = 0; y < numOfColumns; y++) {
@@ -61,7 +65,7 @@
         var wrapper = new google.visualization.ChartWrapper({
             chartType: 'GeoChart',
             dataTable: data,
-            options: {"region":'IT', "displayMode": 'markers',
+            options: {"region":region, "displayMode": 'markers',
                 "colorAxis": {"colors": ['green', 'blue']}
 
             },
