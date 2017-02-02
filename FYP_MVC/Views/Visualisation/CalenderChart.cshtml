@@ -50,6 +50,13 @@
                 arr[x][y] =model.columnList[y].data[x-1].value ;
             }
         }
+        alert(arr[1][0]);
+        //convert first column to date time
+        for(var z=1; z<numOfRows; z++){
+            daytt =  new Date(arr[z][0]);
+            arr[z][0] = daytt.getFullYear();
+            
+        }
 
         alert(arr);
 
