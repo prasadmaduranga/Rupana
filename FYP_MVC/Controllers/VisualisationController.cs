@@ -49,17 +49,23 @@ namespace FYP_MVC.Controllers
 
         public ActionResult GeoMarker()
         {
+
             ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];      
             ViewBag.mapping = chviz.mappingList;
             return View(chviz.chrtCom);
         
+
         }
 
         public ActionResult GeoRegion()
         {
             ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
+
             ViewBag.mapping = chviz.mappingList;
             return View(chviz.chrtCom);
+
+          
+
         }
 
         public ActionResult Histogram()

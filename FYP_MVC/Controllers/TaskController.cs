@@ -296,6 +296,7 @@ namespace FYP_MVC.Controllers
                         return RedirectToAction("GeoMarker", "Visualisation");
 
                     }
+
                 case ("Bar chart"):
                     {
                         TempData["myObject"] = chViz;
@@ -399,6 +400,7 @@ namespace FYP_MVC.Controllers
                         return RedirectToAction("TimeLine", "Visualisation");
 
                     }
+
                 default:
                     {
                         TempData["myObject"] = chViz;

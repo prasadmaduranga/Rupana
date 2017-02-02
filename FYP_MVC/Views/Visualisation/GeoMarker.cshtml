@@ -1,11 +1,12 @@
-﻿
+﻿@model FYP_MVC.Models.CoreObjects.ChartComponent
 @{
     ViewBag.Title = "GeoMarker";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GeoMarker</h2>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBLdtfXt79_MDSF346kLb096uEIKJIt2U&callback=initMap"
+<h2>GeoMarker @Model.name</h2>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa2l_21P4jy0SvWgS_xTuWXa33WpliZSQ&callback=initMap"
         type="text/javascript"></script>
 
 
@@ -30,12 +31,14 @@
         var arr = [];
 
         var model = @Html.Raw(Json.Encode(Model));
-
+      
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
         var resoulution;
         var region;
+
         console.log(model);
+
 
         for (var y = 0; y < numOfColumns; y++) {
             if(model.columnList[y].dataType.dataType == "Location"){
@@ -58,7 +61,7 @@
             }
         }
 
-        alert(arr);
+      
 
         var data = new google.visualization.arrayToDataTable(arr);
 
