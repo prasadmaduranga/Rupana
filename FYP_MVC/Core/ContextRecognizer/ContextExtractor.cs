@@ -32,6 +32,7 @@ namespace FYP_MVC.Core.ContextRecognizer
         float NumericCount = 0;
         float LocationCount = 0;
         float DateCount = 0;
+        float FloatingPointCount = 0;
 
       
         //tempory numeric list
@@ -55,6 +56,7 @@ namespace FYP_MVC.Core.ContextRecognizer
             checkForNumeric(col);
             checkForDate(col);
             checkHeader(col);
+            checkForFloat(col);
 
             // Entering condition count > num_rows/2
             if (rowCount > checkingRowMargin) { rowCount = checkingRowMargin; }
@@ -76,6 +78,8 @@ namespace FYP_MVC.Core.ContextRecognizer
                 if (isPercentage) { col.Context = "Percentage"; }
                 else if (LocationCount>.6*NumericCount) { col.Context = "Location"; }
                 else if (DateCount>.6*NumericCount) { col.Context = "Time series"; }
+                //special validation for date time with period ex :- "12.50"
+                if (col.Context.Equals("Time series") && FloatingPointCount > .6* col.Data.Count) { col.Context = "Numeric"; }
             }
             numericTotal = 0f;
 
@@ -103,6 +107,22 @@ namespace FYP_MVC.Core.ContextRecognizer
                 }
             }
            
+        }
+
+        public void checkForFloat(Column col)
+        {
+            int rowCount = col.Data.Count;
+            if (rowCount > checkingRowMargin) { rowCount = checkingRowMargin; }
+            FloatingPointCount = 0;
+            for (int i = 0; i < rowCount; i++)
+            {
+                string item = col.Data[i];
+                if (item.Contains(".") && IsNumeric(item))
+                {
+                        FloatingPointCount++;
+                }
+            }
+
         }
 
         // try convert to numeric
