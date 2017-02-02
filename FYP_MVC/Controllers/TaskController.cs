@@ -289,9 +289,17 @@ namespace FYP_MVC.Controllers
                         return RedirectToAction("BarChart", "Visualisation");
                     
                     }
+
+                case ("Pin point location map"):
+                    {
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("GeoMarker", "Visualisation");
+
+                    }
                 default:
                     {
-                        return RedirectToAction("AreaChart", "Visualisation", chViz);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("GeoMarker", "Visualisation");
                     }
 
             }

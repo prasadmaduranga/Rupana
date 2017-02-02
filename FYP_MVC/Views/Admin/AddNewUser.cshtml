@@ -1,0 +1,65 @@
+﻿@model FYP_MVC.Models.DAO.user
+@{
+    ViewBag.Title = "AddNewUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    List<SelectListItem> li = new List<SelectListItem>();
+    li.Add(new SelectListItem() { Text = "Admin", Value = "Admin" });
+    li.Add(new SelectListItem() { Text = "General user", Value = "General user" });
+}
+
+<h2>AddNewUser</h2>
+
+@using (Html.BeginForm("AddNewUserVal", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.passwword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <input type="password" id="password_c" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="passwword">Confirm Password</label>
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.passwword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.firstName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.firstName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.lastName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.lastName, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.userType, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("userType", li, "Select User Type")
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    </div>
+}
+
+
+

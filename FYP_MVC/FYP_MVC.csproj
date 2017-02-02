@@ -181,6 +181,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\chartsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -216,6 +217,7 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DAO\charts.cs" />
+    <Compile Include="Models\DAO\ChartTemplate.cs" />
     <Compile Include="Models\DAO\column.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -240,6 +242,7 @@
     <Compile Include="Models\DAO\dimensionCount.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAO\DimensionTemplate.cs" />
     <Compile Include="Models\DAO\feedBack.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -284,10 +287,12 @@
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\lightbox.css" />
     <Content Include="Content\css\loader.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\datepicker3.css" />
+    <Content Include="Content\css\main.css" />
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfontba72.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
@@ -295,6 +300,7 @@
     <Content Include="Content\img\2.png" />
     <Content Include="Content\img\3.png" />
     <Content Include="Content\img\4.png" />
+    <Content Include="Content\img\blog\1.jpg" />
     <Content Include="Content\img\find_user.png" />
     <Content Include="Content\img\img.png" />
     <Content Include="Content\img\Preloader_1.gif" />
@@ -307,6 +313,7 @@
     <Content Include="Content\img\logo1.png" />
     <Content Include="Content\img\name.png" />
     <Content Include="Content\img\welcome.PNG" />
+    <Content Include="Content\js\blog.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\bootstrap-dropdown.js" />
     <Content Include="Content\js\bootstrap-table.js" />
@@ -325,11 +332,14 @@
     <Content Include="Content\js\jquery-1.11.1.min.js" />
     <Content Include="Content\js\jquery.csv.js" />
     <Content Include="Content\js\jquery.metisMenu.js" />
+    <Content Include="Content\js\lightbox.min.js" />
     <Content Include="Content\js\lumino.glyphs.js" />
+    <Content Include="Content\js\main.js" />
     <Content Include="Content\js\morris\morris-0.4.3.min.css" />
     <Content Include="Content\js\morris\morris.js" />
     <Content Include="Content\js\morris\raphael-2.1.0.min.js" />
     <Content Include="Content\js\respond.min.js" />
+    <Content Include="Content\js\wow.min.js" />
     <Content Include="Content\Python\date.py" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -449,6 +459,20 @@
     <Content Include="Views\Visualisation\Histogram.cshtml" />
     <Content Include="Views\Visualisation\LineChart.cshtml" />
     <Content Include="Views\Visualisation\TimeLine.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\AddNewChart.cshtml" />
+    <Content Include="Views\Admin\AddNewChartName.cshtml" />
+    <Content Include="Views\Admin\AddNewUser.cshtml" />
+    <Content Include="Views\Admin\ChartDetails.cshtml" />
+    <Content Include="Views\Admin\ChartList.cshtml" />
+    <Content Include="Views\Admin\EditChart.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Admin\UserDetails.cshtml" />
+    <Content Include="Views\Admin\UserList.cshtml" />
+    <Content Include="Views\Blog\page1.cshtml" />
+    <Content Include="Views\Blog\page2.cshtml" />
+    <Content Include="Views\Blog\page3.cshtml" />
+    <Content Include="Views\Blog\page4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

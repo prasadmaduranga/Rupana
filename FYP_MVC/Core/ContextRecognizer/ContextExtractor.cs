@@ -8,8 +8,10 @@ using System.IO;
 using FYP_MVC.Models.DAO;
 using Newtonsoft.Json;
 using System.Net;
+
 using FYP_MVC.Models;
 using System.Data.Entity.Core.Objects;
+
 namespace FYP_MVC.Core.ContextRecognizer
 {
     public class ContextExtractor
@@ -31,6 +33,7 @@ namespace FYP_MVC.Core.ContextRecognizer
         float LocationCount = 0;
         float DateCount = 0;
 
+      
         //tempory numeric list
         float numericTotal = 0f;
 

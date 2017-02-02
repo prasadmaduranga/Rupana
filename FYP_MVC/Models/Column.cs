@@ -9,7 +9,8 @@ namespace FYP_MVC.Models
     {
         public String Heading { get; set; }
         public List<string> Data { get; set; }
-        public List<string> LocationValues { get; set; }
+        public string Resolution { get; set; }
+        public string Region { get; set; }
         public DateTime[] DateValues { get; set; }
         public bool selected { get; set; }
         public String Context { get; set; }

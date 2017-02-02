@@ -1,11 +1,12 @@
-﻿
+﻿@model FYP_MVC.Models.CoreObjects.ChartComponent
 @{
     ViewBag.Title = "GeoMarker";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GeoMarker</h2>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBLdtfXt79_MDSF346kLb096uEIKJIt2U&callback=initMap"
+<h2>GeoMarker @Model.name</h2>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa2l_21P4jy0SvWgS_xTuWXa33WpliZSQ&callback=initMap"
         type="text/javascript"></script>
 
 
@@ -30,10 +31,22 @@
         var arr = [];
 
         var model = @Html.Raw(Json.Encode(Model));
-
+      
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
-        console.log(model);
+        var resoulution;
+        var region;
+        
+
+        for (var y = 0; y < numOfColumns; y++) {
+ 
+          console.log(model.columnList[y]);
+            if(model.columnList[y].dataType.dataType == "Location"){
+                resoulution = model.columnList[y].dataType.resolution;
+                region = model.columnList[y].dataType.region;
+           
+            }
+        }
 
         //for(var x = 0; x < numOfColumns; x++){
         //        arr[x] = [];
@@ -54,14 +67,14 @@
             }
         }
 
-        alert(arr);
+      
 
         var data = new google.visualization.arrayToDataTable(arr);
 
         var wrapper = new google.visualization.ChartWrapper({
             chartType: 'GeoChart',
             dataTable: data,
-            options: {"region":'IT', "displayMode": 'markers',
+            options: {"region":region, "displayMode": 'markers',
                 "colorAxis": {"colors": ['green', 'blue']}
 
             },
