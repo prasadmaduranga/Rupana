@@ -16,8 +16,10 @@
     <link href="~/Content/css/styles.css" rel="stylesheet" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
+    <script src="~/Content/js/blog.js"></script>
     <!--Icons-->
-    <link href="@Url.Content(" ~/Content/css/loader.css")" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="~/Content/js/lumino.glyphs.js"></script>
 </head>
 
@@ -268,6 +270,15 @@
             $(window).on('resize', function () {
                 if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
             })
+
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+            h._hjSettings = { hjid: 398327, hjsv: 5 };
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script'); r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, '//static.hotjar.com/c/hotjar-', '.js?sv=');
     </script>
 </body>
 </html>
