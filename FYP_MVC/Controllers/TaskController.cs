@@ -280,6 +280,7 @@ namespace FYP_MVC.Controllers
             {
                 case ("Area chart"):
                     {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
                         TempData["myObject"] = chViz;
                         return RedirectToAction("AreaChart", "Visualisation", "prasad");
                     }

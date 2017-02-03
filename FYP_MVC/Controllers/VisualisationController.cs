@@ -21,8 +21,9 @@ namespace FYP_MVC.Controllers
         
         public ActionResult AreaChart()
         {
+      
             ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
-            ViewBag.mapping = chviz.mappingList;
+            ViewBag.mapping = TempData["mapping"];
             return View(chviz.chrtCom);
         }
 
@@ -43,7 +44,7 @@ namespace FYP_MVC.Controllers
         public ActionResult CalenderChart()
         {
             ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
-            ViewBag.mapping = chviz.mappingList;
+            ViewBag.mapping = chviz.mappingList.ToList();
             return View(chviz.chrtCom);
         }
 
@@ -107,6 +108,7 @@ namespace FYP_MVC.Controllers
         public ActionResult ScatterPlot()
         {
             ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
+            ViewBag.mapping = TempData["mapping"]; 
             ViewBag.mapping = chviz.mappingList;
             return View(chviz.chrtCom);
         }

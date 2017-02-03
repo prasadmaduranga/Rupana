@@ -13,32 +13,17 @@
     // load the visualization library from Google and set a listener
     google.load("visualization", "1", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawVisualization);
-
-    function drawVisualization() { // grab the CSV
-        @*var a2 =  @Html.Raw(Json.Encode(ViewBag.a));
-        alert("First value of first term: " + a2[0][0] + "Second value of first term: " + a2[0][1]);*@
-            //var arrayData = ['a','b'];
-            //var numOfColumns = 5
-            //var colors = ['red', 'blue', 'green'];
-
-            //var splitArray = arrayData.split(",");
-            //alert(splitArray);
-            //var numOfRows = splitArray.length/numOfColumns;
+    var mapping = '@TempData["mapping"]';
+    
+    function drawVisualization() {
 
         var arr = [];
 
         var model = @Html.Raw(Json.Encode(Model));
-
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
         console.log(model);
 
-        //for(var x = 0; x < numOfColumns; x++){
-        //        arr[x] = [];
-        //        for (var y = 0; y < numOfRows; y++) {
-        //            arr[y][x] =model.columnList[x].data[y].value ;
-        //        }
-        //}
         arr[0] = [];
 
         for (var y = 0; y < numOfColumns; y++) {
@@ -54,9 +39,16 @@
 
         alert(arr);
 
-        alert(ViewBag.mapping);
+        var finalArray = [];
 
-        var data = new google.visualization.arrayToDataTable(arr);
+        for(var x = 0; x < arr.length; x++){
+           finalArray[x] = [];    
+           for(var y = 0; y < mapping.length; y++){ 
+             finalArray[x][y] = arr[x][mapping[y]];    
+           }    
+        } 
+    
+        var data = new google.visualization.arrayToDataTable(finalArray);
 
         var wrapper = new google.visualization.ChartWrapper({
             chartType: 'AreaChart',
