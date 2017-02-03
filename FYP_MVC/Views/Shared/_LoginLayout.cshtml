@@ -33,8 +33,16 @@
             console.log('statusChangeCallback');
             console.log(response);
             if (response.status === 'connected') {
+                @*var LoggedOutFromApplication = '@Session["LoggedOutFromApplication"]';
+
                 // Logged into your app and Facebook.
-                testAPI();
+                if (LoggedOutFromApplication === "True") {
+
+                }
+                else {*@
+                    testAPI();
+                //}
+                
             } else if (response.status === 'not_authorized') {
                 // The person is logged into Facebook, but not your app.
                 document.getElementById('status').innerHTML = 'Please log ' +
@@ -124,9 +132,13 @@
                     url: '@Url.Action("FBLogout", "Authentication")',
                     success: function (data) {
                         if (data.result === 'Redirect') {
-                            FB.logout(function (response) {
+                            FB.Logout(function (response) {
+                                alert('fb logout');
                                 window.location = data.url;
                             });
+                            //FB.logout();
+                            //alert('fb logout');
+                            //window.location = data.url;
                         }
                     },
                     error: function () {
