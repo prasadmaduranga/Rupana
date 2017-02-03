@@ -278,10 +278,9 @@ namespace FYP_MVC.Controllers
 
             switch (chViz.chrtCom.name)
             {
-                case ("Area chart"):
+                case ("Area Chart"):
                     {
-                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
-                        TempData["myObject"] = chViz;
+                        //return RedirectToAction("AreaChart", "Visualisation", new { chviz = chViz });
                         return RedirectToAction("AreaChart", "Visualisation", "prasad");
                     }
                 case ("Stacked bar chart"):
@@ -295,109 +294,6 @@ namespace FYP_MVC.Controllers
                     {
                         TempData["myObject"] = chViz;
                         return RedirectToAction("GeoMarker", "Visualisation");
-
-                    }
-                case ("Bar chart"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("BarChart", "Visualisation");
-
-                    }
-
-                case ("Pie chart"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("PieChart", "Visualisation");
-
-                    }
-                case ("Tree Map"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("TreeMap", "Visualisation");
-
-                    }
-                case ("Stacked area chart"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("StackedAreaChart", "Visualisation");
-
-                    }
-                case ("Nomalized stacked bar chart"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("NormalizedStackedBarChart", "Visualisation");
-
-                    }
-                case ("Scatterplot"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("ScatterPlot", "Visualisation");
-
-                    }
-                case ("Mark Area  map"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("GeoRegion", "Visualisation");
-
-                    }
-                case ("Bubble chart"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("BubbleChart", "Visualisation");
-
-                    }
-                case ("Calender view chart"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("CalenderChart", "Visualisation");
-
-                    }
-                case ("Clusture dendogram"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("WordChart", "Visualisation");
-
-                    }
-                case ("Parallel cordinates"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("ParallelCordinates", "Visualisation");
-
-                    }
-                case ("Sankey diagram"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("SankeyDiagram", "Visualisation");
-
-                    }
-                case ("Boxplot"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("BoxPlot", "Visualisation");
-
-                    }
-                case ("Line chart"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("LineChart", "Visualisation");
-
-                    }
-                case ("Normalized stacked area chart"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("NormalizedStackedAreaChart", "Visualisation");
-
-                    }
-                case ("Histrogram"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("Histogram", "Visualisation");
-
-                    }
-                case ("Time Line"):
-                    {
-                        TempData["myObject"] = chViz;
-                        return RedirectToAction("TimeLine", "Visualisation");
 
                     }
                 default:
