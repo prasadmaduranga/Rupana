@@ -275,16 +275,19 @@ namespace FYP_MVC.Controllers
             chViz.chrtCom = new ChartComponent();
             chViz.chrtCom.name = chViz.chartTypes[num];
             chViz.chrtCom = converter.Convert(csv, chViz.chrtCom);
-
+            
             switch (chViz.chrtCom.name)
             {
                 case ("Area Chart"):
                     {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
                         //return RedirectToAction("AreaChart", "Visualisation", new { chviz = chViz });
-                        return RedirectToAction("AreaChart", "Visualisation", "prasad");
+                        return RedirectToAction("AreaChart", "Visualisation");
                     }
                 case ("Stacked bar chart"):
                     {
+
                         TempData["myObject"] = chViz;
                         return RedirectToAction("BarChart", "Visualisation");
                     
@@ -298,8 +301,10 @@ namespace FYP_MVC.Controllers
                     }
                 default:
                     {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
                         TempData["myObject"] = chViz;
-                        return RedirectToAction("GeoMarker", "Visualisation");
+                        //return RedirectToAction("AreaChart", "Visualisation", new { chviz = chViz });
+                        return RedirectToAction("AreaChart", "Visualisation");
                     }
 
             }

@@ -202,6 +202,7 @@
     <Compile Include="Models\AuthenticationViewModels.cs" />
     <Compile Include="Models\Column.cs" />
     <Compile Include="Models\CoreObjects\ChartComponent.cs" />
+    <Compile Include="Models\CoreObjects\ChartComponentViewModel.cs" />
     <Compile Include="Models\CoreObjects\Column.cs" />
     <Compile Include="Models\CoreObjects\ChartVisualizationObject.cs" />
     <Compile Include="Models\CoreObjects\Data.cs" />
