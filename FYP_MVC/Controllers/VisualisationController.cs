@@ -29,13 +29,12 @@ namespace FYP_MVC.Controllers
         }
 
         public ActionResult BarChart()
-       // public ActionResult BarChart(string i)
         {
            ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
       
             ViewBag.mapping= chviz.mappingList;
              return View(chviz.chrtCom);
-            //return View();
+          
 
         }
 
