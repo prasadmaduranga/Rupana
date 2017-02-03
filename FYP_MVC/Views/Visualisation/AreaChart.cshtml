@@ -1,4 +1,4 @@
-﻿@model FYP_MVC.Models.CoreObjects.ChartComponent
+﻿@model FYP_MVC.Models.CoreObjects.ChartComponentViewModel
 
 @{
     ViewBag.Title = "AreaChart";
@@ -8,37 +8,25 @@
 <h2>AreaChart</h2>
 
 <script>
- // wait till the DOM is loaded
 
-    // load the visualization library from Google and set a listener
     google.load("visualization", "1", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawVisualization);
+   
+   
 
-    function drawVisualization() { // grab the CSV
-        @*var a2 =  @Html.Raw(Json.Encode(ViewBag.a));
-        alert("First value of first term: " + a2[0][0] + "Second value of first term: " + a2[0][1]);*@
-            //var arrayData = ['a','b'];
-            //var numOfColumns = 5
-            //var colors = ['red', 'blue', 'green'];
-
-            //var splitArray = arrayData.split(",");
-            //alert(splitArray);
-            //var numOfRows = splitArray.length/numOfColumns;
+    function drawVisualization() {
 
         var arr = [];
-
-        var model = @Html.Raw(Json.Encode(Model));
-
+        var viewModel = @Html.Raw(Json.Encode(Model));  
+        var model=viewModel.chartComponent;
+        var mapping=viewModel.mapping;
+        alert(viewModel);
+        console.log(model);
+        console.log(mapping);
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
         console.log(model);
 
-        //for(var x = 0; x < numOfColumns; x++){
-        //        arr[x] = [];
-        //        for (var y = 0; y < numOfRows; y++) {
-        //            arr[y][x] =model.columnList[x].data[y].value ;
-        //        }
-        //}
         arr[0] = [];
 
         for (var y = 0; y < numOfColumns; y++) {
