@@ -156,7 +156,7 @@ namespace FYP_MVC.Controllers
         public ActionResult showContextInfo(CSVFile csv)
         {
             int selectedcout = csv.Data.Where(c => c.selected).Count();
-            if (selectedcout < 2 || selectedcout > 7)
+            if (selectedcout < 1 || selectedcout > 7)
             {
                 TempData["csv"] = CSVInjector.csv;
                 TempData["errorMessage"] = "Please select number of columns in range 2-7";

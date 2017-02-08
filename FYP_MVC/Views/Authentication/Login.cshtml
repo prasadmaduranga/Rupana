@@ -5,43 +5,66 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
+<br /><br />
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Authentication", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-md-offset-4">
+            <div class="account-box">
+   
+                <div class="logo ">
+                    <img src="~/Content/img/logo1.png" height="150" width="150"/>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-            }
-        </section>
-       
-    </div>
+                
+                    @using (Html.BeginForm("Login", "Authentication", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password)
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+
+                        <button class="btn btn-lg btn-block purple-bg" type="submit">
+                            Sign in
+                        </button>
+
+                        <div class="or-box">
+
+                            <div class="row">
+                                <div class="col-md-6 row-block">
+                                    <a href="http://www.jquery2dotnet.com" class="btn btn-facebook btn-block">Facebook</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="or-box row-block">
+                            <div class="row">
+                                <div class="col-md-12 row-block">
+
+                                    @Html.ActionLink("Create New Account", "Register",null, new object { },new { @class = "btn btn-primary btn-block" })
+                                 
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+
+                    </div></div></div></div>
+                      
+                    
+
+
+
+
+
     <div class="col-md-4">
             <section id="socialLoginForm">
                 <div class="fb-login-button" scope="public_profile,email" onlogin="checkLoginState();" data-max-rows="2" data-size="large" data-show-faces="true" ></div>
@@ -50,4 +73,3 @@
                 </div>
             </section>
         </div>
-</div>

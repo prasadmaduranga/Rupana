@@ -10,5 +10,7 @@ namespace FYP_MVC.Models.CoreObjects
         public ChartComponent chrtCom;
         public List<int[]> mappingList;
         public string[] chartTypes;
+        public List<int[]> more_mappingList;
+        public string[] more_chartTypes;
     }
 }
