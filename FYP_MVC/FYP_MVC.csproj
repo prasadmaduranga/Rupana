@@ -301,9 +301,11 @@
     <Content Include="Content\img\2.png" />
     <Content Include="Content\img\3.png" />
     <Content Include="Content\img\4.png" />
+    <Content Include="Content\img\barchart.png" />
     <Content Include="Content\img\blog\1.jpg" />
     <Content Include="Content\img\find_user.png" />
     <Content Include="Content\img\img.png" />
+    <Content Include="Content\img\Pie.png" />
     <Content Include="Content\img\Preloader_1.gif" />
     <Content Include="Content\img\Preloader_2.gif" />
     <Content Include="Content\img\Preloader_3.gif" />
@@ -474,6 +476,7 @@
     <Content Include="Views\Blog\page2.cshtml" />
     <Content Include="Views\Blog\page3.cshtml" />
     <Content Include="Views\Blog\page4.cshtml" />
+    <Content Include="Views\Blog\ChartDiscriptionPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
