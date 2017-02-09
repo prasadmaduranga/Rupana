@@ -427,6 +427,7 @@ namespace FYP_MVC.Controllers
                         return RedirectToAction("BarChart", "Visualisation");
                     }
 
+<<<<<<< HEAD
                 case ("Bivariate area chart"):
                     {
                         TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
@@ -435,6 +436,8 @@ namespace FYP_MVC.Controllers
                     }
 
 
+=======
+>>>>>>> 41aa695c0674823f5648263f8860b4a15cc5b3fd
                 default:
                     {
                         TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);

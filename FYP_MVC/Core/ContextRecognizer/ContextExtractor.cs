@@ -32,7 +32,13 @@ namespace FYP_MVC.Core.ContextRecognizer
         float NumericCount = 0;
         float LocationCount = 0;
         float DateCount = 0;
+<<<<<<< HEAD
         float FloatingPointCount = 0;
+=======
+
+        float FloatingPointCount = 0;
+
+>>>>>>> 41aa695c0674823f5648263f8860b4a15cc5b3fd
 
       
         //tempory numeric list
@@ -76,6 +82,10 @@ namespace FYP_MVC.Core.ContextRecognizer
                 if (numericTotal > .9f && numericTotal < 1.1f) { isPercentage = true; }
                 if (numericTotal > 90f && numericTotal < 110f) { isPercentage = true; }
                 if (isPercentage) { col.Context = "Percentage"; }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 41aa695c0674823f5648263f8860b4a15cc5b3fd
                 else if (LocationCount>.6*NumericCount) { col.Context = "Location"; }
                 else if (DateCount>.6*NumericCount) { col.Context = "Time series"; }
                 //special validation for date time with period ex :- "12.50"
@@ -215,9 +225,16 @@ namespace FYP_MVC.Core.ContextRecognizer
         {
             DateCount = 0;
             ProcessStartInfo pythonInfo = new ProcessStartInfo();
+<<<<<<< HEAD
             //pythonInfo.FileName = @"C:\Python27\python.exe";
             
             pythonInfo.FileName = @"C:\Users\kanchana\AppData\Local\Programs\Python\Python36-32\python.exe";
+=======
+
+            pythonInfo.FileName = @"C:\Python27\python.exe";
+            
+
+>>>>>>> 41aa695c0674823f5648263f8860b4a15cc5b3fd
             int temp = col.Data.Count;
             col.DateValues = new DateTime[temp];
             String[] arr = col.Data.ToArray();
