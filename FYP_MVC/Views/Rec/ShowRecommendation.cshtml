@@ -7,7 +7,9 @@
 }
 
 <h2>ShowRecommendation</h2>
-
+<script>
+    
+</script>
 
 <table class="table">
     <tr>
@@ -17,6 +19,7 @@
     {
         <tr>
             <td>
+                <img src="~/Content/img/chartImg/" alt="" style="width:100px; height:auto;">
                 @Html.ActionLink(Model.chartTypes[i], "visualizeDataFile", "Task", new { num = i }, null)
             </td>
         </tr>
