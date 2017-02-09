@@ -25,5 +25,10 @@ namespace FYP_MVC.Controllers
         {
             return View();
         }
+
+        public ActionResult ChartDiscriptionPage()
+        {
+            return View();
+        }
     }
 }

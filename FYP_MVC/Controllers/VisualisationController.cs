@@ -30,11 +30,20 @@ namespace FYP_MVC.Controllers
 
         public ActionResult BarChart()
         {
+<<<<<<< HEAD
             ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
             ChartComponentViewModel modelObj = new ChartComponentViewModel();
             modelObj.chartComponent = chviz.chrtCom;
             modelObj.mapping = (int[])TempData["mapping"];
             return View(modelObj);
+=======
+           ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
+      
+            ViewBag.mapping= chviz.mappingList;
+             return View(chviz.chrtCom);
+          
+
+>>>>>>> 7ffdb22cccfcce22b3f8efe0e476de8b87a56c0d
         }
 
         public ActionResult BubbleChart()

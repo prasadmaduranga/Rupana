@@ -6,16 +6,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<<<<<<< HEAD
 <h2>ShowRecommendation</h2>
 <script>
     
 </script>
+=======
+<h2>Chart Recommendation</h2>
+
+>>>>>>> 7ffdb22cccfcce22b3f8efe0e476de8b87a56c0d
 
 <table class="table">
     <tr>
         <th>Chart</th>
     </tr>
-    @for (int i = 0; i < Model.chartTypes.Length; i++)
+    @{int count = Model.chartTypes.Length; }
+    @for (int i = 0; i < count; i++)
     {
         <tr>
             <td>
@@ -26,3 +32,31 @@
     }
 
 </table>
+<br />
+<a href="#" id="show"class="btn btn-success">Load more ...</a>
+<br />
+<div id="hidden" >
+    <table class="table">
+        <tr>
+            <th>Chart</th>
+        </tr>
+        @for (int i = 0; i < Model.more_chartTypes.Length; i++)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(Model.more_chartTypes[i], "visualizeDataFile", "Task", new { num = i+ count }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#hidden").hide();
+    });
+    $("#show").click(function () {
+        $("#hidden").show(2000);
+    });
+</script>

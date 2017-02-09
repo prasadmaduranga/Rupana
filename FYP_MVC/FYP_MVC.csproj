@@ -305,6 +305,7 @@
     <Content Include="Content\img\2.png" />
     <Content Include="Content\img\3.png" />
     <Content Include="Content\img\4.png" />
+    <Content Include="Content\img\barchart.png" />
     <Content Include="Content\img\blog\1.jpg" />
     <Content Include="Content\img\chartImg\4.png" />
     <Content Include="Content\img\chartImg\Area chart.png" />
@@ -334,6 +335,7 @@
     <Content Include="Content\img\chartImg\Tree Map.png" />
     <Content Include="Content\img\find_user.png" />
     <Content Include="Content\img\img.png" />
+    <Content Include="Content\img\Pie.png" />
     <Content Include="Content\img\Preloader_1.gif" />
     <Content Include="Content\img\Preloader_2.gif" />
     <Content Include="Content\img\Preloader_3.gif" />
@@ -510,6 +512,7 @@
     <Content Include="Views\Visualisation\BivariateAreaChart.cshtml" />
     <Content Include="Views\Visualisation\ParallelCordinates.cshtml" />
     <Content Include="Views\Visualisation\ChartDetails.cshtml" />
+    <Content Include="Views\Blog\ChartDiscriptionPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

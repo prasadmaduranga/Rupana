@@ -28,12 +28,14 @@ namespace FYP_MVC.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult Login(string returnUrl)
         {
 
 
             if (Session["user"] != null && !Convert.ToBoolean(Session["isFBAuthenticated"]))
             {
+              
                 if (((user)Session["user"]).userType == "Admin")
                 {
                     return RedirectToAction("Home", "Admin");
@@ -44,10 +46,13 @@ namespace FYP_MVC.Controllers
                 }
 
             }
-
+         
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+
+
+       
 
         [HttpPost]
         [AllowAnonymous]
@@ -55,8 +60,6 @@ namespace FYP_MVC.Controllers
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
 
-            
-            
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -139,8 +142,8 @@ namespace FYP_MVC.Controllers
                     db.SaveChanges();
                     Session["isFBAuthenticated"] = true;
                     Session["user"] = user;
-
-                    return Json(new { result = "Redirect", url = Url.Action("Home", "Task") });
+                    return RedirectToAction("Home", "Task");
+                    //return Json(new { result = "Redirect", url = Url.Action("Home", "Task") });
 
                 }
                 catch (Exception e)
@@ -154,13 +157,15 @@ namespace FYP_MVC.Controllers
 
             }
             else {
-                Session["user"] = user;
+                Session["user"] = users.FirstOrDefault();
                 Session["isFBAuthenticated"] = true;
+                //return RedirectToAction("Home", "Task");
+
                 return Json(new { result = "Redirect", url = Url.Action("Home", "Task") });
             }
-           
 
-        
+
+
         }
 
         [HttpPost]
@@ -169,6 +174,7 @@ namespace FYP_MVC.Controllers
 
             Session["user"] = null;
             Session["isFBAuthenticated"] = false;
+            Session["LoggedOutFromApplication"] = true;
             return Json(new { result = "Redirect", url = Url.Action("Login", "Authentication") });
 
             //return RedirectToAction("Login", "Authentication");
