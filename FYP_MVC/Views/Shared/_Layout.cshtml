@@ -21,6 +21,16 @@
     <!--Icons-->
     <link href="~/Content/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="~/Content/js/lumino.glyphs.js"></script>
+    <script>
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+            h._hjSettings = { hjid: 398327, hjsv: 5 };
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script'); r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, '//static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
 </head>
 
 
@@ -156,7 +166,7 @@
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '582017025328479',
-                cookie: true,  // enable cookies to allow the server to access 
+                cookie: true,  // enable cookies to allow the server to access
                 // the session
                 xfbml: true,  // parse social plugins on this page
                 version: 'v2.8' // use graph api version 2.8
@@ -214,7 +224,7 @@
 
         function logout() {
             var isFBAuthenticated = '@Session["isFBAuthenticated"]';
-   
+
             if (isFBAuthenticated === "True") {
                 $.ajax({
                     type: "POST",
@@ -241,8 +251,8 @@
                            @*$.ajax({
                                type: "GET",
                                url: '@Url.Action("Login", "Authentication")'
-          
-                           });*@ 
+
+                           });*@
 
                            }
                     },
@@ -271,14 +281,8 @@
                 if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
             })
 
-        (function (h, o, t, j, a, r) {
-            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
-            h._hjSettings = { hjid: 398327, hjsv: 5 };
-            a = o.getElementsByTagName('head')[0];
-            r = o.createElement('script'); r.async = 1;
-            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window, document, '//static.hotjar.com/c/hotjar-', '.js?sv=');
+    
+
     </script>
 </body>
 </html>
