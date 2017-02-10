@@ -29,7 +29,7 @@ namespace FYP_MVC.Core.Recommendations
 
 
         }
-        public static List<Recommendations_Result> getRecommendationsWithoutIntentionMore(int tableID, string intention)
+        public static List<Recommendations_Result> getRecommendationsWithoutIntentionMore(int tableID)
         {
             return db.getRecommendations_More_WithoutIntention(tableID).ToList<Recommendations_Result>();
 

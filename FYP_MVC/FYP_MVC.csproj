@@ -284,16 +284,20 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bivariateArea.css" />
     <Content Include="Content\css\bootstrap-table.css" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\carousel.css" />
+    <Content Include="Content\css\imageGrid.css" />
     <Content Include="Content\css\lightbox.css" />
     <Content Include="Content\css\loader.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\datepicker3.css" />
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\parallelCor.css" />
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfontba72.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
@@ -301,9 +305,37 @@
     <Content Include="Content\img\2.png" />
     <Content Include="Content\img\3.png" />
     <Content Include="Content\img\4.png" />
+    <Content Include="Content\img\barchart.png" />
     <Content Include="Content\img\blog\1.jpg" />
+    <Content Include="Content\img\chartImg\4.png" />
+    <Content Include="Content\img\chartImg\Area chart.png" />
+    <Content Include="Content\img\chartImg\Bar chart.png" />
+    <Content Include="Content\img\chartImg\bivariate.png" />
+    <Content Include="Content\img\chartImg\box.png" />
+    <Content Include="Content\img\chartImg\Boxplot.png" />
+    <Content Include="Content\img\chartImg\Bubble chart.png" />
+    <Content Include="Content\img\chartImg\Calender view chart.jpg" />
+    <Content Include="Content\img\chartImg\Clusture dendogram.png" />
+    <Content Include="Content\img\chartImg\Geo-Map-Regional-World-Map.png" />
+    <Content Include="Content\img\chartImg\Grouped bar chart.png" />
+    <Content Include="Content\img\chartImg\Histrogram.png" />
+    <Content Include="Content\img\chartImg\Line chart.png" />
+    <Content Include="Content\img\chartImg\Mark Area  map.png" />
+    <Content Include="Content\img\chartImg\Nomalized stacked bar chart.png" />
+    <Content Include="Content\img\chartImg\Normalized stacked area chart.png" />
+    <Content Include="Content\img\chartImg\Parallel cordinates.png" />
+    <Content Include="Content\img\chartImg\Pie chart.png" />
+    <Content Include="Content\img\chartImg\Pin point location map.png" />
+    <Content Include="Content\img\chartImg\Sankey diagram.png" />
+    <Content Include="Content\img\chartImg\Scatterplot.png" />
+    <Content Include="Content\img\chartImg\Stacked area chart.png" />
+    <Content Include="Content\img\chartImg\Stacked bar chart.png" />
+    <Content Include="Content\img\chartImg\stackednorArea.png" />
+    <Content Include="Content\img\chartImg\Time Line.png" />
+    <Content Include="Content\img\chartImg\Tree Map.png" />
     <Content Include="Content\img\find_user.png" />
     <Content Include="Content\img\img.png" />
+    <Content Include="Content\img\Pie.png" />
     <Content Include="Content\img\Preloader_1.gif" />
     <Content Include="Content\img\Preloader_2.gif" />
     <Content Include="Content\img\Preloader_3.gif" />
@@ -320,6 +352,7 @@
     <Content Include="Content\js\bootstrap-table.js" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\carousel.js" />
     <Content Include="Content\js\chart-data.js" />
     <Content Include="Content\js\chart.min.js" />
     <Content Include="Content\js\custom.js" />
@@ -329,6 +362,7 @@
     <Content Include="Content\js\easypiechart-data.js" />
     <Content Include="Content\js\easypiechart.js" />
     <Content Include="Content\js\html5shiv.min.js" />
+    <Content Include="Content\js\imageGrid.js" />
     <Content Include="Content\js\jquery-1.10.2.js" />
     <Content Include="Content\js\jquery-1.11.1.min.js" />
     <Content Include="Content\js\jquery.csv.js" />
@@ -475,6 +509,11 @@
     <Content Include="Views\Blog\page2.cshtml" />
     <Content Include="Views\Blog\page3.cshtml" />
     <Content Include="Views\Blog\page4.cshtml" />
+    <Content Include="Views\Visualisation\Boxplot.cshtml" />
+    <Content Include="Views\Visualisation\BivariateAreaChart.cshtml" />
+    <Content Include="Views\Visualisation\ParallelCordinates.cshtml" />
+    <Content Include="Views\Visualisation\ChartDetails.cshtml" />
+    <Content Include="Views\Blog\ChartDiscriptionPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

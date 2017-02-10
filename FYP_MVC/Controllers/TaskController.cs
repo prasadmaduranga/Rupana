@@ -156,7 +156,7 @@ namespace FYP_MVC.Controllers
         public ActionResult showContextInfo(CSVFile csv)
         {
             int selectedcout = csv.Data.Where(c => c.selected).Count();
-            if (selectedcout < 2 || selectedcout > 7)
+            if (selectedcout < 1 || selectedcout > 7)
             {
                 TempData["csv"] = CSVInjector.csv;
                 TempData["errorMessage"] = "Please select number of columns in range 2-7";
@@ -275,30 +275,214 @@ namespace FYP_MVC.Controllers
             chViz.chrtCom = new ChartComponent();
             chViz.chrtCom.name = chViz.chartTypes[num];
             chViz.chrtCom = converter.Convert(csv, chViz.chrtCom);
-            
+
+            //saving the feedback
+            feedBack fb = new feedBack();
+            fb.tableID = (int)Session["CurrentTableId"];
+            int colCount = csv.Data.Count();
+            fb.dim1_IsContinuous = csv.Data[0].IsContinous?1:0;
+            fb.dim1_context = csv.Data[0].Context;
+            fb.dim1_Cardinality = csv.Data[0].NumDiscreteValues;
+            if (colCount == 7) {
+                fb.dim7_IsContinuous = csv.Data[6].IsContinous ? 1 : 0;
+                fb.dim7_context = csv.Data[6].Context;
+                fb.dim7_Cardinality = csv.Data[6].NumDiscreteValues;
+            }
+            if (colCount > 5)
+            {
+                fb.dim6_IsContinuous = csv.Data[5].IsContinous ? 1 : 0;
+                fb.dim6_context = csv.Data[5].Context;
+                fb.dim6_Cardinality = csv.Data[5].NumDiscreteValues;
+            }
+            if (colCount > 4)
+            {
+                fb.dim5_IsContinuous = csv.Data[4].IsContinous ? 1 : 0;
+                fb.dim5_context = csv.Data[4].Context;
+                fb.dim5_Cardinality = csv.Data[4].NumDiscreteValues;
+            }
+            if (colCount > 3)
+            {
+                fb.dim4_IsContinuous = csv.Data[3].IsContinous ? 1 : 0;
+                fb.dim4_context = csv.Data[3].Context;
+                fb.dim4_Cardinality = csv.Data[3].NumDiscreteValues;
+            }
+            if (colCount > 2)
+            {
+                fb.dim3_IsContinuous = csv.Data[2].IsContinous ? 1 : 0;
+                fb.dim3_context = csv.Data[2].Context;
+                fb.dim3_Cardinality = csv.Data[2].NumDiscreteValues;
+            }
+            if (colCount > 1)
+            {
+                fb.dim2_IsContinuous = csv.Data[1].IsContinous ? 1 : 0;
+                fb.dim2_context = csv.Data[1].Context;
+                fb.dim2_Cardinality = csv.Data[1].NumDiscreteValues;
+            }
+            db.feedBacks.Add(fb);
+  //          db.SaveChanges();
+
             switch (chViz.chrtCom.name)
             {
-                case ("Area Chart"):
+                case ("Area chart"):
                     {
                         TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
-                        TempData["myObject"] = chViz;
-                        //return RedirectToAction("AreaChart", "Visualisation", new { chviz = chViz });
+                        TempData["myObject"] = chViz;                    
                         return RedirectToAction("AreaChart", "Visualisation");
                     }
                 case ("Stacked bar chart"):
                     {
-
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
                         TempData["myObject"] = chViz;
-                        return RedirectToAction("BarChart", "Visualisation");
-                    
+                        return RedirectToAction("StackedBarChart", "Visualisation");
+
                     }
 
                 case ("Pin point location map"):
                     {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
                         TempData["myObject"] = chViz;
                         return RedirectToAction("GeoMarker", "Visualisation");
 
                     }
+
+                case ("Bar chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("BarChart", "Visualisation");
+
+                    }
+
+                case ("Pie chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("PieChart", "Visualisation");
+
+                    }
+                case ("Tree Map"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("TreeMap", "Visualisation");
+
+                    }
+                case ("Stacked area chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("StackedAreaChart", "Visualisation");
+                    }
+                case ("Nomalized stacked bar chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("NormalizedStackedBarChart", "Visualisation");
+                    }
+                case ("Scatterplot"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("Scatterplot", "Visualisation");
+
+                    }
+                case ("Mark Area  map"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("GeoRegion", "Visualisation");
+
+                    }
+                case ("Bubble chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("BubbleChart", "Visualisation");
+                    }
+                case ("Calender view chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("CalenderChart", "Visualisation");
+
+                    }
+                case ("Clusture dendogram"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("WordChart", "Visualisation");
+
+                    }
+                case ("Parallel cordinates"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("ParallelCordinates", "Visualisation");
+                    }
+                case ("Sankey diagram"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("SankeyDiagram", "Visualisation");
+                    }
+                case ("Boxplot"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("Boxplot", "Visualisation");
+                    }
+                case ("Line chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("LineChart", "Visualisation");
+                    }
+                case ("Normalized stacked area chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("NormalizedStackedAreaChart", "Visualisation");
+
+                    }
+                case ("Histrogram"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("Histogram", "Visualisation");
+                    }
+                case ("Time Line"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("TimeLine", "Visualisation");
+                    }
+
+                    
+                case ("Grouped bar chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("BarChart", "Visualisation");
+                    }
+
+                case ("Muiltiple Bar chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("BarChart", "Visualisation");
+                    }
+
+<<<<<<< HEAD
+                case ("Bivariate area chart"):
+                    {
+                        TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
+                        TempData["myObject"] = chViz;
+                        return RedirectToAction("BivariateAreaChart", "Visualisation");
+                    }
+
+
+=======
+>>>>>>> 41aa695c0674823f5648263f8860b4a15cc5b3fd
                 default:
                     {
                         TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);

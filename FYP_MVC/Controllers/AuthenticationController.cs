@@ -28,6 +28,7 @@ namespace FYP_MVC.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult Login(string returnUrl)
         {
 
@@ -59,8 +60,6 @@ namespace FYP_MVC.Controllers
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
 
-            
-            
             if (!ModelState.IsValid)
             {
                 return View(model);
