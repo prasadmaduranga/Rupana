@@ -45,7 +45,14 @@ namespace FYP_MVC.Controllers
             return File(fileStream, "application/pdf");
         }
 
-    
+        public ActionResult Guide()
+        {
+            return View();
+        }
+        public ActionResult DevTeam()
+        {
+            return View();
+        }
 
     }
 }

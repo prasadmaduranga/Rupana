@@ -337,6 +337,7 @@
     <Content Include="Content\img\chartImg\Time Line.png" />
     <Content Include="Content\img\chartImg\Tree Map.png" />
     <Content Include="Content\img\find_user.png" />
+    <Content Include="Content\img\Guide.png" />
     <Content Include="Content\img\img.png" />
     <Content Include="Content\img\Pie.png" />
     <Content Include="Content\img\Preloader_1.gif" />
@@ -519,6 +520,8 @@
     <Content Include="Views\Visualisation\ChartDetails.cshtml" />
     <Content Include="Views\Blog\ChartDiscriptionPage.cshtml" />
     <Content Include="Views\Blog\publications.cshtml" />
+    <Content Include="Views\Blog\Guide.cshtml" />
+    <Content Include="Views\Blog\DevTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -114,6 +114,7 @@
 <a href="#" id="feedback" class="btn btn-warning">Save Feedback</a>
     <script>
         var selected_chartId = -1;
+        var feebackSaved = false;
 
         $(document).ready(function () {
             $("#hidden").hide();
@@ -127,12 +128,16 @@
                             });
 
         $("#feedback").click(function () {
-                                if (selected_chartId == -1) { alert("Please select a chart type before saving feedback"); }
-                                else {
-                $.getJSON("@Url.Action("saveFeedback", "Task", new { num = "_noticeId"})".replace("_noticeId", selected_chartId), function (data) {
-                                        alert("Your feeback saved, Thank You!");
-                                    });
-                                }
+            if (!feebackSaved) {
+                if (selected_chartId == -1) { alert("Please select a chart type before saving feedback"); }
+                else {
+                    $.getJSON("@Url.Action("saveFeedback", "Task", new { num = "_noticeId"})".replace("_noticeId", selected_chartId), function (data) {
+                        feebackSaved = true;
+                        alert("Your feeback saved, Thank You!");
+                    });
+                }
+            }
+            else if (feebackSaved) { alert("Feedback already saved"); }
                             });
 
     
