@@ -5,28 +5,28 @@
     ViewBag.Title = "ShowRecommendation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <style>
-    
-.listrap {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            cursor: default;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
+    .listrap {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        cursor: default;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
         .listrap li {
             margin: 0;
             padding: 10px;
         }
 
-        .listrap li.active, .listrap li:hover {
-            background-color: #d9edf7;
-        }
+            .listrap li.active, .listrap li:hover {
+                background-color: #d9edf7;
+            }
 
         .listrap strong {
             margin-left: 10px;
@@ -38,25 +38,25 @@
             height: 60px;
         }
 
-        .listrap .listrap-toggle span {
-            background-color: #428bca;
-            opacity: 0.8;
-            z-index: 100;
-            width: 60px;
-            height: 60px;
-            display: none;
-            position: absolute;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 60px;
-            vertical-align: middle;
-            color: #ffffff;
-        }
+            .listrap .listrap-toggle span {
+                background-color: #428bca;
+                opacity: 0.8;
+                z-index: 100;
+                width: 60px;
+                height: 60px;
+                display: none;
+                position: absolute;
+                border-radius: 50%;
+                text-align: center;
+                line-height: 60px;
+                vertical-align: middle;
+                color: #ffffff;
+            }
 
-        .listrap .listrap-toggle span:before {
-            font-family: 'Glyphicons Halflings';
-            content: "\e013";
-        }
+                .listrap .listrap-toggle span:before {
+                    font-family: 'Glyphicons Halflings';
+                    content: "\e013";
+                }
 
         .listrap li.active .listrap-toggle span {
             display: block;
@@ -71,10 +71,10 @@
             @{int count = Model.chartTypes.Length;}
             @for (int i = 0; i < count; i++)
             {
-                <li class="active">
-                    <div class="listrap-toggle">
+                <li>
+                    <div class="listrap-toggle"  id="@i" onclick="set_feedback(this)">
                         <span></span>
-                        <img src="http://lorempixel.com/60/60/people/?v=2" class="img-circle" />
+                        <img src="~/Content/img/chartImg/@(Model.chartTypes[i]).png" height="60px" width="60px" class="img-circle" /> 
                     </div>
                     <strong>@Html.ActionLink(Model.chartTypes[i], "visualizeDataFile", "Task", new { num = i }, null)</strong>
                 </li>
@@ -87,55 +87,59 @@
 <a href="#" id="show" class="btn btn-success">Load more ...</a>
 <br />
     <div id="hidden">
-        <table class="table">
-            <tr>
-                <th>Chart</th>
-            </tr>
-            @for (int i = 0; i < Model.more_chartTypes.Length; i++)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(Model.more_chartTypes[i], "visualizeDataFile", "Task", new { num = i + count }, null)
-                    </td>
-                </tr>
-            }
+        <div class="row">
+            <div class="col-lg-4">
+                <ul class="listrap">
 
-        </table>
+                    @{int count2 = Model.more_chartTypes.Length;
+                        if (count2 > 0) {
+                    for (int i = count; i < count + count2; i++)
+                    {
+                        <li>
+                            <div class="listrap-toggle" id="@i" onclick="set_feedback(this)">
+                                <span></span>
+                                <img src="~/Content/img/chartImg/@(Model.more_chartTypes[i-count]).png" height="60px" width="60px" class="img-circle" /> 
+                            </div>
+                            <strong>@Html.ActionLink(Model.more_chartTypes[i - count], "visualizeDataFile", "Task", new { num = i }, null)</strong>
+                        </li>
+                    }} }
+                </ul>
+            </div>
+        </div>
     </div>
-
+<a href="#" id="feedback" class="btn btn-warning">Save Feedback</a>
     <script>
+        var selected_chartId = -1;
+
         $(document).ready(function () {
             $("#hidden").hide();
             $(".listrap").listrap().on("selection-changed", function (event, selection) {
-                console.log(selection);
-            });
+                                    console.log(selection);
+                                });
 
-        });
+                            });
         $("#show").click(function () {
             $("#hidden").show(2000);
-        });
+                            });
 
+        $("#feedback").click(function () {
+                                if (selected_chartId == -1) { alert("Please select a chart type before saving feedback"); }
+                                else {
+                $.getJSON("@Url.Action("saveFeedback", "Task", new { num = "_noticeId"})".replace("_noticeId", selected_chartId), function (data) {
+                                        alert("Your feeback saved, Thank You!");
+                                    });
+                                }
+                            });
 
+    
 
-        jQuery.fn.extend({
-            listrap: function () {
-                var listrap = this;
-                listrap.getSelection = function () {
-                    var selection = new Array();
-                    listrap.children("li.active").each(function (ix, el) {
-                        selection.push($(el)[0]);
-                    });
-                    return selection;
-                }
-                var toggle = "li .listrap-toggle ";
-                var selectionChanged = function () {
-                    $(this).parent().parent().toggleClass("active");
-                    listrap.trigger("selection-changed", [listrap.getSelection()]);
-                }
-                $(listrap).find(toggle + "img").on("click", selectionChanged);
-                $(listrap).find(toggle + "span").on("click", selectionChanged);
-                return listrap;
-            }
-        });
+function set_feedback(elem){
+$(".listrap-toggle").parent().removeClass();
+                                elem.parentElement.className="active";
+                                selected_chartId = elem.id;
+                             
+
+                            }
+
 
     </script>

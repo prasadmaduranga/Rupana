@@ -179,6 +179,7 @@ namespace FYP_MVC.Controllers
         public ActionResult Recommendations(CSVFile csv)
         {
             CSVFile csv2 = CSVInjector.csv;
+            csv.Data = csv.Data.Where(c => c.Context != null).ToArray();
             for (int i = 0; i < csv.Data.Length; i++)
             {
                 csv2.Data.ToList()[i].Context = csv.Data.ToList()[i].Context;
@@ -267,23 +268,23 @@ namespace FYP_MVC.Controllers
 
         }
 
-        public ActionResult visualizeDataFile(int num)
+        public ActionResult saveFeedback(int num)
         {
-            ChartVisualizationObject chViz = ChartVisualizationObjectInjector.CVObject;
             CSVFile csv = CSVInjector.csv;
-            Convert_CSV_to_Chart converter = new Convert_CSV_to_Chart();
-            chViz.chrtCom = new ChartComponent();
-            chViz.chrtCom.name = chViz.chartTypes[num];
-            chViz.chrtCom = converter.Convert(csv, chViz.chrtCom);
-
-            //saving the feedback
+            ChartVisualizationObject chViz = ChartVisualizationObjectInjector.CVObject;
             feedBack fb = new feedBack();
+            int recCount = chViz.chartTypes.Count();
+            if (recCount > num) { fb.recommendation = chViz.chartTypes[num]; }
+            else { fb.recommendation = chViz.more_chartTypes[num-recCount]; }
             fb.tableID = (int)Session["CurrentTableId"];
             int colCount = csv.Data.Count();
-            fb.dim1_IsContinuous = csv.Data[0].IsContinous?1:0;
+            fb.numOfDim = colCount;
+            fb.intention = csv.Intension;
+            fb.dim1_IsContinuous = csv.Data[0].IsContinous ? 1 : 0;
             fb.dim1_context = csv.Data[0].Context;
             fb.dim1_Cardinality = csv.Data[0].NumDiscreteValues;
-            if (colCount == 7) {
+            if (colCount == 7)
+            {
                 fb.dim7_IsContinuous = csv.Data[6].IsContinous ? 1 : 0;
                 fb.dim7_context = csv.Data[6].Context;
                 fb.dim7_Cardinality = csv.Data[6].NumDiscreteValues;
@@ -320,8 +321,22 @@ namespace FYP_MVC.Controllers
             }
             db.feedBacks.Add(fb);
             db.SaveChanges();
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult visualizeDataFile(int num)
+        {
+            ChartVisualizationObject chViz = ChartVisualizationObjectInjector.CVObject;
+            CSVFile csv = CSVInjector.csv;
+            Convert_CSV_to_Chart converter = new Convert_CSV_to_Chart();
+            chViz.chrtCom = new ChartComponent();
+            chViz.chrtCom.name = chViz.chartTypes[num];
+            chViz.chrtCom = converter.Convert(csv, chViz.chrtCom);
+            string chart = "";
+            int recCount = chViz.chartTypes.Count();
+            if (recCount > num) { chart = chViz.chartTypes[num]; }
+            else { chart = chViz.more_chartTypes[num - recCount]; }
 
-            switch (chViz.chrtCom.name)
+            switch (chart)
             {
                 case ("Area chart"):
                     {
