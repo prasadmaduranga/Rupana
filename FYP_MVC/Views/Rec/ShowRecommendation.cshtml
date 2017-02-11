@@ -6,52 +6,144 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    
 
-<h2>Chart Recommendation</h2>
-
-
-<table class="table">
-    <tr>
-        <th>Chart</th>
-    </tr>
-    @{int count = Model.chartTypes.Length; }
-    @for (int i = 0; i < count; i++)
-    {
-        <tr>
-            <td>
-                <img src="~/Content/img/chartImg/@(Model.chartTypes[i]).png" alt="" style="width:100px; height:auto;">
-                @Html.ActionLink(Model.chartTypes[i], "visualizeDataFile", "Task", new { num = i }, null)
-            </td>
-        </tr>
+<style>
+    .listrap {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        cursor: default;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
-</table>
-<br />
-<a href="#" id="show"class="btn btn-success">Load more ...</a>
-<br />
-<div id="hidden" >
-    <table class="table">
-        <tr>
-            <th>Chart</th>
-        </tr>
-        @for (int i = 0; i < Model.more_chartTypes.Length; i++)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(Model.more_chartTypes[i], "visualizeDataFile", "Task", new { num = i+ count }, null)
-                </td>
-            </tr>
+        .listrap li {
+            margin: 0;
+            padding: 10px;
         }
 
-    </table>
-</div>
+            .listrap li.active, .listrap li:hover {
+                background-color: #d9edf7;
+            }
 
-<script>
-    $(document).ready(function () {
-        $("#hidden").hide();
-    });
-    $("#show").click(function () {
-        $("#hidden").show(2000);
-    });
-</script>
+        .listrap strong {
+            margin-left: 10px;
+        }
+
+        .listrap .listrap-toggle {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+        }
+
+            .listrap .listrap-toggle span {
+                background-color: #428bca;
+                opacity: 0.8;
+                z-index: 100;
+                width: 60px;
+                height: 60px;
+                display: none;
+                position: absolute;
+                border-radius: 50%;
+                text-align: center;
+                line-height: 60px;
+                vertical-align: middle;
+                color: #ffffff;
+            }
+
+                .listrap .listrap-toggle span:before {
+                    font-family: 'Glyphicons Halflings';
+                    content: "\e013";
+                }
+
+        .listrap li.active .listrap-toggle span {
+            display: block;
+        }
+</style>
+
+
+<h2>Chart Recommendation</h2>
+<div class="row">
+    <div class="col-lg-4">
+        <ul class="listrap">
+
+
+            @{int count = Model.chartTypes.Length;}
+            @for (int i = 0; i < count; i++)
+            {
+                <li>
+                    <div class="listrap-toggle"  id="@i" onclick="set_feedback(this)">
+                        <span></span>
+                        <img src="~/Content/img/chartImg/@(Model.chartTypes[i]).png" height="60px" width="60px" class="img-circle" /> 
+                    </div>
+                    <strong>@Html.ActionLink(Model.chartTypes[i], "visualizeDataFile", "Task", new { num = i }, null)</strong>
+                </li>
+            }
+        </ul>
+    </div>
+    </div>
+
+
+<br />
+<a href="#" id="show" class="btn btn-success">Load more ...</a>
+<br />
+    <div id="hidden">
+        <div class="row">
+            <div class="col-lg-4">
+                <ul class="listrap">
+
+                    @{int count2 = Model.more_chartTypes.Length;
+                        if (count2 > 0) {
+                    for (int i = count; i < count + count2; i++)
+                    {
+                        <li>
+                            <div class="listrap-toggle" id="@i" onclick="set_feedback(this)">
+                                <span></span>
+                                <img src="~/Content/img/chartImg/@(Model.more_chartTypes[i-count]).png" height="60px" width="60px" class="img-circle" /> 
+                            </div>
+                            <strong>@Html.ActionLink(Model.more_chartTypes[i - count], "visualizeDataFile", "Task", new { num = i }, null)</strong>
+                        </li>
+                    }} }
+                </ul>
+            </div>
+        </div>
+    </div>
+<a href="#" id="feedback" class="btn btn-warning">Save Feedback</a>
+    <script>
+        var selected_chartId = -1;
+
+        $(document).ready(function () {
+            $("#hidden").hide();
+            $(".listrap").listrap().on("selection-changed", function (event, selection) {
+                                    console.log(selection);
+                                });
+
+                            });
+        $("#show").click(function () {
+            $("#hidden").show(2000);
+                            });
+
+        $("#feedback").click(function () {
+                                if (selected_chartId == -1) { alert("Please select a chart type before saving feedback"); }
+                                else {
+                $.getJSON("@Url.Action("saveFeedback", "Task", new { num = "_noticeId"})".replace("_noticeId", selected_chartId), function (data) {
+                                        alert("Your feeback saved, Thank You!");
+                                    });
+                                }
+                            });
+
+    
+
+function set_feedback(elem){
+$(".listrap-toggle").parent().removeClass();
+                                elem.parentElement.className="active";
+                                selected_chartId = elem.id;
+                             
+
+                            }
+
+
+    </script>

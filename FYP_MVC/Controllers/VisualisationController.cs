@@ -30,6 +30,7 @@ namespace FYP_MVC.Controllers
 
         public ActionResult BarChart()
         {
+
             ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
             ChartComponentViewModel modelObj = new ChartComponentViewModel();
             modelObj.chartComponent = chviz.chrtCom;
@@ -58,6 +59,7 @@ namespace FYP_MVC.Controllers
 
         public ActionResult GeoMarker()
         {
+
             ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
             ChartComponentViewModel modelObj = new ChartComponentViewModel();
             modelObj.chartComponent = chviz.chrtCom;
@@ -69,6 +71,7 @@ namespace FYP_MVC.Controllers
         public ActionResult GeoRegion()
         {
             ChartVisualizationObject chviz = (ChartVisualizationObject)TempData["myObject"];
+
             ChartComponentViewModel modelObj = new ChartComponentViewModel();
             modelObj.chartComponent = chviz.chrtCom;
             modelObj.mapping = (int[])TempData["mapping"];

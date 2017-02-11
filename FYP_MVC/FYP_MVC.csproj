@@ -222,6 +222,9 @@
     <Compile Include="Models\DAO\column.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAO\countryData.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DAO\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -307,7 +310,6 @@
     <Content Include="Content\img\4.png" />
     <Content Include="Content\img\barchart.png" />
     <Content Include="Content\img\blog\1.jpg" />
-    <Content Include="Content\img\chartImg\4.png" />
     <Content Include="Content\img\chartImg\Area chart.png" />
     <Content Include="Content\img\chartImg\Bar chart.png" />
     <Content Include="Content\img\chartImg\bivariate.png" />
@@ -321,6 +323,7 @@
     <Content Include="Content\img\chartImg\Histrogram.png" />
     <Content Include="Content\img\chartImg\Line chart.png" />
     <Content Include="Content\img\chartImg\Mark Area  map.png" />
+    <Content Include="Content\img\chartImg\Muiltiple Bar chart.png" />
     <Content Include="Content\img\chartImg\Nomalized stacked bar chart.png" />
     <Content Include="Content\img\chartImg\Normalized stacked area chart.png" />
     <Content Include="Content\img\chartImg\Parallel cordinates.png" />
@@ -412,6 +415,8 @@
     <Content Include="Content\DataFiles\area.csv" />
     <Content Include="Content\DataFiles\calenderChart.csv" />
     <Content Include="Content\DataFiles\pie.csv" />
+    <Content Include="Content\papers\context_aware_recommendation_for_data_visualization.pdf" />
+    <None Include="Properties\PublishProfiles\testhosting.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

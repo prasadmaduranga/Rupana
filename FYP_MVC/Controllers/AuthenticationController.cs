@@ -142,8 +142,8 @@ namespace FYP_MVC.Controllers
                     db.SaveChanges();
                     Session["isFBAuthenticated"] = true;
                     Session["user"] = user;
-                    return RedirectToAction("Home", "Task");
-                    //return Json(new { result = "Redirect", url = Url.Action("Home", "Task") });
+                    //return RedirectToAction("Home", "Task");
+                   return Json(new { result = "Redirect", url = Url.Action("Home", "Task") });
 
                 }
                 catch (Exception e)
