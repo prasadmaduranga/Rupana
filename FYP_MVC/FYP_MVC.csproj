@@ -350,6 +350,9 @@
     <Content Include="Content\img\logo1.png" />
     <Content Include="Content\img\name.png" />
     <Content Include="Content\img\welcome.PNG" />
+    <Content Include="Content\img\welcome1.png" />
+    <Content Include="Content\img\welcome2.png" />
+    <Content Include="Content\img\welcome3.png" />
     <Content Include="Content\js\blog.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\bootstrap-dropdown.js" />
