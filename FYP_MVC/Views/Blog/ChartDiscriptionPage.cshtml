@@ -1,0 +1,175 @@
+﻿
+@{
+    ViewBag.Title = "ChartDiscriptionPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .new-deal{width:100%;float:left;padding:15px 0;}
+.new-deal .item-slide{position: relative;overflow: hidden;transition:all .5s ease;-moz-transition:all .5s ease;-webkit-transition:all .5s ease;margin:15px 0;}
+.new-deal .slide-hover{ position: absolute;height: 100%;width: 100%;left: -100%; background:rgba(0,0,0,.5);top: 0;transition:all .5s ease;-moz-transition:all .5s ease;-webkit-transition:all .5s ease;-moz-border-radius: 5px; border-radius: 5px;-webkit-border-radius: 5px;  }
+.new-deal .item-slide:hover .slide-hover{left:0px;}
+.new-deal img{width:348px;height:250px;}
+.text-wrap {position: absolute;bottom: 0;left: 0;width: 100%;color: #fff;background: rgba(0, 0, 0, .5);z-index:999;transition:all .5s ease;-moz-transition:all .5s ease;-webkit-transition:all .5s ease;}
+.text-wrap h3{padding:0 5px; color:white}
+.box-img{width: 100%;   float: left;    -moz-border-radius: 5px; border-radius: 5px;-webkit-border-radius: 5px;    overflow: hidden;    border: 1px solid #ccc;}
+.text-wrap .desc{width:50%;float:left;padding:0 5px;}
+.text-wrap p{padding: 15px;font-size: 15px;text-align: center;font-weight: normal;text-shadow: 2px 2px 3px #000;color:white}
+.text-wrap .desc h4{margin:0px;font: 400 17px/21px "Roboto";}
+.text-wrap .desc h3{margin:0px;font: 400 32px/36px "Roboto";}
+.new-deal .item-slide:hover .text-wrap{background:none}
+.book-now-c {float:right;padding:10px;}
+.book-now-c a {background: #029a8b;color: #fff;padding: 5px;border-radius: 5px;margin-top:0px;float: left;min-width: 101px;text-align: center;font-size: 16px;}
+.new-deal .item-slide:hover .box-img .text-wrap{bottom:-100%;}
+</style>
+
+<h2>Know your charts</h2>
+
+
+<section class="new-deal">
+    <div class="container">
+        
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 deal">
+            <div class="item-slide">
+                <div class="box-img">
+                    <img src="~/Content/img/Pie.png" />
+                    <div class="text-wrap">
+                        <h3>Pie Chart</h3>
+                        <div class="desc">
+                            <span>Used mostly to express composition information</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-hover">
+                    <div class="text-wrap">
+                        <p>Pie chart is another stupid chart which u can used to plot your stupid data inside a stupid 360 circle</p>
+                        <h3>Pie Chart </h3>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 deal">
+            <div class="item-slide">
+                <div class="box-img">
+                    <img src="~/Content/img/barchart.png" />
+                    <div class="text-wrap">
+                        <h4>Paris europe  <span class="deal-data"><span class="glyphicon glyphicon-calendar"></span> Sun, Jan 29 - Tue, Jan 31</span></h4>
+                        <div class="desc">
+                            <span>Starting from</span>
+                            <h3>$1000</h3>
+                        </div>
+                        <div class="book-now-c">
+                            <a href="#">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-hover">
+                    <div class="text-wrap">
+                        <p>MyFlightSearch gets you flight tickets at the best price. MyFlightSearch gets you flight tickets at the best price.</p>
+                        <h4>Paris europe  <span class="deal-data"><span class="glyphicon glyphicon-calendar"></span> Sun, Jan 29 - Tue, Jan 31</span></h4>
+                        <div class="desc">
+                            <span>Starting from</span>
+                            <h3>$1000</h3>
+                        </div>
+                        <div class="book-now-c">
+                            <a href="#">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 deal">
+            <div class="item-slide">
+                <div class="box-img">
+                    <img src="http://orig11.deviantart.net/6356/f/2010/156/e/f/swallowed_by_nature_by_danutza88.jpg" alt="dasdas" />
+                    <div class="text-wrap">
+                        <h4>Paris europe  <span class="deal-data"><span class="glyphicon glyphicon-calendar"></span> Sun, Jan 29 - Tue, Jan 31</span></h4>
+                        <div class="desc">
+                            <span>Starting from</span>
+                            <h3>$1000</h3>
+                        </div>
+                        <div class="book-now-c">
+                            <a href="#">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-hover">
+                    <div class="text-wrap">
+                        <p>MyFlightSearch gets you flight tickets at the best price. MyFlightSearch gets you flight tickets at the best price.</p>
+                        <h4>Paris europe  <span class="deal-data"><span class="glyphicon glyphicon-calendar"></span> Sun, Jan 29 - Tue, Jan 31</span></h4>
+                        <div class="desc">
+                            <span>Starting from</span>
+                            <h3>$1000</h3>
+                        </div>
+                        <div class="book-now-c">
+                            <a href="#">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 deal">
+            <div class="item-slide">
+                <div class="box-img">
+                    <img src="http://orig11.deviantart.net/6356/f/2010/156/e/f/swallowed_by_nature_by_danutza88.jpg" alt="dasdas" />
+                    <div class="text-wrap">
+                        <h4>Paris europe  <span class="deal-data"><span class="glyphicon glyphicon-calendar"></span> Sun, Jan 29 - Tue, Jan 31</span></h4>
+                        <div class="desc">
+                            <span>Starting from</span>
+                            <h3>$1000</h3>
+                        </div>
+                        <div class="book-now-c">
+                            <a href="#">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-hover">
+                    <div class="text-wrap">
+                        <p>MyFlightSearch gets you flight tickets at the best price. MyFlightSearch gets you flight tickets at the best price.</p>
+                        <h4>Paris europe  <span class="deal-data"><span class="glyphicon glyphicon-calendar"></span> Sun, Jan 29 - Tue, Jan 31</span></h4>
+                        <div class="desc">
+                            <span>Starting from</span>
+                            <h3>$1000</h3>
+                        </div>
+                        <div class="book-now-c">
+                            <a href="#">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 deal">
+            <div class="item-slide">
+                <div class="box-img">
+                    <img src="http://orig11.deviantart.net/6356/f/2010/156/e/f/swallowed_by_nature_by_danutza88.jpg" alt="dasdas" />
+                    <div class="text-wrap">
+                        <h4>Paris europe  <span class="deal-data"><span class="glyphicon glyphicon-calendar"></span> Sun, Jan 29 - Tue, Jan 31</span></h4>
+                        <div class="desc">
+                            <span>Starting from</span>
+                            <h3>$1000</h3>
+                        </div>
+                        <div class="book-now-c">
+                            <a href="#">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-hover">
+                    <div class="text-wrap">
+                        <p>MyFlightSearch gets you flight tickets at the best price. MyFlightSearch gets you flight tickets at the best price.</p>
+                        <h4>Paris europe  <span class="deal-data"><span class="glyphicon glyphicon-calendar"></span> Sun, Jan 29 - Tue, Jan 31</span></h4>
+                        <div class="desc">
+                            <span>Starting from</span>
+                            <h3>$1000</h3>
+                        </div>
+                        <div class="book-now-c">
+                            <a href="#">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</section>

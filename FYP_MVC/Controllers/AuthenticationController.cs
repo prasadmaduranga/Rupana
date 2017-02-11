@@ -28,6 +28,7 @@ namespace FYP_MVC.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult Login(string returnUrl)
         {
 
@@ -59,8 +60,6 @@ namespace FYP_MVC.Controllers
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
 
-            
-            
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -143,8 +142,8 @@ namespace FYP_MVC.Controllers
                     db.SaveChanges();
                     Session["isFBAuthenticated"] = true;
                     Session["user"] = user;
-                    return RedirectToAction("Home", "Task");
-                    //return Json(new { result = "Redirect", url = Url.Action("Home", "Task") });
+                    //return RedirectToAction("Home", "Task");
+                   return Json(new { result = "Redirect", url = Url.Action("Home", "Task") });
 
                 }
                 catch (Exception e)
