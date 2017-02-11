@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AreaChart</h2>
+<h2>BoxPlot</h2>
 
 <script>
 
@@ -13,7 +13,6 @@
     google.charts.setOnLoadCallback(drawVisualization);
 
     function drawVisualization() {
-
         var arr = [];
         var viewModel = @Html.Raw(Json.Encode(Model));
         var model=viewModel.chartComponent;
@@ -38,19 +37,29 @@
         }
 
         //mapping
+        
         var finalArray = [];
-        //alert(arr.length);
 
         for(var x=0;x<arr.length;x++){
             finalArray[x] = [];
             for(var y=0;y < mapping.length; y++){
-                finalArray[x][y] = arr[x][mapping[y]-1];
+                finalArray[x][mapping[y]-1]=arr[x][y];
+            }
+        }
+        alert(finalArray);
+
+        var candleStick = [];
+
+        for (var i = 0; i < numOfColumns; i++) {   
+            candleStick[i] = [];
+            for (var j = 0; j <= numOfRows; j++) {
+                candleStick[i][j] = finalArray[j][i];
             }
         }
 
-        alert(finalArray);
+        alert(candleStick);
 
-        var data = new google.visualization.arrayToDataTable(finalArray);
+        var data = new google.visualization.arrayToDataTable(candleStick,true);
 
         var wrapper = new google.visualization.ChartWrapper({
             chartType: 'CandlestickChart',

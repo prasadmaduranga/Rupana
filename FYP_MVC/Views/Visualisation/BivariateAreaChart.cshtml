@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>BivariateAreaChart</h2>
+<h2>Bivariate Area Chart</h2>
 <script>http://d3js.org/d3.v3.min.js</script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
@@ -18,7 +18,7 @@
 
     for(var i=0; i < mapping.length; i++){
         headers[i] = model.columnList[mapping[i]-1].columnHeader;
-        alert[headers[i]];
+  
     }
 
 
@@ -59,12 +59,10 @@
     function drawVisualization() {
 
         var arr = [];
-        
-        console.log(model);
-        console.log(mapping);
+     
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
-        console.log(model);
+
 
         arr[0] = [];
         var headers = [];
@@ -92,7 +90,7 @@
             }
         }
 
-        alert(finalArray);
+     
 
         //dataset for parallel cordinates
         
