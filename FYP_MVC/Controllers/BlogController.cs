@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,5 +31,28 @@ namespace FYP_MVC.Controllers
         {
             return View();
         }
+        public ActionResult publications()
+        {
+            return View();
+        }
+        public FileStreamResult getPublication1()
+        {
+            var pathToTheFile = Server.MapPath("~/Content/papers/context_aware_recommendation_for_data_visualization.pdf");
+            var fileStream = new FileStream(pathToTheFile,
+                                                FileMode.Open,
+                                                FileAccess.Read
+                                            );
+            return File(fileStream, "application/pdf");
+        }
+
+        public ActionResult Guide()
+        {
+            return View();
+        }
+        public ActionResult DevTeam()
+        {
+            return View();
+        }
+
     }
 }

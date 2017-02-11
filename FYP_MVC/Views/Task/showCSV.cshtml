@@ -44,8 +44,8 @@
    <br />
     <div class="row">
        
-        <div class="col-lg-2">
-            <label>Intension :</label>
+        <div class="col-lg-3">
+            <label>Intension :</label><a href="@Url.Action("Guide", "Blog")" target="_blank">Guide to choose</a>
             @{
                 List<SelectListItem> lis = new List<SelectListItem>();
                 SelectListItem item_Distribution = new SelectListItem();
@@ -77,6 +77,7 @@
 
 
                 @Html.DropDownListFor(c => c.Intension, lis, Model.Intension, new { @class = "form-control" });
+                
             }
         </div>
     </div>
