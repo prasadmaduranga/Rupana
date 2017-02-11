@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ParallelCordinates</h2>
+<h2>Parallel Cordinates</h2>
 <script>
 
     var margin = {top: 30, right: 10, bottom: 10, left: 10},
@@ -35,12 +35,10 @@
         var viewModel = @Html.Raw(Json.Encode(Model));
         var model=viewModel.chartComponent;
         var mapping=viewModel.mapping;
-       // console.log(model);
-        //console.log(mapping);
+     
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
-        console.log('num of rows : '+numOfRows);
-        console.log('num of cols : '+numOfColumns);
+     
         arr[0] = [];
 
         var headers = [];
@@ -55,7 +53,7 @@
                 arr[x][y] =model.columnList[y].data[x-1].value ;
             }
         }
-        console.log('arr : '+arr);
+  
         //dataset for parallel cordinates
         
         
@@ -148,7 +146,7 @@
         //obj[headers[5]] = weight[5];      
         //cars.push(obj);
 
-        console.log(cars);
+       
         ///////////////////// ////////////////////////
         x.domain(dimensions = d3.keys(cars[0]).filter(function(d) {
             return d != headers[0] && (y[d] = d3.scale.linear()

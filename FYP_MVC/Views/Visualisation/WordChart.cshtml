@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>WordChart</h2>
+<h2>Clusture Dendogram</h2>
 
 <script>
  // wait till the DOM is loaded
@@ -19,11 +19,10 @@
         var viewModel = @Html.Raw(Json.Encode(Model));
         var model=viewModel.chartComponent;
         var mapping=viewModel.mapping;
-        console.log(model);
-        console.log(mapping);
+    
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
-        console.log(model);
+     
 
         arr[0] = [];
 
@@ -40,7 +39,7 @@
 
         //mapping
         var finalArray = [];
-        //alert(arr.length);
+    
 
         for(var x=0;x<arr.length;x++){
             finalArray[x] = [];
@@ -49,7 +48,7 @@
             }
         }
 
-        alert(finalArray);
+    
 
         var data = new google.visualization.arrayToDataTable(finalArray);
 

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GeoMarker @Model.name</h2>
+<h2>Geo Marker Map</h2>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCa2l_21P4jy0SvWgS_xTuWXa33WpliZSQ&callback=initMap"
         type="text/javascript"></script>
@@ -37,7 +37,6 @@
         var resoulution;
         var region;
 
-        console.log(model);
 
 
         for (var y = 0; y < numOfColumns; y++) {

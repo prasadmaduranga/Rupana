@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GeoMarker</h2>
+<h2>Geo Region Marker</h2>
 
 <script>
  // wait till the DOM is loaded
@@ -30,7 +30,7 @@
 
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
-        console.log(model);
+
 
         //for(var x = 0; x < numOfColumns; x++){
         //        arr[x] = [];
@@ -51,7 +51,6 @@
             }
         }
 
-        alert(arr);
 
         var data = new google.visualization.arrayToDataTable(arr);
 
