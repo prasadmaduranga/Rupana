@@ -216,8 +216,10 @@ namespace FYP_MVC.Core.ContextRecognizer
             DateCount = 0;
             ProcessStartInfo pythonInfo = new ProcessStartInfo();
             //pythonInfo.FileName = @"C:\Python27\python.exe";
+
      
             pythonInfo.FileName = @"C:\Python27\python.exe";
+
             //pythonInfo.FileName = @"/usr/bin/python";
             int temp = col.Data.Count;
             col.DateValues = new DateTime[temp];
