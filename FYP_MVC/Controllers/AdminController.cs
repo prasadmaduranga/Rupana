@@ -385,8 +385,131 @@ namespace FYP_MVC.Controllers
             return View(chartTemplate);
         }
 
-        public ActionResult EditChartVal(List<DimensionTemplate> dimList)
+        public ActionResult EditChartVal(ChartTemplate chartTemplate)
         {
+            chart resultChart = db.charts.Where(s => s.ID == chartTemplate.id).FirstOrDefault<chart>();
+            resultChart.name = chartTemplate.name;
+            db.Entry(resultChart).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            var intentionVal = db.intentions.Where(p => p.chartID == chartTemplate.id);
+
+            foreach (var intenDim in intentionVal)                          // update intention table
+            {
+                db.intentions.Remove(intenDim);
+
+            }
+            db.Entry(resultChart).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            if (chartTemplate.comparison)
+            {
+                intention tableIntention = new intention();
+                tableIntention.chartID = chartTemplate.id;
+                tableIntention.intention1 = "Comparison";
+                db.intentions.Add(tableIntention);
+                db.SaveChanges();
+            }
+            if (chartTemplate.composition)
+            {
+                intention tableIntention = new intention();
+                tableIntention.chartID = chartTemplate.id;
+                tableIntention.intention1 = "Composition";
+                db.intentions.Add(tableIntention);
+                db.SaveChanges();
+            }
+            if (chartTemplate.distribution)
+            {
+                intention tableIntention = new intention();
+                tableIntention.chartID = chartTemplate.id;
+                tableIntention.intention1 = "Distribution";
+                db.intentions.Add(tableIntention);
+                db.SaveChanges();
+            }
+            if (chartTemplate.relationship)
+            {
+                intention tableIntention = new intention();
+                tableIntention.chartID = chartTemplate.id;
+                tableIntention.intention1 = "Relationship";
+                db.intentions.Add(tableIntention);
+                db.SaveChanges();
+            }
+
+            foreach(var dimList in chartTemplate.dimentionList)
+            {
+                chartDimension chartDim = db.chartDimensions.Where(s => s.chartID == chartTemplate.id).Where(p=>p.dimensionIndex==dimList.dimensionIndex).FirstOrDefault<chartDimension>();
+                chartDim.isContinuous = Convert.ToInt32(dimList.dimensionIndex);
+                db.Entry(chartDim).State = System.Data.Entity.EntityState.Modified;
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+
+                }
+                
+
+
+                var dimContext = db.dimensionContexts.Where(s => s.dimensionID == dimList.dimensionIndex);
+                foreach(var listDimContext in dimContext)
+                {
+                    db.dimensionContexts.Remove(listDimContext);
+                }
+                try
+                {
+                    db.SaveChanges();
+                }catch(Exception e)
+                {
+
+                }
+                
+                if (dimList.cardinalityAny)
+                {
+                    dimensionContext dimCon = new dimensionContext();
+                    dimCon.dimensionID = dimList.dimensionIndex;
+                    dimCon.context = "Any";
+                    db.dimensionContexts.Add(dimCon);
+                }
+                if (dimList.contextTimeseries)
+                {
+                    dimensionContext dimCon = new dimensionContext();
+                    dimCon.dimensionID = dimList.dimensionIndex;
+                    dimCon.context = "Time series";
+                    db.dimensionContexts.Add(dimCon);
+                }
+                if (dimList.contextNumeric)
+                {
+                    dimensionContext dimCon = new dimensionContext();
+                    dimCon.dimensionID = dimList.dimensionIndex;
+                    dimCon.context = "Numeric";
+                    db.dimensionContexts.Add(dimCon);
+                }
+                if (dimList.contextNominal)
+                {
+                    dimensionContext dimCon = new dimensionContext();
+                    dimCon.dimensionID = dimList.dimensionIndex;
+                    dimCon.context = "Nominal";
+                    db.dimensionContexts.Add(dimCon);
+                }
+                if (dimList.contextLocation)
+                {
+                    dimensionContext dimCon = new dimensionContext();
+                    dimCon.dimensionID = dimList.dimensionIndex;
+                    dimCon.context = "Location";
+                    db.dimensionContexts.Add(dimCon);
+                }
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+            }
+            
+
             return RedirectToAction("ChartList", "Admin");
         }
 
@@ -492,7 +615,9 @@ namespace FYP_MVC.Controllers
 
         public ActionResult EditUser(int id)
         {
-            return View(db.users.Find(id));
+            user tempUser = db.users.Find(id);
+            tempUser.passwword = "";
+            return View(tempUser);
         }
         public ActionResult EditUserVal(user model)
         {
@@ -535,7 +660,12 @@ namespace FYP_MVC.Controllers
         public ActionResult MyProfile()
         {
             ViewData["activeMenu"] = "MyProfile";
-            return View();
+           if(((user)Session["user"]) != null){
+            int userId=  ((user)Session["user"]).ID;
+
+            return View(db.users.Find(userId));
+            }
+            return RedirectToAction("Home", "Admin");
         }
 
         public String CheckCountry()
