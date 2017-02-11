@@ -50,6 +50,8 @@
         })(window, document, '//static.hotjar.com/c/hotjar-', '.js?sv=');
     </script>
 
+
+    
 </head>
 
 
@@ -156,6 +158,12 @@
             setTimeout(function () {
                 $(".se-pre-con").fadeOut("slow");
             });
+            var isFBAuthenticated = '@Session["isFBAuthenticated"]';
+            
+            if (isFBAuthenticated === "True") {
+                $("#btnLogout").css("visibility", "hidden")
+            }
+           
         });
 
         function statusChangeCallback(response) {
@@ -300,7 +308,7 @@
                 if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
             })
 
-    
+
 
     </script>
 </body>

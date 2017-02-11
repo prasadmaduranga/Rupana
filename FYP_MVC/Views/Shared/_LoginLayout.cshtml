@@ -18,13 +18,14 @@
 
     </script>
     @*<script src="~/Content/js/facebook.js"></script>*@
-    
+
     <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/custom.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/LoginLayoutCustomStyles.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/loader.css")" rel="stylesheet" type="text/css" />
     @RenderSection("Styles", false)
+
 
     <script>
         (function (h, o, t, j, a, r) {
@@ -38,78 +39,72 @@
     </script>
 
     <style>
-        .account-box
-{
-    border: 2px solid rgba(153, 153, 153, 0.75);
-    border-radius: 2px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    -khtml-border-radius: 2px;
-    -o-border-radius: 2px;
-    z-index: 3;
-    font-size: 13px !important;
-    font-family: "Helvetica Neue" ,Helvetica,Arial,sans-serif;
-    background-color: #ffffff;
-    padding: 20px;
-}
+        .account-box {
+            border: 2px solid rgba(153, 153, 153, 0.75);
+            border-radius: 2px;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            -khtml-border-radius: 2px;
+            -o-border-radius: 2px;
+            z-index: 3;
+            font-size: 13px !important;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            background-color: #ffffff;
+            padding: 20px;
+        }
 
-.logo
-{
-    width: 150px;
-    height: 150px;
-    text-align: center;
-    margin: 10px 0px 10px 35px;
-    background-position: 0px -4px;
-    position: relative;
-}
+        .logo {
+            width: 150px;
+            height: 150px;
+            text-align: center;
+            margin: 10px 0px 10px 35px;
+            background-position: 0px -4px;
+            position: relative;
+        }
 
-.forgotLnk
-{
-    margin-top: 10px;
-    display: block;
-}
+        .forgotLnk {
+            margin-top: 10px;
+            display: block;
+        }
 
-.purple-bg
-{
-    background-color: #6E329D;
-    color: #fff;
-}
-.or-box
-{
-    position: relative;
-    border-top: 1px solid #dfdfdf;
-    padding-top: 20px;
-    margin-top:20px;
-}
-.or
-{
-    color: #666666;
-    background-color: #ffffff;
-    position: absolute;
-    text-align: center;
-    top: -8px;
-    width: 40px;
-    left: 90px;
-}
-.account-box .btn:hover
-{
-    color: #fff;
-}
-.btn-facebook
-{
-    background-color: #3F639E;
-    color: #fff;
-    font-weight:bold;
-}
-.btn-google
-{
-    background-color: #454545;
-    color: #fff;
-    font-weight:bold;
-}
+        .purple-bg {
+            background-color: #6E329D;
+            color: #fff;
+        }
 
+        .or-box {
+            position: relative;
+            border-top: 1px solid #dfdfdf;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .or {
+            color: #666666;
+            background-color: #ffffff;
+            position: absolute;
+            text-align: center;
+            top: -8px;
+            width: 40px;
+            left: 90px;
+        }
+
+        .account-box .btn:hover {
+            color: #fff;
+        }
+
+        .btn-facebook {
+            background-color: #3F639E;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .btn-google {
+            background-color: #454545;
+            color: #fff;
+            font-weight: bold;
+        }
     </style>
-
 
 
 </head>
@@ -127,9 +122,9 @@
 
                 }
                 else {*@
-                    testAPI();
+                testAPI();
                 //}
-                
+
             } else if (response.status === 'not_authorized') {
                 // The person is logged into Facebook, but not your app.
                 document.getElementById('status').innerHTML = 'Please log ' +
@@ -174,7 +169,7 @@
 
                 document.getElementById('status').innerHTML =
                   'Thanks for logging in, ' + response.name + response.email + '!';
-
+               
                 $.ajax({
                     url: '@Url.Action("LoginWithFB", "Authentication")',
                     type: 'POST',
@@ -189,7 +184,7 @@
 
                     },
                     error: function () {
-                        alert('Error occured');
+                    
                     }
                 });
 
@@ -212,7 +207,7 @@
 
         function logout() {
             var isFBAuthenticated = '@Session["isFBAuthenticated"]';
-            
+
             if (isFBAuthenticated === "True") {
                 $.ajax({
                     type: "POST",
@@ -245,7 +240,7 @@
                     error: function () {
 
                         alert("Error in logging out");
-
+         
                     }
                 });
             }
@@ -267,8 +262,7 @@
     <script src="~/Content/js/jquery.metisMenu.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="~/Content/js/custom.js"></script>
-   
+
 
 </body>
 </html>
-

@@ -480,7 +480,6 @@ namespace FYP_MVC.Controllers
                         return RedirectToAction("BivariateAreaChart", "Visualisation");
                     }
 
-
                 default:
                     {
                         TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
