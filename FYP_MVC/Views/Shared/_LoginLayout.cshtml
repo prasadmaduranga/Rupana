@@ -215,7 +215,7 @@
                     success: function (data) {
                         if (data.result === 'Redirect') {
                             FB.Logout(function (response) {
-                                alert('fb logout');
+                              
                                 window.location = data.url;
                             });
                             //FB.logout();
@@ -224,7 +224,7 @@
                         }
                     },
                     error: function () {
-                        alert("Error in logging out with FB");
+                 
                     }
                 });
 

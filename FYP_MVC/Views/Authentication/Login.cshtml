@@ -9,7 +9,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3 col-md-offset-4">
+        <div class="col-md-4 col-md-offset-4">
             <div class="account-box">
    
                 <div class="logo ">
@@ -40,8 +40,12 @@
                         <div class="or-box">
 
                             <div class="row">
-                                <div class="col-md-6 row-block">
-                                    <a href="http://www.jquery2dotnet.com" class="btn btn-facebook btn-block">Facebook</a>
+                                <div class="col-md-12  row-block">
+                                    <section id="socialLoginForm">
+                                        <div class="fb-login-button " scope="public_profile,email" onlogin="checkLoginState();" data-max-rows="2" data-size="large" data-show-faces="true" style="width:90%"></div>
+                                        <div id="status" style="width:100%">
+                                        </div>
+                                    </section>
                                 </div>
                             </div>
                         </div>
@@ -65,11 +69,11 @@
 
 
 
-    <div class="col-md-4">
+    @*<div class="col-md-4">
             <section id="socialLoginForm">
                 <div class="fb-login-button" scope="public_profile,email" onlogin="checkLoginState();" data-max-rows="2" data-size="large" data-show-faces="true" ></div>
 
                 <div id="status">
                 </div>
             </section>
-        </div>
+        </div>*@
