@@ -39,7 +39,8 @@
         //console.log(mapping);
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
-
+        console.log('num of rows : '+numOfRows);
+        console.log('num of cols : '+numOfColumns);
         arr[0] = [];
 
         var headers = [];
@@ -54,17 +55,19 @@
                 arr[x][y] =model.columnList[y].data[x-1].value ;
             }
         }
+        console.log('arr : '+arr);
         //dataset for parallel cordinates
         
         
         var cars = [];
 
         for(var x = 1; x <= numOfRows; x++){
-            var obj = {};
+            var obj = {headers:[]};
+            var headers=[];
             for (var y = 0; y < mapping.length; y++) {
-                
-                obj[headers[y]] = arr[x][mapping[y]-1];     
+                headers[y] = arr[x][mapping[y]-1];     
             }
+            obj.headers = headers;
             cars.push(obj);
         }
       
