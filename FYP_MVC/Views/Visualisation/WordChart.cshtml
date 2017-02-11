@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Clusture Dendogram</h2>
+<h2>WordChart</h2>
 
 <script>
  // wait till the DOM is loaded
@@ -19,38 +19,36 @@
         var viewModel = @Html.Raw(Json.Encode(Model));
         var model=viewModel.chartComponent;
         var mapping=viewModel.mapping;
-    
+        console.log(model);
+        console.log(mapping);
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
-     
+        console.log(model);
 
-        arr[0] = [];
-
-        for (var y = 0; y < numOfColumns; y++) {
-            arr[0][y] =model.columnList[y].columnHeader;
-        }
+        arr[0] = model.columnList[0].columnHeader;
 
         for(var x = 1; x <=numOfRows ; x++){
-            arr[x] = [];
+            var phrase = "";
             for (var y = 0; y < numOfColumns; y++) {
-                arr[x][y] =model.columnList[y].data[x-1].value ;
+                phrase +=  model.columnList[y].data[x-1].value+ " ";
             }
+            arr[x] = phrase;
         }
+        console.log(arr)
 
         //mapping
-        var finalArray = [];
-    
+        //var finalArray = [];
 
-        for(var x=0;x<arr.length;x++){
-            finalArray[x] = [];
-            for(var y=0;y < mapping.length; y++){
-                finalArray[x][y] = arr[x][mapping[y]-1];
-            }
-        }
+        //for(var x=0;x<arr.length;x++){
+        //    finalArray[x] = [];
+        //    for(var y=0;y < mapping.length; y++){
+        //        finalArray[x][mapping[y]-1]=arr[x][y];
+        //    }
+        //}
 
-    
+        //alert(finalArray);
 
-        var data = new google.visualization.arrayToDataTable(finalArray);
+        var data = new google.visualization.arrayToDataTable(arr);
 
         var wrapper = new google.visualization.ChartWrapper({
             chartType: 'WordTree',

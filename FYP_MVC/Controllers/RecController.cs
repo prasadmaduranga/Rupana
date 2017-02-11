@@ -43,8 +43,25 @@ namespace FYP_MVC.Controllers
                 more_arr.Add(item.chartName);
             }
             more_arr = more_arr.Distinct().ToList();
-            int ColCount = recommendations.Count / arr.Count;
-            int ColCountMore = more_Recommendations.Count / more_arr.Count;
+            int ColCount;
+            int ColCountMore;
+            if (arr.Count != 0) { 
+             ColCount = recommendations.Count / arr.Count;
+            }
+            else
+            {
+                ColCount = 0;
+            }
+
+            if (more_arr.Count != 0)
+            {
+                ColCountMore = more_Recommendations.Count / more_arr.Count;
+            }
+            else
+            {
+                ColCountMore = 0;
+
+            }
 
             ChartVisualizationObject mainObj = new ChartVisualizationObject();
             mainObj.chartTypes = new string[arr.Count];

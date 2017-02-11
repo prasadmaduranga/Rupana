@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Bar Chart</h2>
+<h2>Bar Chart testing</h2>
 
 <script>
 
@@ -13,14 +13,15 @@
     google.charts.setOnLoadCallback(drawVisualization);
 
     function drawVisualization() { // grab the CSV
-
-        var arr = [];
+var arr = [];
         var viewModel = @Html.Raw(Json.Encode(Model));
         var model=viewModel.chartComponent;
         var mapping=viewModel.mapping;
-
+        console.log(model);
+        console.log(mapping);
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
+        console.log(model);
 
         arr[0] = [];
 
@@ -37,15 +38,12 @@
 
         //mapping
         var finalArray = [];
-        //alert(arr.length);
-
         for(var x=0;x<arr.length;x++){
             finalArray[x] = [];
             for(var y=0;y < mapping.length; y++){
-                finalArray[x][y] = arr[x][mapping[y]-1];
+                finalArray[x][mapping[y]-1]=arr[x][y];
             }
         }
-
 
         var data = new google.visualization.arrayToDataTable(finalArray);
 
