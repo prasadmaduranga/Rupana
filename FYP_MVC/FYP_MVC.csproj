@@ -518,6 +518,7 @@
     <Content Include="Views\Visualisation\ParallelCordinates.cshtml" />
     <Content Include="Views\Visualisation\ChartDetails.cshtml" />
     <Content Include="Views\Blog\ChartDiscriptionPage.cshtml" />
+    <Content Include="Views\Blog\publications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
