@@ -42,6 +42,7 @@ namespace FYP_MVC.Models.DAO
         public virtual DbSet<visualizedDataFile> visualizedDataFiles { get; set; }
         public virtual DbSet<feedBack> feedBacks { get; set; }
         public virtual DbSet<userFeedBack> userFeedBacks { get; set; }
+        public virtual DbSet<countryData> countryDatas { get; set; }
     
         public virtual int getRecommendationFromRules(Nullable<int> tableID, string intention)
         {

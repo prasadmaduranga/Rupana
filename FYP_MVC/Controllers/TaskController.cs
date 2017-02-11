@@ -319,7 +319,7 @@ namespace FYP_MVC.Controllers
                 fb.dim2_Cardinality = csv.Data[1].NumDiscreteValues;
             }
             db.feedBacks.Add(fb);
-  //          db.SaveChanges();
+            db.SaveChanges();
 
             switch (chViz.chrtCom.name)
             {
@@ -479,8 +479,6 @@ namespace FYP_MVC.Controllers
                         TempData["myObject"] = chViz;
                         return RedirectToAction("BivariateAreaChart", "Visualisation");
                     }
-
-
 
                 default:
                     {
