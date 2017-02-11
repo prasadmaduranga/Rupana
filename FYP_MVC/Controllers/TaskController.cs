@@ -352,7 +352,7 @@ namespace FYP_MVC.Controllers
 
                     }
 
-                case ("Pin point location map"):
+                case ("Pin point location  map"):
                     {
                         TempData["mapping"] = chViz.mappingList.ToList().ElementAt(num);
                         TempData["myObject"] = chViz;
@@ -494,6 +494,7 @@ namespace FYP_MVC.Controllers
                         TempData["myObject"] = chViz;
                         return RedirectToAction("BivariateAreaChart", "Visualisation");
                     }
+
 
                 default:
                     {
