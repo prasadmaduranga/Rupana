@@ -6,15 +6,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<<<<<<< HEAD
-<h2>ShowRecommendation</h2>
-<script>
     
-</script>
-=======
+
 <h2>Chart Recommendation</h2>
 
->>>>>>> 7ffdb22cccfcce22b3f8efe0e476de8b87a56c0d
 
 <table class="table">
     <tr>
@@ -25,7 +20,7 @@
     {
         <tr>
             <td>
-                <img src="~/Content/img/chartImg/" alt="" style="width:100px; height:auto;">
+                <img src="~/Content/img/chartImg/@(Model.chartTypes[i]).png" alt="" style="width:100px; height:auto;">
                 @Html.ActionLink(Model.chartTypes[i], "visualizeDataFile", "Task", new { num = i }, null)
             </td>
         </tr>

@@ -13,8 +13,7 @@
     google.charts.setOnLoadCallback(drawVisualization);
 
     function drawVisualization() { // grab the CSV
-
-        var arr = [];
+var arr = [];
         var viewModel = @Html.Raw(Json.Encode(Model));
         var model=viewModel.chartComponent;
         var mapping=viewModel.mapping;
@@ -39,16 +38,12 @@
 
         //mapping
         var finalArray = [];
-        //alert(arr.length);
-
         for(var x=0;x<arr.length;x++){
             finalArray[x] = [];
             for(var y=0;y < mapping.length; y++){
-                finalArray[x][y] = arr[x][mapping[y]-1];
+                finalArray[x][mapping[y]-1]=arr[x][y];
             }
         }
-
-        alert(finalArray);
 
         var data = new google.visualization.arrayToDataTable(finalArray);
 
