@@ -222,6 +222,9 @@
     <Compile Include="Models\DAO\column.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAO\countryData.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DAO\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -409,6 +412,8 @@
     <Content Include="Content\DataFiles\area.csv" />
     <Content Include="Content\DataFiles\calenderChart.csv" />
     <Content Include="Content\DataFiles\pie.csv" />
+    <Content Include="Content\papers\context_aware_recommendation_for_data_visualization.pdf" />
+    <None Include="Properties\PublishProfiles\testhosting.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -32,6 +32,7 @@
         <AssociationConnector Association="FYPModel.FK__feedBack__tableI__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="FYPModel.FK__table__fileID__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="FYPModel.FK__tableDime__table__4222D4EF" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FYPModel.countryData" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

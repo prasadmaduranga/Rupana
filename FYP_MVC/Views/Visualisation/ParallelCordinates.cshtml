@@ -39,6 +39,11 @@
         var mapping=viewModel.mapping;
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
+<<<<<<< HEAD
+=======
+        console.log('num of rows : '+numOfRows);
+        console.log('num of cols : '+numOfColumns);
+>>>>>>> a61427b23ceb8b1d50ceff62403fee2cb32cccd9
         arr[0] = [];
         var headers = [];
         for (var i = 0; i < numOfColumns; i++) {
@@ -51,19 +56,33 @@
             for (var j = 0; j < numOfColumns; j++) {
                 arr[i][j] =model.columnList[j].data[i-1].value ;
             }
+<<<<<<< HEAD
         };
+=======
+        }
+        console.log('arr : '+arr);
+>>>>>>> a61427b23ceb8b1d50ceff62403fee2cb32cccd9
         //dataset for parallel cordinates
         
         
         var cars = [];
         //var headers = ["name","economy","cylinders","displacement","power","weight"];
 
+<<<<<<< HEAD
         for(var i = 1; i <= numOfRows; i++){
             var obj = {};
             for (var j = 0; j < mapping.length; j++) {
                 
                 obj[headers[j]] = arr[i][mapping[j]-1];     
+=======
+        for(var x = 1; x <= numOfRows; x++){
+            var obj = {headers:[]};
+            var headers=[];
+            for (var y = 0; y < mapping.length; y++) {
+                headers[y] = arr[x][mapping[y]-1];     
+>>>>>>> a61427b23ceb8b1d50ceff62403fee2cb32cccd9
             }
+            obj.headers = headers;
             cars.push(obj);
         }
       

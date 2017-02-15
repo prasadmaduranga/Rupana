@@ -41,6 +41,18 @@
           <Property Name="context" Type="nvarchar" MaxLength="30" />
           <Property Name="isContinuous" Type="int" />
         </EntityType>
+        <EntityType Name="countryData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="80" />
+          <Property Name="countryCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="subContinent" Type="nvarchar" MaxLength="30" />
+          <Property Name="subContinentCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="continent" Type="nvarchar" MaxLength="30" />
+          <Property Name="continentCode" Type="nvarchar" MaxLength="30" />
+        </EntityType>
         <EntityType Name="dimensionContext">
           <Key>
             <PropertyRef Name="ID" />
@@ -57,8 +69,6 @@
           <Property Name="chartID" Type="int" />
           <Property Name="count" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'FYP.dbo.feedBack' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="feedBack">
           <Key>
             <PropertyRef Name="ID" />
@@ -360,8 +370,10 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
           <EntitySet Name="chartDimension" EntityType="Self.chartDimension" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="chartDimensionCardinality" EntityType="Self.chartDimensionCardinality" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="column" EntityType="Self.column" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="countryData" EntityType="Self.countryData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dimensionContext" EntityType="Self.dimensionContext" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dimensionCount" EntityType="Self.dimensionCount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="feedBack" EntityType="Self.feedBack" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="headerContext" EntityType="Self.headerContext" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="intention" EntityType="Self.intention" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="originalDataFile" EntityType="Self.originalDataFile" Schema="dbo" store:Type="Tables" />
@@ -369,38 +381,6 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
           <EntitySet Name="tableDimension" EntityType="Self.tableDimension" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="visualizedDataFile" EntityType="Self.visualizedDataFile" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="feedBack" EntityType="Self.feedBack" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [feedBack].[ID] AS [ID], 
-    [feedBack].[chartID] AS [chartID], 
-    [feedBack].[tableID] AS [tableID], 
-    [feedBack].[numOfDim] AS [numOfDim], 
-    [feedBack].[intention] AS [intention], 
-    [feedBack].[dim1_IsContinuous] AS [dim1_IsContinuous], 
-    [feedBack].[dim1_Cardinality] AS [dim1_Cardinality], 
-    [feedBack].[dim1_context] AS [dim1_context], 
-    [feedBack].[dim2_IsContinuous] AS [dim2_IsContinuous], 
-    [feedBack].[dim2_Cardinality] AS [dim2_Cardinality], 
-    [feedBack].[dim2_context] AS [dim2_context], 
-    [feedBack].[dim3_IsContinuous] AS [dim3_IsContinuous], 
-    [feedBack].[dim3_Cardinality] AS [dim3_Cardinality], 
-    [feedBack].[dim3_context] AS [dim3_context], 
-    [feedBack].[dim4_IsContinuous] AS [dim4_IsContinuous], 
-    [feedBack].[dim4_Cardinality] AS [dim4_Cardinality], 
-    [feedBack].[dim4_context] AS [dim4_context], 
-    [feedBack].[dim5_IsContinuous] AS [dim5_IsContinuous], 
-    [feedBack].[dim5_Cardinality] AS [dim5_Cardinality], 
-    [feedBack].[dim5_context] AS [dim5_context], 
-    [feedBack].[dim6_IsContinuous] AS [dim6_IsContinuous], 
-    [feedBack].[dim6_Cardinality] AS [dim6_Cardinality], 
-    [feedBack].[dim6_context] AS [dim6_context], 
-    [feedBack].[dim7_IsContinuous] AS [dim7_IsContinuous], 
-    [feedBack].[dim7_Cardinality] AS [dim7_Cardinality], 
-    [feedBack].[dim7_context] AS [dim7_context], 
-    [feedBack].[recommendation] AS [recommendation], 
-    [feedBack].[rating] AS [rating]
-    FROM [dbo].[feedBack] AS [feedBack]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="userFeedBack" EntityType="Self.userFeedBack" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [userFeedBack].[ID] AS [ID], 
@@ -913,12 +893,25 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
             <Parameter Name="region" Mode="InOut" Type="String" />
             <Parameter Name="resolution" Mode="InOut" Type="String" />
           </FunctionImport>
+          <EntitySet Name="countryDatas" EntityType="FYPModel.countryData" />
         </EntityContainer>
         <ComplexType Name="Recommendations_Result">
           <Property Type="String" Name="chartName" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="tableDimIndex" Nullable="true" />
           <Property Type="Int32" Name="chartDimIndex" Nullable="true" />
         </ComplexType>
+        <EntityType Name="countryData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="countryCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="subContinent" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="subContinentCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="continent" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="continentCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1155,6 +1148,19 @@ warning 6002: The table/view 'FYP.dbo.userFeedBack' does not have a primary key 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getRegionCodeAndResolution" FunctionName="FYPModel.Store.getRegionCodeAndResolution" />
+          <EntitySetMapping Name="countryDatas">
+            <EntityTypeMapping TypeName="FYPModel.countryData">
+              <MappingFragment StoreEntitySet="countryData">
+                <ScalarProperty Name="continentCode" ColumnName="continentCode" />
+                <ScalarProperty Name="continent" ColumnName="continent" />
+                <ScalarProperty Name="subContinentCode" ColumnName="subContinentCode" />
+                <ScalarProperty Name="subContinent" ColumnName="subContinent" />
+                <ScalarProperty Name="countryCode" ColumnName="countryCode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
