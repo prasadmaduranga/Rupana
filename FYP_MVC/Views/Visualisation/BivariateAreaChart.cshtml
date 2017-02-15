@@ -6,8 +6,7 @@
 }
 
 <h2>Bivariate Area Chart</h2>
-<script>http://d3js.org/d3.v3.min.js</script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
     var headers = [];
@@ -15,6 +14,8 @@
     var viewModel = @Html.Raw(Json.Encode(Model));
     var model=viewModel.chartComponent;
     var mapping=viewModel.mapping;
+    var numOfRows=model.columnList[0].data.length;
+    var numOfColumns=model.columnList.length;
 
     for(var i=0; i < mapping.length; i++){
         headers[i] = model.columnList[mapping[i]-1].columnHeader;
@@ -59,53 +60,34 @@
     function drawVisualization() {
 
         var arr = [];
-     
-        var numOfRows=model.columnList[0].data.length;
-        var numOfColumns=model.columnList.length;
-
-
         arr[0] = [];
-        var headers = [];
 
-        for (var y = 0; y < numOfColumns; y++) {
-            arr[0][y] =model.columnList[y].columnHeader;
-            headers[y] = model.columnList[y].columnHeader;
+        for (var i = 0; i < numOfColumns; i++) {
+            arr[0][i] =model.columnList[i].columnHeader;
         }
 
-        for(var x = 1; x <=numOfRows ; x++){
-            arr[x] = [];
-            for (var y = 0; y < numOfColumns; y++) {
-                arr[x][y] =model.columnList[y].data[x-1].value ;
+        for(var i = 1; i <=numOfRows ; i++){
+            arr[i] = [];
+            for (var j = 0; j < numOfColumns; j++) {
+                arr[i][j] =model.columnList[j].data[i-1].value ;
             }
-        }
+        };
 
         //mapping
-        var finalArray = [];
-        //alert(arr.length);
+        var data = [];
 
-        for(var x=0;x<arr.length;x++){
-            finalArray[x] = [];
-            for(var y=0;y < mapping.length; y++){
-                finalArray[x][y] = arr[x][mapping[y]-1];
-            }
-        }
-
-     
-
-        //dataset for parallel cordinates
-        
-        var data = []
-        for(var x = 1; x <= numOfRows; x++){
+        for(var i = 1; i <= numOfRows; i++){
             var obj = {};
-            for (var y = 0; y < mapping.length; y++) {
-                
-                obj[headers[y]] = arr[x][mapping[y]-1];     
+            for (var j = 0; j < mapping.length; j++) {
+
+                obj[headers[j]] = arr[i][mapping[j]-1];
             }
             data.push(obj);
         }
+        console.log(data);
 
         data.forEach(function(d) {
-            d[headers[0]] = parseDate(d[headers[0]]);
+            d[headers[0]] = new Date(d[headers[0]]);
             d[headers[1]] = +d[headers[1]];
             d[headers[2]] = +d[headers[2]];
         });
