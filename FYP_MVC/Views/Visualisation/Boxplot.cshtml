@@ -37,7 +37,7 @@
         }
 
         //mapping
-     
+
         var finalArray = [];
 
         for(var x=0;x<arr.length;x++){
@@ -46,24 +46,16 @@
                 finalArray[x][mapping[y]-1]=arr[x][y];
             }
         }
-<<<<<<< HEAD
-=======
- 
->>>>>>> 437f86f174d659aa8221fbfa4825b38e9338b228
 
         var candleStick = [];
 
-        for (var i = 0; i < numOfColumns; i++) {   
+        for (var i = 0; i < numOfColumns; i++) {
             candleStick[i] = [];
             for (var j = 0; j <= numOfRows; j++) {
                 candleStick[i][j] = finalArray[j][i];
             }
         }
 
-<<<<<<< HEAD
-=======
-      
->>>>>>> 437f86f174d659aa8221fbfa4825b38e9338b228
 
         var data = new google.visualization.arrayToDataTable(candleStick,true);
         var image;
@@ -78,10 +70,10 @@
 
         google.visualization.events.addListener(wrapper, 'ready', function () {
             image = wrapper.getChart().getImageURI();
-        }); 
+        });
 
         wrapper.draw();
-        
+
         $('#saveIm').click(function(){
             //alert("dsf");
             //window.open(image);
