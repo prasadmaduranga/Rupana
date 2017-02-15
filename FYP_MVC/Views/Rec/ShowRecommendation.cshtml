@@ -20,7 +20,7 @@
     {
         <tr>
             <td>
-                <img src="~/Content/img/chartImg/@(Model.chartTypes[i]).png" alt="" style="width:100px; height:auto;">
+                <img src="~/Content/img/chartImages/@(Model.chartTypes[i]).png" alt="" style="width:130px; height:auto;">
                 @Html.ActionLink(Model.chartTypes[i], "visualizeDataFile", "Task", new { num = i }, null)
             </td>
         </tr>

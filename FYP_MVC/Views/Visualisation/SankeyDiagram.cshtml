@@ -42,14 +42,12 @@
         for(var x=0;x<arr.length;x++){
             finalArray[x] = [];
             for(var y=0;y < mapping.length; y++){
-                finalArray[x][y] = arr[x][mapping[y]-1];
+                finalArray[x][mapping[y]-1]=arr[x][y];
             }
         }
 
-        alert(finalArray);
-
         var data = new google.visualization.arrayToDataTable(finalArray);
-
+        var image;
 
         var wrapper = new google.visualization.ChartWrapper({
             chartType: 'Sankey',
@@ -57,12 +55,23 @@
             containerId: 'chart'
         });
 
-         //google.visualization.events.addListener(wrapper, 'ready', function () {
-         //  var image = wrapper.getChart().getImageURI();
-         //  window.open(image);
-         //});
+        google.visualization.events.addListener(wrapper, 'ready', function () {
+            image = wrapper.getChart().getImageURI();
+        }); 
 
         wrapper.draw();
+        
+        $('#saveIm').click(function(){
+            //alert("dsf");
+            //window.open(image);
+            console.log(image);
+            var imageData = image.split(',')[1];
+            var a = $("<a>").attr("href", "data:image/png;base64," + imageData )
+                          .attr("download","image.png")
+                          .appendTo("body");
+            a[0].click();
+            a.remove();
+        });
 
         //title
         $("#title").keyup(function(){
@@ -143,7 +152,8 @@
 
     </br>
 <div class="container">
-
+    <button type="button" class="btn btn-primary" id="saveIm" type="button">Download</button>
+    </br></br>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home"><h4>Chart</h4></a></li>
     </ul>
