@@ -17,12 +17,11 @@
         var viewModel = @Html.Raw(Json.Encode(Model));
         var model=viewModel.chartComponent;
         var mapping=viewModel.mapping;
-        console.log(model);
-        console.log(mapping);
+   
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
-        console.log(model);
-        alert(mapping);
+   
+     
         arr[0] = [];
 
         for (var y = 0; y < numOfColumns; y++) {
@@ -46,6 +45,11 @@
             }
         }
 
+<<<<<<< HEAD
+=======
+    
+
+>>>>>>> 437f86f174d659aa8221fbfa4825b38e9338b228
         var data = new google.visualization.arrayToDataTable(finalArray);
         var image;
 

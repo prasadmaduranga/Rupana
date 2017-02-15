@@ -5,9 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<<<<<<< HEAD
 <h2>ParallelCordinates</h2>
 
 <script src="//d3js.org/d3.v3.min.js"></script>
+=======
+<h2>Parallel Cordinates</h2>
+>>>>>>> 437f86f174d659aa8221fbfa4825b38e9338b228
 <script>
 
     var margin = {top: 30, right: 10, bottom: 10, left: 10},
@@ -37,6 +41,7 @@
         var viewModel = @Html.Raw(Json.Encode(Model));
         var model=viewModel.chartComponent;
         var mapping=viewModel.mapping;
+<<<<<<< HEAD
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
 <<<<<<< HEAD
@@ -44,6 +49,12 @@
         console.log('num of rows : '+numOfRows);
         console.log('num of cols : '+numOfColumns);
 >>>>>>> a61427b23ceb8b1d50ceff62403fee2cb32cccd9
+=======
+     
+        var numOfRows=model.columnList[0].data.length;
+        var numOfColumns=model.columnList.length;
+     
+>>>>>>> 437f86f174d659aa8221fbfa4825b38e9338b228
         arr[0] = [];
         var headers = [];
         for (var i = 0; i < numOfColumns; i++) {
@@ -60,8 +71,12 @@
         };
 =======
         }
+<<<<<<< HEAD
         console.log('arr : '+arr);
 >>>>>>> a61427b23ceb8b1d50ceff62403fee2cb32cccd9
+=======
+  
+>>>>>>> 437f86f174d659aa8221fbfa4825b38e9338b228
         //dataset for parallel cordinates
         
         
@@ -87,8 +102,90 @@
         }
       
        
+<<<<<<< HEAD
        
         x.domain(dimensions = d3.keys(cars[0]).filter(function (d) {
+=======
+        //////////////////////////// ////////////////////
+        //var headers = ["name","economy","cylinder","displacement","power","weight"];
+
+        //var name = ["amc ambassador brougham","amc ambassador dpl","amc ambassador sst","amc concord dl","amc concord dl","amc concord dl"];
+        //var economy = [13,15,17,20.2,18.1,23];
+        //var cylinder = [8,8,8,6,6,4];
+        //var displacement = [360,390,304,232,258,151];
+        //var power = [175,190,150,90,120,125];
+        //var weight = [3821,3850,3671,3265,3410,3035];
+
+        //   var cars = [
+        //   {name: "amc ambassador brougham", economy: 13, cylinder: 8, displacement: 360, power: 175, weight: 3821},
+        //   {name: "amc ambassador dpl", economy: 15, cylinder: 8, displacement: 390, power: 190, weight: 3850},
+        //   {name: "amc ambassador sst", economy: 17, cylinder: 8, displacement: 304, power: 150, weight: 3672},
+        //   {name: "amc concord dl", economy: 20.2, cylinder: 6, displacement: 232, power: 90, weight: 3265},
+        //   {name: "amc concord dl", economy: 18.1, cylinder: 6, displacement: 258, power: 120, weight: 3410},
+        //   {name: "amc concord dl", economy: 23, cylinder: 4, displacement: 151, power: 125, weight: 3035},
+        // ]
+        // alert(cars[5][headers[2]])
+  
+        //var cars = [];
+        //var obj = {};
+              
+        //obj[headers[0]] = name[0];
+        //obj[headers[1]] = economy[0];
+        //obj[headers[2]] = cylinder[0]; 
+        //obj[headers[3]] = displacement[0] ;
+        //obj[headers[4]] = power[0] ;
+        //obj[headers[5]] = weight[0];      
+        //cars.push(obj);
+
+        //var obj = {};
+        //obj[headers[0]] = name[1];
+        //obj[headers[1]] = economy[1];
+        //obj[headers[2]] = cylinder[1]; 
+        //obj[headers[3]] = displacement[1] ;
+        //obj[headers[4]] = power[1] ;
+        //obj[headers[5]] = weight[1];      
+        //cars.push(obj);
+
+        //var obj = {};
+        //obj[headers[0]] = name[2];
+        //obj[headers[1]] = economy[2];
+        //obj[headers[2]] = cylinder[2]; 
+        //obj[headers[3]] = displacement[2] ;
+        //obj[headers[4]] = power[2] ;
+        //obj[headers[5]] = weight[2];      
+        //cars.push(obj);
+
+        //var obj = {};
+        //obj[headers[0]] = name[3];
+        //obj[headers[1]] = economy[3];
+        //obj[headers[2]] = cylinder[3]; 
+        //obj[headers[3]] = displacement[3] ;
+        //obj[headers[4]] = power[3] ;
+        //obj[headers[5]] = weight[3];      
+        //cars.push(obj);
+
+        //var obj = {};
+        //obj[headers[0]] = name[4];
+        //obj[headers[1]] = economy[4];
+        //obj[headers[2]] = cylinder[4]; 
+        //obj[headers[3]] = displacement[4] ;
+        //obj[headers[4]] = power[4] ;
+        //obj[headers[5]] = weight[4];      
+        //cars.push(obj);
+
+        //var obj = {};
+        //obj[headers[0]] = name[5];
+        //obj[headers[1]] = economy[5];
+        //obj[headers[2]] = cylinder[5]; 
+        //obj[headers[3]] = displacement[5] ;
+        //obj[headers[4]] = power[5] ;
+        //obj[headers[5]] = weight[5];      
+        //cars.push(obj);
+
+       
+        ///////////////////// ////////////////////////
+        x.domain(dimensions = d3.keys(cars[0]).filter(function(d) {
+>>>>>>> 437f86f174d659aa8221fbfa4825b38e9338b228
             return d != headers[0] && (y[d] = d3.scale.linear()
                 .domain(d3.extent(cars, function (p) { return +p[d]; }))
                 .range([height, 0]));

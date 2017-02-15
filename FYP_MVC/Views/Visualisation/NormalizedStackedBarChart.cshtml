@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>NormalizedStackedBarChart</h2>
+<h2>Normalized Stacked Bar Chart</h2>
 
 <script>
 
@@ -17,11 +17,10 @@
         var viewModel = @Html.Raw(Json.Encode(Model));
         var model=viewModel.chartComponent;
         var mapping=viewModel.mapping;
-        console.log(model);
-        console.log(mapping);
+    
         var numOfRows=model.columnList[0].data.length;
         var numOfColumns=model.columnList.length;
-        console.log(model);
+ 
 
         arr[0] = [];
 
@@ -47,7 +46,7 @@
             }
         }
 
-        alert(finalArray);
+  
 
         var data = new google.visualization.arrayToDataTable(finalArray);
         var image;

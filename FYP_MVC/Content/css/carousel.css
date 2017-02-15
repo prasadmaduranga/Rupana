@@ -102,13 +102,13 @@ body {
 #first-slider .carousel-indicators li {
     width: 14px;
     height: 14px;
-    background-color: rgba(255,255,255,.4);
+    background-color:greenyellow;
   border:none;
 }
 #first-slider .carousel-indicators .active{
     width: 16px;
     height: 16px;
-    background-color: #fff;
+    background-color: green;
   border:none;
 }
 
@@ -151,7 +151,7 @@ body {
     height: 38px;
     margin-top: -15px;
     font-size: 30px;
-    color: #fff;
+    color: greenyellow;
     border: 3px solid #ffffff;
     -webkit-border-radius: 23px;
     -moz-border-radius: 23px;
@@ -163,7 +163,7 @@ body {
     height: 38px;
     margin-top: -15px;
     font-size: 30px;
-    color: #fff;
+    color: greenyellow;
     border: 3px solid #ffffff;
     -webkit-border-radius: 23px;
     -moz-border-radius: 23px;
@@ -179,22 +179,22 @@ body {
 /*       Slides backgrounds     */
 /********************************/
 #first-slider .slide1 {
-    background-image: url(http://s20.postimg.org/h50tgcuz1/image.jpg);
-      background-size: cover;
+    background-image: url('../img/welcome1.png');
+    background-size: cover;
     background-repeat: no-repeat;
 }
 #first-slider .slide2 {
-  background-image: url(http://s20.postimg.org/uxf8bzlql/image.jpg);
-      background-size: cover;
+    background-image: url('../img/welcome2.png');
+    background-size: cover;
     background-repeat: no-repeat;
 }
 #first-slider .slide3 {
-  background-image: url(http://s20.postimg.org/el56m97f1/image.jpg);
+    background-image: url('../img/welcome3.png');
       background-size: cover;
     background-repeat: no-repeat;
 }
 #first-slider .slide4 {
-  background-image: url(http://s20.postimg.org/66pjy66dp/image.jpg);
+  background-image: url('../img/welcome2.png');
       background-size: cover;
     background-repeat: no-repeat;
 }
