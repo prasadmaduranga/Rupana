@@ -68,6 +68,7 @@
         }
 
         var data = new google.visualization.arrayToDataTable(finalArray);
+        var image;
 
         var wrapper = new google.visualization.ChartWrapper({
             chartType: 'Calendar',
@@ -79,12 +80,48 @@
             containerId: 'chart'
         });
 
-         google.visualization.events.addListener(wrapper, 'ready', function () {
-           var image = wrapper.getChart().getImageURI();
-           window.open(image);
-         });
+        google.visualization.events.addListener(wrapper, 'ready', function () {
+            image = wrapper.getChart().getImageURI();
+        }); 
 
         wrapper.draw();
+        
+        //save AS
+        $("#saveAs").change(function(){   
+            var type = $('#saveAs :selected').val();
+            if(type == "png"){
+
+                console.log(image);
+                var imageData = image.split(',')[1];
+                var a = $("<a>").attr("href", "data:image/png;base64," + imageData )
+                            .attr("download","image.png")
+                            .appendTo("body");
+                a[0].click();
+                a.remove();
+
+            }else if(type == "html"){
+
+                var firstpart = "<!DOCTYPE html><html><head><title></title></head><body>";
+                var lastpart = "</body></html>";
+                var divdata = $('#chart').html();     
+                var htmlFile = firstpart+divdata+lastpart;
+                download("test.html",htmlFile);
+            }   
+        });
+
+        function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+
 
         //title
         $("#title").keyup(function(){
@@ -165,7 +202,18 @@
 
       </br>
 <div class="container">
-
+    <h5><strong>Download As</strong></h5>
+    <div class="row">
+        <div class="col-xs-2">
+            <div class="form-group">
+                <select id="saveAs" class="selectpicker form-control">
+                    <option value="png">png</option>
+                    <option value="html">html</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    </br>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home"><h4>Chart</h4></a></li>
         <li><a data-toggle="tab" href="#menu1"><h4>X-Axis</h4></a></li>
