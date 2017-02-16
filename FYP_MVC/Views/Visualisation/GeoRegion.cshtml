@@ -46,6 +46,16 @@
                 finalArray[x][mapping[y]-1]=arr[x][y];
             }
         }
+        var resoulution;
+        var region;
+
+        for (var y = 0; y < numOfColumns; y++) {
+            if(model.columnList[y].dataType.dataType == "Location"){
+                resoulution = model.columnList[y].dataType.resolution;
+                region = model.columnList[y].dataType.region;
+            }
+
+        }
 
         var data = new google.visualization.arrayToDataTable(finalArray);
         var image;
@@ -53,7 +63,7 @@
         var wrapper = new google.visualization.ChartWrapper({
             chartType: 'GeoChart',
             dataTable: data,
-            options: {
+            options: {"region":region,"colorAxis": {"colors": ['green', 'blue']}
             },
             containerId: 'chart'
         });

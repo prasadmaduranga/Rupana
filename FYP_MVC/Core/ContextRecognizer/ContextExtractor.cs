@@ -8,9 +8,10 @@ using System.IO;
 using FYP_MVC.Models.DAO;
 using Newtonsoft.Json;
 using System.Net;
-
 using FYP_MVC.Models;
 using System.Data.Entity.Core.Objects;
+using System.Web.Hosting;
+using PrecisionSoftware;
 
 namespace FYP_MVC.Core.ContextRecognizer
 {
@@ -217,12 +218,20 @@ namespace FYP_MVC.Core.ContextRecognizer
             ProcessStartInfo pythonInfo = new ProcessStartInfo();
             //pythonInfo.FileName = @"C:\Python27\python.exe";
 
-     
-            pythonInfo.FileName = @"C:\Python27\python.exe";
+
+            //pythonInfo.FileName = @"C:\Python27\python.exe";
+            //Server.MapPath("~/CSVFinalized")
+            //pythonInfo.FileName = @"/usr/bin/python/python.exe";
+            //
 
             //pythonInfo.FileName = @"/usr/bin/python";
+            //pythonInfo.FileName = System.Web.Hosting.HostingEnvironment.MapPath("/usr/bin/python/python.exe");
+            //pythonInfo.FileName = HostingEnvironment.MapPath(@"/usr/bin/python/python.exe");
+
+            //pythonInfo.FileName = System.Web.Hosting.HostingEnvironment.MapPath("~/Python/python.exe");
             int temp = col.Data.Count;
-            col.DateValues = new DateTime[temp];
+            //col.DateValues = new DateTime[temp];
+            col.DateValues = new string[temp];
             String[] arr = col.Data.ToArray();
             int numRows = col.Data.Count;
             if (numRows > checkingRowMargin) { numRows = checkingRowMargin; }
@@ -231,13 +240,15 @@ namespace FYP_MVC.Core.ContextRecognizer
             string query = "";
             for (int i = 0; i < iterations; i++)
             {
-                query = generateQuery(arr, i * 5, (i + 1) * 5);
-                callPython(pythonInfo,query,i*5,(i+1)*5,col);
+                //query = generateQuery(arr, i * 5, (i + 1) * 5);
+                //callPython(pythonInfo,query,i*5,(i+1)*5,col);
+                NaturalDateParserForDateTime(arr, i * 5, (i + 1) * 5, col);
             }
             if (remainder > 0)
             {
-                query = generateQuery(arr, iterations * 5, col.Data.Count);
-                callPython(pythonInfo, query, iterations * 5, col.Data.Count, col);
+               // query = generateQuery(arr, iterations * 5, col.Data.Count);
+               // callPython(pythonInfo, query, iterations * 5, col.Data.Count, col);
+               NaturalDateParserForDateTime(arr, iterations * 5, col.Data.Count, col);
             }         
             return DateCount;
         }
@@ -262,28 +273,70 @@ namespace FYP_MVC.Core.ContextRecognizer
             pythonInfo.UseShellExecute = false;
             pythonInfo.RedirectStandardOutput = true;
             string result = "";
-            using (Process process = Process.Start(pythonInfo))
+            //using (Process process = Process.Start(pythonInfo))
+            //{
+            //    using (StreamReader reader = process.StandardOutput)
+            //    {
+            //        for (int i = start; i < finish; i++)
+            //        {
+            //            result = reader.ReadLine();
+            //            if (result != null)
+            //            {
+            //                if (!result.Equals("error"))
+            //                {
+            //                    DateTime myDate = DateTime.Parse(result);
+            //                    if (myDate.Year > 1900 && myDate.Year < 2100)
+            //                    {
+            //                        col.DateValues[i] = new DateTime();
+            //                        col.DateValues[i] = myDate;
+            //                        DateCount++;
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+
+
+            for (int i = start; i < finish; i++)
             {
-                using (StreamReader reader = process.StandardOutput)
+                if (result != null)
                 {
-                    for (int i = start; i < finish; i++)
+                    if (!result.Equals("error"))
                     {
-                        result = reader.ReadLine();
-                        if (result != null)
+                        DateTime myDate = DateTime.Parse(result);
+                        if (myDate.Year > 1900 && myDate.Year < 2100)
                         {
-                            if (!result.Equals("error"))
-                            {
-                                DateTime myDate = DateTime.Parse(result);
-                                if (myDate.Year > 1900 && myDate.Year < 2100)
-                                {
-                                    col.DateValues[i] = new DateTime();
-                                    col.DateValues[i] = myDate;
-                                    DateCount++;
-                                }
-                            }
+                            //col.DateValues[i] = new DateTime();
+                            //col.DateValues[i] = myDate;
+                            DateCount++;
                         }
                     }
                 }
+            }
+        }
+
+        public void NaturalDateParserForDateTime(string[] arr,int start, int finish, Column col) {
+
+            NaturalDate outval = "";
+        
+            for (int i = start; i < finish; i++)
+            {
+                bool isdate = NaturalDate.TryParse(arr[i], out outval);
+                int number = 0;
+
+                if (isdate) {                   
+                    //col.DateValues[i] = outval.ToString();
+                    
+                    //if convert to an number not beween  1800 and 2100 then dont increment
+                    if (Int32.TryParse(arr[i], out number)){
+                        if (number < 1900 || number > 2100) {
+                            continue;
+                        }
+                    }
+                    DateCount++;
+
+                }            
             }
         }
     }

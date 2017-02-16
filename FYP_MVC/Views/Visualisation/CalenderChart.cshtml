@@ -29,10 +29,25 @@
             arr[0][y] =model.columnList[y].columnHeader;
         }
 
+        //for(var x = 1; x <=numOfRows ; x++){
+        //    arr[x] = [];
+        //    for (var y = 0; y < numOfColumns; y++) {
+        //        arr[x][y] =model.columnList[y].data[x-1].value ;
+        //    }
+        //}
+
         for(var x = 1; x <=numOfRows ; x++){
             arr[x] = [];
             for (var y = 0; y < numOfColumns; y++) {
-                arr[x][y] =model.columnList[y].data[x-1].value ;
+                if(model.columnList[y].dataType.dataType=='TimeSeries'){                    
+                    arr[x][y] =Date.parse(model.columnList[y].data[x-1].value).toString("yyyy-MM-dd");
+              
+                }
+                else{
+                    arr[x][y] =model.columnList[y].data[x-1].value;
+                }
+              
+              
             }
         }
 
