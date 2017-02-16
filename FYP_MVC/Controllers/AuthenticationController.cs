@@ -10,6 +10,9 @@ using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using System.Web.Script.Serialization;
+using System.Diagnostics;
+using System.IO;
+using System.Web.Hosting;
 
 namespace FYP_MVC.Controllers
 {
@@ -46,13 +49,68 @@ namespace FYP_MVC.Controllers
                 }
 
             }
-         
+           
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
 
-       
+        public string testPython() {
+
+            ProcessStartInfo pythonInfo = new ProcessStartInfo();
+            //pythonInfo.FileName = @"C:\Python27\python.exe";
+
+
+            //pythonInfo.FileName = @"C:\Python27\python.exe";
+            //Server.MapPath("~/CSVFinalized")
+            //pythonInfo.FileName = @"/usr/bin/python/python.exe";
+            //
+
+            //pythonInfo.FileName = @"/usr/bin/python";
+            pythonInfo.FileName = @"C:\Users\User\AppData\Local\Programs\Python2\Python35-32\python.exe";
+            //pythonInfo.FileName = System.Web.Hosting.HostingEnvironment.MapPath(" / usr/bin/python/python.exe");
+            pythonInfo.FileName = HostingEnvironment.MapPath(@"/usr/bin/python/python.exe");
+
+            //pythonInfo.FileName = System.Web.Hosting.HostingEnvironment.MapPath("~/Python/python.exe");
+           
+                     
+           string result = callPython(pythonInfo);
+            Console.Write(result);
+            return result;
+
+
+        }
+
+        public string callPython(ProcessStartInfo pythonInfo2)
+        {
+            ProcessStartInfo pythonInfo = new ProcessStartInfo();
+
+            // calling python script passing parameter "query"
+            //string path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/Python/date.py");
+            string path = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Python/date2.py");
+            //pythonInfo.FileName = @"C:\Users\User\AppData\Local\Programs\Python2\Python35-32\python.exe";
+            pythonInfo.FileName = @"/usr/bin/python/python.exe";
+            pythonInfo.Arguments = string.Format("{0}", path);
+            pythonInfo.CreateNoWindow = false;
+            pythonInfo.UseShellExecute = false;
+            pythonInfo.RedirectStandardOutput = true;
+            string result = "";
+
+
+
+
+           
+          
+            using (Process process = Process.Start(pythonInfo))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    result = reader.ReadToEnd();
+                    Console.Write(result);
+                }
+            }
+            return result;
+        }
 
         [HttpPost]
         [AllowAnonymous]

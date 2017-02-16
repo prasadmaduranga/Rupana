@@ -135,7 +135,7 @@ namespace FYP_MVC.Core.ContextRecognizer
         {
             for (int i = 0; i < col.Data.Count; i++)
             {
-                if (col.DateValues[i]==DateTime.MinValue) { errorRows.Add(i); }
+                //if (col.DateValues[i]==DateTime.MinValue) { errorRows.Add(i); }
             }
         }
         public bool IsNumeric(String value)

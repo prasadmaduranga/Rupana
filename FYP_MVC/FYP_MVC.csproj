@@ -58,6 +58,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NaturalDate">
+      <HintPath>..\..\NaturalDate\NaturalDate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -336,6 +339,21 @@
     <Content Include="Content\img\chartImg\stackednorArea.png" />
     <Content Include="Content\img\chartImg\Time Line.png" />
     <Content Include="Content\img\chartImg\Tree Map.png" />
+    <Content Include="Content\img\faviicon\android-icon-144x144.png" />
+    <Content Include="Content\img\faviicon\android-icon-192x192.png" />
+    <Content Include="Content\img\faviicon\android-icon-36x36.png" />
+    <Content Include="Content\img\faviicon\android-icon-48x48.png" />
+    <Content Include="Content\img\faviicon\android-icon-72x72.png" />
+    <Content Include="Content\img\faviicon\android-icon-96x96.png" />
+    <Content Include="Content\img\faviicon\browserconfig.xml" />
+    <Content Include="Content\img\faviicon\favicon-16x16.png" />
+    <Content Include="Content\img\faviicon\favicon-32x32.png" />
+    <Content Include="Content\img\faviicon\favicon-96x96.png" />
+    <Content Include="Content\img\faviicon\favicon.ico" />
+    <Content Include="Content\img\faviicon\ms-icon-144x144.png" />
+    <Content Include="Content\img\faviicon\ms-icon-150x150.png" />
+    <Content Include="Content\img\faviicon\ms-icon-310x310.png" />
+    <Content Include="Content\img\faviicon\ms-icon-70x70.png" />
     <Content Include="Content\img\find_user.png" />
     <Content Include="Content\img\Guide.png" />
     <Content Include="Content\img\img.png" />
@@ -366,6 +384,7 @@
     <Content Include="Content\js\dataTables\dataTables.bootstrap.css" />
     <Content Include="Content\js\dataTables\dataTables.bootstrap.js" />
     <Content Include="Content\js\dataTables\jquery.dataTables.js" />
+    <Content Include="Content\js\date.js" />
     <Content Include="Content\js\easypiechart-data.js" />
     <Content Include="Content\js\easypiechart.js" />
     <Content Include="Content\js\html5shiv.min.js" />
@@ -383,6 +402,7 @@
     <Content Include="Content\js\respond.min.js" />
     <Content Include="Content\js\wow.min.js" />
     <Content Include="Content\Python\date.py" />
+    <Content Include="Content\Python\date2.py" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -420,6 +440,7 @@
     <Content Include="Content\DataFiles\calenderChart.csv" />
     <Content Include="Content\DataFiles\pie.csv" />
     <Content Include="Content\papers\context_aware_recommendation_for_data_visualization.pdf" />
+    <Content Include="Content\img\faviicon\manifest.json" />
     <None Include="Properties\PublishProfiles\testhosting.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

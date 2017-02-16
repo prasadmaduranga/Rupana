@@ -1,3 +1,5 @@
+import cgitb
+cgitb.enable()
 import sys
 from datetime import*
 path=[]
