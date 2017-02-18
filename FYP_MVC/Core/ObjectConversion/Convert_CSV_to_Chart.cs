@@ -28,7 +28,7 @@ namespace FYP_MVC.Core.ObjectConversion
                 case "Nominal": { Column<string> column = new Column<string> { data = processNominalColumn(col), dataType = new Nominal { dataType = "Nominal", type = "string" }, columnHeader = col.Heading }; ChartColumns[i] = column; break; }
                 case "Numeric": { Column<double> column = new Column<double> { data = processNumericColumn(col), dataType = new Numeric { dataType = "Numeric", type = "double" }, columnHeader = col.Heading }; ChartColumns[i] = column; break; }
                 case "Percentage": { Column<double> column = new Column<double> { data = processNumericColumn(col), dataType = new Numeric { dataType = "Percentage", type = "double" }, columnHeader = col.Heading }; ChartColumns[i] = column; break; }
-                case "Time series": { Column<string> column = new Column<string> { data = processDateColumn(col), dataType = new FYP_MVC.Models.CoreObjects.DateTime { dataType = "Nominal", type = "string" }, columnHeader = col.Heading }; ChartColumns[i] = column; break; }
+                case "Time series": { Column<string> column = new Column<string> { data = processDateColumn(col), dataType = new FYP_MVC.Models.CoreObjects.DateTime { dataType = "TimeSeries", type = "string" }, columnHeader = col.Heading }; ChartColumns[i] = column; break; }
                 case "Location": { Column<string> column = new Column<string> { data = processLocationColumn(col), dataType = new FYP_MVC.Models.CoreObjects.Location { dataType = "Location", type = "string" ,region=col.Region,resolution=col.Resolution}, columnHeader = col.Heading }; ChartColumns[i] = column; break; }
             }
         }
@@ -66,7 +66,9 @@ namespace FYP_MVC.Core.ObjectConversion
             Data<string>[] temp = new Data<string>[RowCount];
             for (int i = 0; i < RowCount; i++)
             {
-                temp[i] = new Data<string> { value = col.DateValues[i].ToString("yyyy-MM-dd")};
+                //temp[i] = new Data<string> { value = col.DateValues[i].ToString("yyyy-MM-dd")};
+                temp[i] = new Data<string> { value = col.Data[i]};
+                //temp[i] = new Data<string> { value = col.Data[i] };
             }
             return temp;
         }

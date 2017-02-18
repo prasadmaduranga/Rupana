@@ -11,7 +11,9 @@ namespace FYP_MVC.Models
         public List<string> Data { get; set; }
         public string Resolution { get; set; }
         public string Region { get; set; }
-        public DateTime[] DateValues { get; set; }
+        //public DateTime[] DateValues { get; set; }
+       public string[] DateValues { get; set; }
+
         public bool selected { get; set; }
         public String Context { get; set; }
         public bool IsContinous { get; set; }
