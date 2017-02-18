@@ -111,6 +111,7 @@ namespace FYP_MVC.Controllers
                         // numRows - used as loop variable in creating table
                         if (rows > 10) { ViewBag.numRows = 10; }
                         else { ViewBag.numRows = rows; }
+                        if (rows > 200) { ViewBag.Message = "Your csv contain large number of rows (This application not provide big data visualizations)"; return View();}
                     }
 
 
@@ -329,12 +330,13 @@ namespace FYP_MVC.Controllers
             CSVFile csv = CSVInjector.csv;
             Convert_CSV_to_Chart converter = new Convert_CSV_to_Chart();
             chViz.chrtCom = new ChartComponent();
-            chViz.chrtCom.name = chViz.chartTypes[num];
-            chViz.chrtCom = converter.Convert(csv, chViz.chrtCom);
             string chart = "";
             int recCount = chViz.chartTypes.Count();
             if (recCount > num) { chart = chViz.chartTypes[num]; }
             else { chart = chViz.more_chartTypes[num - recCount]; }
+            chViz.chrtCom.name = chart;
+            chViz.chrtCom = converter.Convert(csv, chViz.chrtCom);
+           
 
             switch (chart)
             {

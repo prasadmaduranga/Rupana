@@ -59,7 +59,7 @@
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NaturalDate">
-      <HintPath>..\..\NaturalDate\NaturalDate.dll</HintPath>
+      <HintPath>Content\NaturalDate\NaturalDate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -315,7 +315,6 @@
     <Content Include="Content\img\4.png" />
     <Content Include="Content\img\barchart.png" />
     <Content Include="Content\img\blog\1.jpg" />
-
     <Content Include="Content\img\blog\aba.jpg" />
     <Content Include="Content\img\blog\dilshan.jpg" />
     <Content Include="Content\img\blog\lahiru.jpg" />
@@ -343,7 +342,6 @@
     <Content Include="Content\img\chartImages\Stacked bar chart.png" />
     <Content Include="Content\img\chartImages\Time Line.png" />
     <Content Include="Content\img\chartImages\Tree Map.png" />
-
     <Content Include="Content\img\find_user.png" />
     <Content Include="Content\img\Guide.png" />
     <Content Include="Content\img\img.png" />
