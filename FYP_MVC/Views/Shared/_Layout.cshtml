@@ -68,7 +68,8 @@
     </script>
 
 
-    
+    <script type='text/javascript' src='//cdn.jsdelivr.net/jquery.marquee/1.4.0/jquery.marquee.min.js'></script>   
+
 </head>
 
 
@@ -87,9 +88,12 @@
                     </button>
 
 
-                    <img src="~/Content/img/name.png" width="200" height="35" style="margin-top: 7px" />
+                    <img src="~/Content/img/logo1.png" width="40" height="40" style="margin-top: 7px" />
+                  
+                   
+                  
 
-                    <ul class="user-menu">
+                    <ul class="user-menu" >
                         <li class="dropdown pull-right">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> @Session["userName"] <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -128,7 +132,7 @@
             <div class="row">
                 <ol class="breadcrumb">
                     <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-                    <li class="active">Icons</li>
+                    <li class="active">@ViewBag.path</li>
                 </ol>
             </div><!--/.row-->
 
@@ -148,6 +152,7 @@
 
     <script>
 
+      
 
         $(window).load(function () {
             setTimeout(function () {

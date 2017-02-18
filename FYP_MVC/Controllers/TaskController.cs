@@ -23,6 +23,7 @@ namespace FYP_MVC.Controllers
         {
             CSVFile csv = new CSVFile();
             csv.hasHeader = true;
+            ViewBag.path = "New Task / Upload CSV";
             return View(csv);
         }
 
@@ -151,6 +152,7 @@ namespace FYP_MVC.Controllers
                 ViewBag.rowCount = csv.rowCount;
             }
             else ViewBag.rowCount = 15;
+            ViewBag.path = "New Task / Show CSV";
             return View(csv);
         }
         [HttpPost]
@@ -172,7 +174,7 @@ namespace FYP_MVC.Controllers
             ContextExtractor con = new ContextExtractor(csv2);
             CSVFile csvs = con.processCSV();
             CSVInjector.csv = csvs;
-
+            ViewBag.path = "New Task / Context info";
             return View(csvs);
         }
 
