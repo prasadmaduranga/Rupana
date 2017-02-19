@@ -21,10 +21,17 @@ namespace FYP_MVC.Controllers
         [HttpGet]
         public ActionResult UploadCSV()
         {
-            CSVFile csv = new CSVFile();
-            csv.hasHeader = true;
-            ViewBag.path = "New Task / Upload CSV";
-            return View(csv);
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
+            else
+            {
+                CSVFile csv = new CSVFile();
+                csv.hasHeader = true;
+                ViewBag.path = "New Task / Upload CSV";
+                return View(csv);
+            }
         }
 
         public ActionResult Home()
