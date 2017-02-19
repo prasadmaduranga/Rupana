@@ -21,10 +21,17 @@ namespace FYP_MVC.Controllers
         [HttpGet]
         public ActionResult UploadCSV()
         {
-            CSVFile csv = new CSVFile();
-            csv.hasHeader = true;
-            ViewBag.path = "New Task / Upload CSV";
-            return View(csv);
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
+            else
+            {
+                CSVFile csv = new CSVFile();
+                csv.hasHeader = true;
+                ViewBag.path = "New Task / Upload CSV";
+                return View(csv);
+            }
         }
 
         public ActionResult Home()
@@ -34,111 +41,118 @@ namespace FYP_MVC.Controllers
         [HttpPost]
         public ActionResult UploadCSV(bool hasHeader, HttpPostedFileBase file)
         {
-            if (file != null && file.ContentLength > 0)
-                try
-                {
-                    CSVFile csv = new CSVFile();
-                    //Saving File in server
-                    csv.hasHeader = hasHeader;
-                    String GUID = Guid.NewGuid().ToString();
-                    var myUniqueFileName = string.Format(@"{0}.csv", GUID);
-                    string path = Path.Combine(Server.MapPath("~/CSV"), Path.GetFileName(myUniqueFileName));
-                    file.SaveAs(path);
-
-                    //Initializing CSV 
-                    csv.csvFile = file;
-                    csv.filename = file.FileName;
-                    csv.GUID = GUID;
-
-                    int columnCount = 0;
-                    using (Stream fileStream = file.InputStream)
-                    using (StreamReader sr = new StreamReader(fileStream))
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
+            else
+            {
+                if (file != null && file.ContentLength > 0)
+                    try
                     {
-                        string a = null;
-                        // reading csv header
-                        a = sr.ReadLine();
-                        string[] columns = a.Split(',');
-                        columnCount = columns.Length;
-                        csv.Data = new Column[columnCount];
-                        for (int i = 0; i < columnCount; i++)
+                        CSVFile csv = new CSVFile();
+                        //Saving File in server
+                        csv.hasHeader = hasHeader;
+                        String GUID = Guid.NewGuid().ToString();
+                        var myUniqueFileName = string.Format(@"{0}.csv", GUID);
+                        string path = Path.Combine(Server.MapPath("~/CSV"), Path.GetFileName(myUniqueFileName));
+                        file.SaveAs(path);
+
+                        //Initializing CSV 
+                        csv.csvFile = file;
+                        csv.filename = file.FileName;
+                        csv.GUID = GUID;
+
+                        int columnCount = 0;
+                        using (Stream fileStream = file.InputStream)
+                        using (StreamReader sr = new StreamReader(fileStream))
                         {
-                            Column col = new Column();
-                            col.Data = new List<string>();
-                            col.selected = true;
-                            csv.Data[i] = col;
-                        }
-                        int rows = 0;
-                        if (hasHeader)
-                        {
-                            //creating new columns 
+                            string a = null;
+                            // reading csv header
+                            a = sr.ReadLine();
+                            string[] columns = a.Split(',');
+                            columnCount = columns.Length;
+                            csv.Data = new Column[columnCount];
                             for (int i = 0; i < columnCount; i++)
                             {
-                                csv.Data[i].Heading = columns[i];
+                                Column col = new Column();
+                                col.Data = new List<string>();
+                                col.selected = true;
+                                csv.Data[i] = col;
                             }
-                        }
-                        else
-                        {
-                            rows = 1;
-                            if (!columns.Where(c => c.Equals(String.Empty)).Any())
+                            int rows = 0;
+                            if (hasHeader)
                             {
-
+                                //creating new columns 
                                 for (int i = 0; i < columnCount; i++)
                                 {
-                                    csv.Data[i].Data.Add(columns[i]);
-                                    csv.Data[i].Heading = "Column " + (i + 1);
+                                    csv.Data[i].Heading = columns[i];
                                 }
                             }
                             else
-                            { //fatal error
-                            }
-                        }
-                        //now read rest of the file 
-
-                        while ((a = sr.ReadLine()) != null)
-                        {
-                            string[] cols = a.Split(',');
-                            if (!cols.Where(c => c.Equals(String.Empty)).Any())
                             {
-
-                                for (int i = 0; i < columnCount; i++)
+                                rows = 1;
+                                if (!columns.Where(c => c.Equals(String.Empty)).Any())
                                 {
-                                    csv.Data[i].Data.Add(cols[i]);
+
+                                    for (int i = 0; i < columnCount; i++)
+                                    {
+                                        csv.Data[i].Data.Add(columns[i]);
+                                        csv.Data[i].Heading = "Column " + (i + 1);
+                                    }
                                 }
-                                rows++;
+                                else
+                                { //fatal error
+                                }
                             }
-                            else { }
+                            //now read rest of the file 
+
+                            while ((a = sr.ReadLine()) != null)
+                            {
+                                string[] cols = a.Split(',');
+                                if (!cols.Where(c => c.Equals(String.Empty)).Any())
+                                {
+
+                                    for (int i = 0; i < columnCount; i++)
+                                    {
+                                        csv.Data[i].Data.Add(cols[i]);
+                                    }
+                                    rows++;
+                                }
+                                else { }
+                            }
+                            csv.rowCount = rows;
+                            // numRows - used as loop variable in creating table
+                            if (rows > 10) { ViewBag.numRows = 10; }
+                            else { ViewBag.numRows = rows; }
+                            if (rows > 200) { ViewBag.Message = "Your csv contain large number of rows (This application not provide big data visualizations)"; return View(); }
                         }
-                        csv.rowCount = rows;
-                        // numRows - used as loop variable in creating table
-                        if (rows > 10) { ViewBag.numRows = 10; }
-                        else { ViewBag.numRows = rows; }
-                        if (rows > 200) { ViewBag.Message = "Your csv contain large number of rows (This application not provide big data visualizations)"; return View();}
+
+
+                        // saving to database : OriginalDataFile
+                        originalDataFile ori_data = new originalDataFile();
+                        ori_data.date = System.DateTime.Now;
+                        ori_data.fileLocation = csv.GUID;
+                        user temp = (user)Session["user"];
+                        ori_data.userID = temp.ID;
+                        db.originalDataFiles.Add(ori_data);
+                        db.SaveChanges();
+
+                        csv.ID = ori_data.ID;
+                        TempData["csv"] = csv;
+                        return RedirectToAction("showCSV", "Task");
+
                     }
-
-
-                    // saving to database : OriginalDataFile
-                    originalDataFile ori_data = new originalDataFile();
-                    ori_data.date = System.DateTime.Now;
-                    ori_data.fileLocation = csv.GUID;
-                    user temp = (user)Session["user"];
-                    ori_data.userID = temp.ID;
-                    db.originalDataFiles.Add(ori_data);
-                    db.SaveChanges();
-
-                    csv.ID = ori_data.ID;
-                    TempData["csv"] = csv;
-                    return RedirectToAction("showCSV", "Task");
-
-                }
-                catch (Exception ex)
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    }
+                else
                 {
-                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    ViewBag.Message = "You have not specified a file.";
                 }
-            else
-            {
-                ViewBag.Message = "You have not specified a file.";
+                return View();
             }
-            return View();
         }
 
         [HttpGet]
