@@ -102,13 +102,13 @@ body {
 #first-slider .carousel-indicators li {
     width: 14px;
     height: 14px;
-    background-color:greenyellow;
+    background-color:#d0d4cb;
   border:none;
 }
 #first-slider .carousel-indicators .active{
     width: 16px;
     height: 16px;
-    background-color: green;
+    background-color: black;
   border:none;
 }
 
@@ -151,7 +151,7 @@ body {
     height: 38px;
     margin-top: -15px;
     font-size: 30px;
-    color: greenyellow;
+    color: #d0d4cb;
     border: 3px solid #ffffff;
     -webkit-border-radius: 23px;
     -moz-border-radius: 23px;
@@ -163,7 +163,7 @@ body {
     height: 38px;
     margin-top: -15px;
     font-size: 30px;
-    color: greenyellow;
+    color: #d0d4cb;
     border: 3px solid #ffffff;
     -webkit-border-radius: 23px;
     -moz-border-radius: 23px;
