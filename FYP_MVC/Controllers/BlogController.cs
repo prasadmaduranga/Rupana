@@ -29,10 +29,12 @@ namespace FYP_MVC.Controllers
 
         public ActionResult ChartDiscriptionPage()
         {
+            ViewBag.path = "Chart descriptions";
             return View();
         }
         public ActionResult publications()
         {
+            ViewBag.path = "Publications";
             return View();
         }
         public FileStreamResult getPublication1()
@@ -47,10 +49,12 @@ namespace FYP_MVC.Controllers
 
         public ActionResult Guide()
         {
+            ViewBag.path = "Guide";
             return View();
         }
         public ActionResult DevTeam()
         {
+            ViewBag.path = "Development team";
             return View();
         }
 

@@ -114,7 +114,7 @@ namespace FYP_MVC.Controllers
             
             //Setting dependency injection
             ChartVisualizationObjectInjector.CVObject = mainObj;
-
+            ViewBag.path = "New Task / Recommended chart types";
             return View(mainObj);
         }
     }

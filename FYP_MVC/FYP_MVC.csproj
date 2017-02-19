@@ -59,7 +59,7 @@
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NaturalDate">
-      <HintPath>..\..\NaturalDate\NaturalDate.dll</HintPath>
+      <HintPath>Content\NaturalDate\NaturalDate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -313,37 +313,41 @@
     <Content Include="Content\img\4.png" />
     <Content Include="Content\img\barchart.png" />
     <Content Include="Content\img\blog\1.jpg" />
+
     <Content Include="Content\img\chartImg\1.png" />
-    <Content Include="Content\img\chartImg\Area chart.png" />
-    <Content Include="Content\img\chartImg\Bar chart.png" />
-    <Content Include="Content\img\chartImg\bivariate.png" />
-    <Content Include="Content\img\chartImg\box.png" />
-    <Content Include="Content\img\chartImg\Boxplot.png" />
-    <Content Include="Content\img\chartImg\Bubble chart.png" />
-    <Content Include="Content\img\chartImg\Calender view chart.jpg" />
-    <Content Include="Content\img\chartImg\Clusture dendogram.png" />
-    <Content Include="Content\img\chartImg\Geo-Map-Regional-World-Map.png" />
-    <Content Include="Content\img\chartImg\Grouped bar chart.png" />
-    <Content Include="Content\img\chartImg\Histrogram.png" />
-    <Content Include="Content\img\chartImg\Line chart.png" />
-    <Content Include="Content\img\chartImg\Mark Area  map.png" />
-    <Content Include="Content\img\chartImg\Muiltiple Bar chart.png" />
-    <Content Include="Content\img\chartImg\Nomalized stacked bar chart.png" />
-    <Content Include="Content\img\chartImg\Normalized stacked area chart.png" />
-    <Content Include="Content\img\chartImg\Parallel cordinates.png" />
-    <Content Include="Content\img\chartImg\Pie chart.png" />
-    <Content Include="Content\img\chartImg\Pin point location  map.png" />
-    <Content Include="Content\img\chartImg\Pin point location map.png" />
-    <Content Include="Content\img\chartImg\Sankey diagram.png" />
-    <Content Include="Content\img\chartImg\Scatterplot.png" />
-    <Content Include="Content\img\chartImg\Stacked area chart.png" />
-    <Content Include="Content\img\chartImg\Stacked bar chart.png" />
-    <Content Include="Content\img\chartImg\stackednorArea.png" />
-    <Content Include="Content\img\chartImg\Time Line.png" />
-    <Content Include="Content\img\chartImg\Tree Map.png" />
+
+    <Content Include="Content\img\blog\aba.jpg" />
+    <Content Include="Content\img\blog\dilshan.jpg" />
+    <Content Include="Content\img\blog\lahiru.jpg" />
+    <Content Include="Content\img\blog\prasad.jpg" />
+    <Content Include="Content\img\chartImages\Area chart.png" />
+    <Content Include="Content\img\chartImages\Bar chart.png" />
+    <Content Include="Content\img\chartImages\Bivariate area chart.png" />
+    <Content Include="Content\img\chartImages\Boxplot.png" />
+    <Content Include="Content\img\chartImages\Bubble chart.png" />
+    <Content Include="Content\img\chartImages\Calender view chart.png" />
+    <Content Include="Content\img\chartImages\Clusture dendogram.png" />
+    <Content Include="Content\img\chartImages\Grouped bar chart.png" />
+    <Content Include="Content\img\chartImages\Histrogram.png" />
+    <Content Include="Content\img\chartImages\Line chart.png" />
+    <Content Include="Content\img\chartImages\Mark Area  map.png" />
+    <Content Include="Content\img\chartImages\Muiltiple Bar chart.png" />
+    <Content Include="Content\img\chartImages\Nomalized stacked bar chart.png" />
+    <Content Include="Content\img\chartImages\Normalized stacked area chart.png" />
+    <Content Include="Content\img\chartImages\Parallel cordinates.png" />
+    <Content Include="Content\img\chartImages\Pie chart.png" />
+    <Content Include="Content\img\chartImages\Pin point location  map.png" />
+    <Content Include="Content\img\chartImages\Sankey diagram.png" />
+    <Content Include="Content\img\chartImages\Scatterplot.png" />
+    <Content Include="Content\img\chartImages\Stacked area chart.png" />
+    <Content Include="Content\img\chartImages\Stacked bar chart.png" />
+    <Content Include="Content\img\chartImages\Time Line.png" />
+    <Content Include="Content\img\chartImages\Tree Map.png" />
+
     <Content Include="Content\img\find_user.png" />
     <Content Include="Content\img\Guide.png" />
     <Content Include="Content\img\img.png" />
+    <Content Include="Content\img\logo2.png" />
     <Content Include="Content\img\Pie.png" />
     <Content Include="Content\img\Preloader_1.gif" />
     <Content Include="Content\img\Preloader_2.gif" />

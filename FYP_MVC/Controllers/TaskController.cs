@@ -23,6 +23,7 @@ namespace FYP_MVC.Controllers
         {
             CSVFile csv = new CSVFile();
             csv.hasHeader = true;
+            ViewBag.path = "New Task / Upload CSV";
             return View(csv);
         }
 
@@ -111,6 +112,7 @@ namespace FYP_MVC.Controllers
                         // numRows - used as loop variable in creating table
                         if (rows > 10) { ViewBag.numRows = 10; }
                         else { ViewBag.numRows = rows; }
+                        if (rows > 200) { ViewBag.Message = "Your csv contain large number of rows (This application not provide big data visualizations)"; return View();}
                     }
 
 
@@ -150,6 +152,7 @@ namespace FYP_MVC.Controllers
                 ViewBag.rowCount = csv.rowCount;
             }
             else ViewBag.rowCount = 15;
+            ViewBag.path = "New Task / Show CSV";
             return View(csv);
         }
         [HttpPost]
@@ -171,7 +174,7 @@ namespace FYP_MVC.Controllers
             ContextExtractor con = new ContextExtractor(csv2);
             CSVFile csvs = con.processCSV();
             CSVInjector.csv = csvs;
-
+            ViewBag.path = "New Task / Context info";
             return View(csvs);
         }
 
@@ -329,12 +332,13 @@ namespace FYP_MVC.Controllers
             CSVFile csv = CSVInjector.csv;
             Convert_CSV_to_Chart converter = new Convert_CSV_to_Chart();
             chViz.chrtCom = new ChartComponent();
-            chViz.chrtCom.name = chViz.chartTypes[num];
-            chViz.chrtCom = converter.Convert(csv, chViz.chrtCom);
             string chart = "";
             int recCount = chViz.chartTypes.Count();
             if (recCount > num) { chart = chViz.chartTypes[num]; }
             else { chart = chViz.more_chartTypes[num - recCount]; }
+            chViz.chrtCom.name = chart;
+            chViz.chrtCom = converter.Convert(csv, chViz.chrtCom);
+           
 
             switch (chart)
             {

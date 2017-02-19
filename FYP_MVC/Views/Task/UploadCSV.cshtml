@@ -1,5 +1,5 @@
 ﻿@using FYP_MVC.Models
-@model CSVFile 
+@model CSVFile
 @{
     ViewBag.Title = "UploadCSV";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,8 +7,9 @@
 
 
 @using (Html.BeginForm("UploadCSV", "Task",
-                  new { hasHeader = true }, FormMethod.Post,
-              new { enctype = "multipart/form-data" })) { 
+                              new { hasHeader = true }, FormMethod.Post,
+                          new { enctype = "multipart/form-data" }))
+{
 
 
 
@@ -39,12 +40,11 @@
                         <button type="reset" class="btn btn-default" onclick='$("#upload-file-info").html($(this).val());'>Cancel</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                     @ViewBag.Message
                 </fieldset>
             </form>
-            </div>
         </div>
+    </div>
 }
-

@@ -56,7 +56,7 @@ namespace FYP_MVC.Core.ContextRecognizer
                         {
                             if (csv.Data[j].Context.Equals("Time series"))
                             {
-                                newArray.Add(csv.Data[j].DateValues[i].ToString());
+                                newArray.Add(csv.Data[j].Data[i].ToString());
                             }
                             else newArray.Add(oldData[i]);
                         }
